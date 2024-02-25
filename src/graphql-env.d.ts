@@ -1045,15 +1045,7 @@ export type introspection = {
         "name": "LoginInput",
         "inputFields": [
           {
-            "name": "email",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            }
-          },
-          {
-            "name": "username",
+            "name": "input",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1086,6 +1078,31 @@ export type introspection = {
                 "name": "String",
                 "ofType": null
               }
+            },
+            "args": []
+          },
+          {
+            "name": "isAuthenticated",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LogoutResponse",
+        "fields": [
+          {
+            "name": "loggedOut",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
             },
             "args": []
           }
@@ -1816,7 +1833,7 @@ export type introspection = {
             },
             "args": [
               {
-                "name": "input",
+                "name": "credentials",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -1831,8 +1848,8 @@ export type introspection = {
           {
             "name": "logout",
             "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
+              "kind": "OBJECT",
+              "name": "LogoutResponse",
               "ofType": null
             },
             "args": []
