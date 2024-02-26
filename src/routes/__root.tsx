@@ -1,7 +1,10 @@
-import { Link, Outlet, createRootRouteWithContext } from '@tanstack/react-router';
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import styled from 'styled-components';
 
-import { useAuth, type AuthContext } from '../auth';
+import { type AuthContext } from '../auth';
+import Navbar from '../components/Navbar';
+import GlobalStyles from '../styles/GlobalStyles';
 
 interface MyRouterContext {
 	auth: AuthContext;
@@ -9,53 +12,43 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	component: RootComponent,
+	errorComponent: () => <div>Error</div>,
 });
 
+const InnerStyles = styled.div`
+	/* Inner styles */
+`;
+
+const Container = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+`;
+
+const Message = styled.h1`
+	font-size: 24px;
+`;
+
+const LaptopScreenSize = 50;
+
 function RootComponent() {
-	const auth = useAuth();
+	const isSmallScreen = window.innerWidth < LaptopScreenSize;
 	return (
 		<>
-			<div className='p-2 flex gap-2 text-lg'>
-				<Link
-					to='/'
-					activeProps={{
-						className: 'font-bold',
-					}}
-					activeOptions={{ exact: true }}
-				>
-					Home
-				</Link>{' '}
-				{auth.isLoggedIn && !auth.isLoggingOut && (
-					<Link
-						to={'/dashboard'}
-						activeProps={{
-							className: 'font-bold',
-						}}
-					>
-						Dashboard
-					</Link>
-				)}
-				{!auth.isLoggedIn ? (
-					<Link
-						to={'/login'}
-						activeProps={{
-							className: 'font-bold',
-						}}
-					>
-						Login
-					</Link>
+			<GlobalStyles />
+			<Navbar />
+
+			<InnerStyles>
+				{isSmallScreen ? (
+					<Container>
+						<Message>Please use a bigger screen</Message>
+					</Container>
 				) : (
-					<button
-						onClick={() => {
-							auth.setIsLoggingOut(true);
-						}}
-					>
-						Logout
-					</button>
+					<Outlet />
 				)}
-			</div>
-			<hr />
-			<Outlet />
+			</InnerStyles>
+
 			<TanStackRouterDevtools position='bottom-right' initialIsOpen={false} />
 		</>
 	);
