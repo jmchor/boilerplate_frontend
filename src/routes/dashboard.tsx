@@ -1,15 +1,12 @@
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { useAuth } from '../auth';
 
 export const Route = createFileRoute('/dashboard')({
-	beforeLoad: ({ context, location }) => {
-		if (!context.auth.isLoggedIn) {
+	beforeLoad: ({ context }) => {
+		if (!context.auth.isLoading && !context.auth.isLoggedIn) {
 			throw redirect({
 				to: '/login',
-				search: {
-					redirect: location.href,
-				},
 			});
 		}
 	},
@@ -17,24 +14,15 @@ export const Route = createFileRoute('/dashboard')({
 });
 
 function DashboardComponent() {
-	const navigate = useNavigate({ from: '/dashboard' });
 	const auth = useAuth();
 
-	const handleLogout = () => {
-		auth.setIsLoggingOut(true);
-		navigate({ to: '/' });
-	};
+	console.log('isloading', auth.isLoading);
 
 	return (
 		<div className='p-2'>
 			<h3>Dashboard page</h3>
 			<p>Hi {auth?.user?.username}!</p>
 			<p>If you can see this, that means you are authenticated.</p>
-			<div className='mt-4'>
-				<button type='button' onClick={handleLogout} className='bg-slate-500 text-white py-2 px-4 rounded-md'>
-					Logout
-				</button>
-			</div>
 		</div>
 	);
 }
