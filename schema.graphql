@@ -194,6 +194,10 @@ type LogoutResponse {
 	loggedOut: Boolean
 }
 
+type Authenticationstatus {
+	cookieIsPresent: Boolean
+}
+
 type Query {
 	allProjects: [Project]
 	findProject(_id: ID): Project
@@ -205,6 +209,8 @@ type Query {
 	currentUser: User
 
 	myProjects: [Project]
+
+	checkAuthentication: Authenticationstatus!
 }
 
 type Mutation {
