@@ -1111,6 +1111,22 @@ export type introspection = {
       },
       {
         "kind": "OBJECT",
+        "name": "Authenticationstatus",
+        "fields": [
+          {
+            "name": "cookieIsPresent",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Query",
         "fields": [
           {
@@ -1215,6 +1231,18 @@ export type introspection = {
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Project",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "checkAuthentication",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Authenticationstatus",
                 "ofType": null
               }
             },
