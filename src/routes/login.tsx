@@ -1,8 +1,9 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useMutation } from '@apollo/client';
 import { graphql } from 'gql.tada';
 import { useState } from 'react';
 import { useAuth } from '../auth';
+import { flushSync } from 'react-dom';
 
 export const Route = createFileRoute('/login')({
 	component: Login,
@@ -20,12 +21,14 @@ const LOGIN = graphql(`
 function Login() {
 	const [login, { loading, error }] = useMutation(LOGIN);
 	const navigate = useNavigate();
-	const { setIsLoggedIn } = useAuth();
+	const { setIsLoggedIn, isLoading } = useAuth();
 
 	const [formData, setFormData] = useState({
 		input: '',
 		password: '',
 	});
+
+	console.log('isLoading', isLoading);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -37,10 +40,7 @@ function Login() {
 
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
-
-		console.log(formData);
 		try {
-			console.log('Logging in...');
 			const { data } = await login({
 				variables: {
 					credentials: formData,
@@ -48,8 +48,10 @@ function Login() {
 			});
 
 			if (data?.login?.isAuthenticated === true) {
-				setIsLoggedIn(true);
-				navigate({ to: '/' });
+				flushSync(() => {
+					setIsLoggedIn(true);
+				});
+				navigate({ to: '/dashboard' });
 			}
 		} catch (error) {
 			console.error(error);
