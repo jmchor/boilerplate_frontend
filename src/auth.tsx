@@ -59,13 +59,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>({} as User);
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
-	const [isLoading] = useState<boolean>(true); // New loading state
+	const [isLoading, setIsLoading] = useState<boolean>(true); // New loading state
 
 	useQuery(CURRENT_USER, {
 		skip: !isLoggedIn,
 		onCompleted: (data) => {
 			flushSync(() => {
 				setUser(data?.currentUser);
+				setIsLoading(false);
 			});
 		},
 	});
