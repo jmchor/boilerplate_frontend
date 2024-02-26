@@ -1,7 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import { graphql } from 'gql.tada';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { User } from './types/user';
+import { flushSync } from 'react-dom';
 
 export const CURRENT_USER = graphql(`
 	query CurrentUser {
@@ -33,6 +35,14 @@ export const LOGOUT = graphql(`
 	}
 `);
 
+const CHECK_AUTHENTICATION = graphql(`
+	query CheckAuthentication {
+		checkAuthentication {
+			cookieIsPresent
+		}
+	}
+`);
+
 export interface AuthContext {
 	isLoggedIn: boolean;
 	setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,6 +50,7 @@ export interface AuthContext {
 	setUser: (user: User | null) => void;
 	isLoggingOut: boolean;
 	setIsLoggingOut: React.Dispatch<React.SetStateAction<boolean>>;
+	isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -48,13 +59,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>({} as User);
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true); // New loading state
 
-	const { data } = useQuery(CURRENT_USER, {
+	useQuery(CURRENT_USER, {
 		skip: !isLoggedIn,
 		onCompleted: (data) => {
-			setUser(data?.currentUser);
+			flushSync(() => {
+				setUser(data?.currentUser);
+			});
 		},
 	});
+
+	const { loading, error, data: checkData } = useQuery(CHECK_AUTHENTICATION);
+
+	useEffect(() => {
+		if (!loading && !error && checkData && checkData.checkAuthentication?.cookieIsPresent) {
+			setIsLoggedIn(true);
+		} else {
+			setIsLoggedIn(false);
+		}
+	}, [loading, error, checkData]);
+
 	const [logout] = useMutation(LOGOUT, {
 		onCompleted: () => {
 			setIsLoggedIn(false);
@@ -62,12 +87,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		},
 	});
 
-	if (isLoggingOut) {
-		logout();
+	useEffect(() => {
+		if (isLoggingOut) {
+			logout();
+		}
+	}, [isLoggingOut, logout]);
+
+	if (loading) return <p>Loading...</p>;
+	if (error) {
+		console.error('Error checking authentication:', error);
+		return <p>Error checking authentication. Please try again later.</p>;
 	}
 
 	return (
-		<AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, isLoggingOut, setIsLoggingOut }}>
+		<AuthContext.Provider
+			value={{ isLoggedIn, setIsLoggedIn, user, setUser, isLoggingOut, setIsLoggingOut, isLoading }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
