@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useMutation } from '@apollo/client';
 import { graphql } from 'gql.tada';
 import { useState } from 'react';
