@@ -1,8 +1,23 @@
-export interface User {
-	username: string;
+export type User = {
+	likedArticles:
+		| ({
+				_id: string | number | null;
+				title: string;
+		  } | null)[]
+		| null;
+	articles:
+		| ({
+				_id: string | number | null;
+				title: string;
+		  } | null)[]
+		| null;
+	projects:
+		| ({
+				_id: string | number | null;
+				title: string;
+		  } | null)[]
+		| null;
+	_id: string | number | null;
 	email: string;
-	_id: string;
-	projects: string[];
-	articles: string[];
-	likedArticles: string[];
-}
+	username: string;
+};
