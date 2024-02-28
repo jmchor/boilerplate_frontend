@@ -4,7 +4,8 @@ import { useAuth } from '../auth';
 
 export const Route = createFileRoute('/dashboard')({
 	beforeLoad: ({ context }) => {
-		if (!context.auth.isLoading && !context.auth.isLoggedIn) {
+		console.log(context);
+		if (!context.auth.isLoggedIn || (!context.auth.isLoading && !context.auth.isLoggedIn)) {
 			throw redirect({
 				to: '/login',
 			});
