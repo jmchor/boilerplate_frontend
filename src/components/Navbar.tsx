@@ -1,79 +1,38 @@
-import { Link, useNavigate } from '@tanstack/react-router';
-
+import { useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../auth';
-import styled from 'styled-components';
 
-const NavigationBar = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-decoration: none;
-`;
-
-const Subbar = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 0.5rem;
-`;
-
-const StyledLink = styled(Link)`
-	text-decoration: none;
-`;
+import { NavigationBar, NavigationButton, NavigationContainer, Subbar } from '../styles/NavbarStyles';
+import { SidebarData, SidebarItem } from '../data/SidebarData';
+import SubMenu from './SubMenu';
 
 function Navbar() {
 	const auth = useAuth();
 	const navigate = useNavigate();
 
 	return (
-		<>
+		<NavigationContainer>
 			<NavigationBar>
 				<Subbar>
-					<StyledLink
-						to='/'
-						activeProps={{
-							className: 'font-bold',
-						}}
-						activeOptions={{ exact: true }}
-					>
-						Home
-					</StyledLink>{' '}
-					{auth.isLoggedIn && !auth.isLoggingOut && (
-						<StyledLink
-							to={'/dashboard'}
-							activeProps={{
-								className: 'font-bold',
-							}}
-						>
-							Dashboard
-						</StyledLink>
-					)}
+					{SidebarData.map((item: SidebarItem) => {
+						return <SubMenu item={item} key={item.title} />;
+					})}
 				</Subbar>
 				{!auth.isLoggedIn ? (
-					<StyledLink
-						to={'/login'}
-						activeProps={{
-							className: 'font-bold',
-						}}
-					>
-						Login
-					</StyledLink>
+					<NavigationButton onClick={() => navigate({ to: '/login' })}>Sign In</NavigationButton>
 				) : (
-					<button
+					<NavigationButton
 						onClick={() => {
 							auth.setIsLoggingOut(true);
-
 							navigate({
 								to: '/login',
 							});
 						}}
 					>
-						Logout
-					</button>
+						Sign Out
+					</NavigationButton>
 				)}
 			</NavigationBar>
-			<hr />
-		</>
+		</NavigationContainer>
 	);
 }
 
