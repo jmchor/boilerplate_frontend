@@ -10,59 +10,63 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as LoginImport } from './routes/login';
-import { Route as DashboardImport } from './routes/dashboard';
-import { Route as AuthImport } from './auth';
-import { Route as IndexImport } from './routes/index';
+import { Route as rootRoute } from './routes/__root'
+import { Route as DashboardImport } from './routes/dashboard'
+import { Route as LayoutLoginImport } from './routes/_layout-login'
+import { Route as IndexImport } from './routes/index'
+import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
 
 // Create/Update Routes
 
-const LoginRoute = LoginImport.update({
-	path: '/login',
-	getParentRoute: () => rootRoute,
-} as any);
-
 const DashboardRoute = DashboardImport.update({
-	path: '/dashboard',
-	getParentRoute: () => rootRoute,
-} as any);
+  path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
 
-const AuthRoute = AuthImport.update({
-	path: '/auth',
-	getParentRoute: () => rootRoute,
-} as any);
+const LayoutLoginRoute = LayoutLoginImport.update({
+  id: '/_layout-login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
-	path: '/',
-	getParentRoute: () => rootRoute,
-} as any);
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutLoginLoginRouteRoute = LayoutLoginLoginRouteImport.update({
+  path: '/login',
+  getParentRoute: () => LayoutLoginRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
-	interface FileRoutesByPath {
-		'/': {
-			preLoaderRoute: typeof IndexImport;
-			parentRoute: typeof rootRoute;
-		};
-		'/auth': {
-			preLoaderRoute: typeof AuthImport;
-			parentRoute: typeof rootRoute;
-		};
-		'/dashboard': {
-			preLoaderRoute: typeof DashboardImport;
-			parentRoute: typeof rootRoute;
-		};
-		'/login': {
-			preLoaderRoute: typeof LoginImport;
-			parentRoute: typeof rootRoute;
-		};
-	}
+  interface FileRoutesByPath {
+    '/': {
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout-login': {
+      preLoaderRoute: typeof LayoutLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard': {
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/_layout-login/login': {
+      preLoaderRoute: typeof LayoutLoginLoginRouteImport
+      parentRoute: typeof LayoutLoginImport
+    }
+  }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexRoute, AuthRoute, DashboardRoute, LoginRoute]);
+export const routeTree = rootRoute.addChildren([
+  IndexRoute,
+  LayoutLoginRoute.addChildren([LayoutLoginLoginRouteRoute]),
+  DashboardRoute,
+])
 
 /* prettier-ignore-end */
