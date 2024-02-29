@@ -9,12 +9,12 @@ const LoginWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 100%;
 `;
 
 function LoginLayoutComponent() {
 	return (
-		<LoginWrapper>
+		<LoginWrapper className='here'>
 			<Outlet />
 		</LoginWrapper>
 	);
