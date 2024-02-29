@@ -5,8 +5,8 @@ import { flushSync } from 'react-dom';
 import { useNavigate } from '@tanstack/react-router';
 import Form from '../styles/Form';
 import { useState } from 'react';
-import styled from 'styled-components';
-import { NavigationButton } from '../styles/NavbarStyles';
+
+import { SigninFormWrapper } from '../styles/SigninForm';
 
 const LOGIN = graphql(`
 	mutation Login($credentials: LoginInput!) {
@@ -16,14 +16,6 @@ const LOGIN = graphql(`
 		}
 	}
 `);
-
-const SigninFormWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-`;
 
 const SigninForm: React.FC = () => {
 	const [login, { loading, error }] = useMutation(LOGIN);
