@@ -6,7 +6,8 @@ import { SyncLoader } from 'react-spinners';
 
 import { SigninFormWrapper } from '../styles/SigninForm';
 import useForm from '../lib/useForm';
-import styled from 'styled-components';
+
+import { LoaderStyles } from '../styles/LoaderStyles';
 
 const SIGNUP_MUTATION = graphql(`
 	mutation CreateUser($email: String!, $username: String!, $password: String!) {
@@ -43,14 +44,6 @@ const SignupForm: React.FC = () => {
 		resetForm();
 		//send email and password to graph ql api
 	};
-
-	const LoaderStyles = styled.div`
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 2rem;
-	`;
 
 	return (
 		<SigninFormWrapper>
