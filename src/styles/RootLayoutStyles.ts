@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const InnerStyles = styled.div`
 	max-width: var(--maxWidth);
-	margin: 0 auto;
+	margin-left: 20rem;
 	padding: 2rem;
 	flex: 1;
 	height: 100%;

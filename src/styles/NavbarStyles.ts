@@ -4,6 +4,12 @@ import styled from 'styled-components';
 export const NavigationContainer = styled.div`
 	display: flex;
 	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20rem; /* Adjust the width as needed */
+	height: 100%;
+	overflow-y: auto; /* Add scroll if content overflows */
 `;
 
 export const NavigationBar = styled.div`

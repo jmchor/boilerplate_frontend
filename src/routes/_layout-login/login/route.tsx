@@ -6,5 +6,9 @@ export const Route = createFileRoute('/_layout-login/login')({
 });
 
 function Login() {
-	return <SigninForm />;
+	return (
+		<>
+			<SigninForm />
+		</>
+	);
 }
