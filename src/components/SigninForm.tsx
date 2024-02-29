@@ -6,6 +6,7 @@ import { useNavigate } from '@tanstack/react-router';
 import Form from '../styles/Form';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { NavigationButton } from '../styles/NavbarStyles';
 
 const LOGIN = graphql(`
 	mutation Login($credentials: LoginInput!) {
@@ -86,6 +87,14 @@ const SigninForm: React.FC = () => {
 					<br />
 				</p>
 			)}
+			<p>No Account Yet?</p>
+			<button
+				onClick={() => {
+					navigate({ to: '/signup' });
+				}}
+			>
+				Sign Up
+			</button>
 		</SigninFormWrapper>
 	);
 };
