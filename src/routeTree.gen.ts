@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LayoutLoginImport } from './routes/_layout-login'
 import { Route as IndexImport } from './routes/index'
+import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-login/signup/route'
 import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
 
 // Create/Update Routes
@@ -31,6 +32,11 @@ const LayoutLoginRoute = LayoutLoginImport.update({
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutLoginSignupRouteRoute = LayoutLoginSignupRouteImport.update({
+  path: '/signup',
+  getParentRoute: () => LayoutLoginRoute,
 } as any)
 
 const LayoutLoginLoginRouteRoute = LayoutLoginLoginRouteImport.update({
@@ -58,6 +64,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLoginLoginRouteImport
       parentRoute: typeof LayoutLoginImport
     }
+    '/_layout-login/signup': {
+      preLoaderRoute: typeof LayoutLoginSignupRouteImport
+      parentRoute: typeof LayoutLoginImport
+    }
   }
 }
 
@@ -65,7 +75,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  LayoutLoginRoute.addChildren([LayoutLoginLoginRouteRoute]),
+  LayoutLoginRoute.addChildren([
+    LayoutLoginLoginRouteRoute,
+    LayoutLoginSignupRouteRoute,
+  ]),
   DashboardRoute,
 ])
 
