@@ -14,7 +14,7 @@ const LoginWrapper = styled.div`
 
 function LoginLayoutComponent() {
 	return (
-		<LoginWrapper className='here'>
+		<LoginWrapper>
 			<Outlet />
 		</LoginWrapper>
 	);

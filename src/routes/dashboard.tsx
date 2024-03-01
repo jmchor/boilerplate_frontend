@@ -17,8 +17,6 @@ export const Route = createFileRoute('/dashboard')({
 function DashboardComponent() {
 	const auth = useAuth();
 
-	console.log('isloading', auth.isLoading);
-
 	return (
 		<div className='p-2'>
 			<h3>Dashboard page</h3>
