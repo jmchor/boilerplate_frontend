@@ -15,6 +15,7 @@ import {
 	OptionalContainer,
 	ProjectGrid,
 } from '../../../styles/HomeRouteStyles';
+import { useAuth } from '../../../auth';
 
 export const Route = createFileRoute('/_layout-home/')({
 	component: Index,
@@ -24,6 +25,8 @@ function Index() {
 	const [counts, setCounts] = useState<{ projects: number; articles: number }>({ projects: 4, articles: 3 });
 	const [filter, setFilter] = useState<'projects' | 'articles' | 'all'>('all');
 	const [showOptional, setShowOptional] = useState(true);
+
+	const auth = useAuth();
 
 	const navigate = useNavigate();
 
@@ -58,7 +61,7 @@ function Index() {
 				</LinkButton>
 			</FilterContainer>
 
-			{showOptional ? (
+			{showOptional && !auth.user ? (
 				<OptionalContainer>
 					<button onClick={() => setShowOptional(false)}> X </button>
 					<p>Don't have an account yet? Sign up now!</p>
