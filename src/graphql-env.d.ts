@@ -20,6 +20,10 @@ export type introspection = {
     "subscriptionType": null,
     "types": [
       {
+        "kind": "SCALAR",
+        "name": "Date"
+      },
+      {
         "kind": "ENUM",
         "name": "ModuleType",
         "enumValues": [
@@ -353,12 +357,18 @@ export type introspection = {
           {
             "name": "text",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "subheadline",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "args": []
           },
@@ -407,12 +417,9 @@ export type introspection = {
           {
             "name": "createdBy",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "args": []
           },
@@ -421,6 +428,15 @@ export type introspection = {
             "type": {
               "kind": "SCALAR",
               "name": "ID",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "createdAt",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
               "ofType": null
             },
             "args": []
@@ -526,12 +542,9 @@ export type introspection = {
           {
             "name": "title",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "args": []
           },
@@ -547,36 +560,27 @@ export type introspection = {
           {
             "name": "createdBy",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "frontend",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "FrontendConfig",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "FrontendConfig",
+              "ofType": null
             },
             "args": []
           },
           {
             "name": "backend",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "BackendConfig",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "BackendConfig",
+              "ofType": null
             },
             "args": []
           },
@@ -647,17 +651,11 @@ export type introspection = {
           {
             "name": "packages",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "ofType": {
-                "kind": "LIST",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Packages",
-                    "ofType": null
-                  }
-                }
+                "kind": "ENUM",
+                "name": "Packages",
+                "ofType": null
               }
             },
             "args": []
@@ -676,12 +674,9 @@ export type introspection = {
           {
             "name": "environment",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "ENUM",
-                "name": "BackendEnv",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "BackendEnv",
+              "ofType": null
             },
             "args": []
           },
@@ -715,17 +710,11 @@ export type introspection = {
           {
             "name": "packages",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "ofType": {
-                "kind": "LIST",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Packages",
-                    "ofType": null
-                  }
-                }
+                "kind": "ENUM",
+                "name": "Packages",
+                "ofType": null
               }
             },
             "args": []
@@ -790,17 +779,11 @@ export type introspection = {
           {
             "name": "packages",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "ofType": {
-                "kind": "LIST",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Packages",
-                    "ofType": null
-                  }
-                }
+                "kind": "ENUM",
+                "name": "Packages",
+                "ofType": null
               }
             }
           }
@@ -813,12 +796,9 @@ export type introspection = {
           {
             "name": "environment",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "ENUM",
-                "name": "BackendEnv",
-                "ofType": null
-              }
+              "kind": "ENUM",
+              "name": "BackendEnv",
+              "ofType": null
             }
           },
           {
@@ -848,17 +828,11 @@ export type introspection = {
           {
             "name": "packages",
             "type": {
-              "kind": "NON_NULL",
+              "kind": "LIST",
               "ofType": {
-                "kind": "LIST",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "Packages",
-                    "ofType": null
-                  }
-                }
+                "kind": "ENUM",
+                "name": "Packages",
+                "ofType": null
               }
             }
           },
@@ -901,23 +875,25 @@ export type introspection = {
           {
             "name": "title",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             }
           },
           {
             "name": "text",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "subheadline",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             }
           },
           {
@@ -1019,23 +995,17 @@ export type introspection = {
           {
             "name": "project",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             }
           },
           {
             "name": "createdBy",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             }
           }
         ]
@@ -1139,7 +1109,16 @@ export type introspection = {
                 "ofType": null
               }
             },
-            "args": []
+            "args": [
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            ]
           },
           {
             "name": "findProject",
@@ -1250,6 +1229,10 @@ export type introspection = {
           }
         ],
         "interfaces": []
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int"
       },
       {
         "kind": "OBJECT",
@@ -1572,6 +1555,14 @@ export type introspection = {
                 }
               },
               {
+                "name": "subheadline",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              {
                 "name": "tags",
                 "type": {
                   "kind": "LIST",
@@ -1683,6 +1674,14 @@ export type introspection = {
               },
               {
                 "name": "text",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "subheadline",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",

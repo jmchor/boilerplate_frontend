@@ -1,3 +1,5 @@
+scalar Date
+
 enum ModuleType {
 	commonjs
 	module
@@ -90,13 +92,15 @@ type User {
 
 type Article {
 	title: String!
-	text: String!
+	text: String
+	subheadline: String
 	tags: [Tags]
 	imageUrl: String
 	externalLink: String
 	linkedProjects: [Project]
-	createdBy: User!
+	createdBy: User
 	_id: ID
+	createdAt: Date
 }
 
 type Kanban {
@@ -110,11 +114,11 @@ type Kanban {
 }
 
 type Project {
-	title: String!
+	title: String
 	description: String
-	createdBy: User!
-	frontend: FrontendConfig!
-	backend: BackendConfig!
+	createdBy: User
+	frontend: FrontendConfig
+	backend: BackendConfig
 	installScripts: InstallScripts
 	kanban: Kanban
 	articles: [Article]
@@ -124,15 +128,15 @@ type Project {
 type FrontendConfig {
 	framework: FrontFrame
 	gqlClient: Boolean
-	packages: [Packages!]!
+	packages: [Packages]
 }
 
 type BackendConfig {
-	environment: BackendEnv!
+	environment: BackendEnv
 	moduleType: ModuleType
 	gqlServer: Boolean
 	cms: CMS
-	packages: [Packages!]!
+	packages: [Packages]
 	database: Database
 }
 
@@ -144,15 +148,15 @@ type InstallScripts {
 input FrontendConfigInput {
 	framework: FrontFrame
 	gqlClient: Boolean
-	packages: [Packages!]!
+	packages: [Packages]
 }
 
 input BackendConfigInput {
-	environment: BackendEnv!
+	environment: BackendEnv
 	moduleType: ModuleType
 	gqlServer: Boolean
 	cms: CMS
-	packages: [Packages!]!
+	packages: [Packages]
 	database: Database
 }
 
@@ -161,8 +165,9 @@ input InstallScriptsInput {
 	backend: String
 }
 input ArticleInput {
-	title: String!
-	text: String!
+	title: String
+	text: String
+	subheadline: String
 	tags: [Tags]
 	imageUrl: String
 	externalLink: String
@@ -176,8 +181,8 @@ input KanbanInput {
 	todo: [String]
 	doing: [String]
 	done: [String]
-	project: ID!
-	createdBy: ID!
+	project: ID
+	createdBy: ID
 }
 
 input LoginInput {
@@ -199,7 +204,7 @@ type Authenticationstatus {
 }
 
 type Query {
-	allProjects: [Project]
+	allProjects(limit: Int): [Project]
 	findProject(_id: ID): Project
 	searchProject(_id: ID, title: String): Project
 
@@ -240,6 +245,7 @@ type Mutation {
 	createArticle(
 		title: String!
 		text: String!
+		subheadline: String
 		tags: [Tags]
 		imageUrl: String
 		externalLink: String
@@ -253,6 +259,7 @@ type Mutation {
 		_id: ID!
 		title: String
 		text: String
+		subheadline: String
 		tags: [Tags]
 		imageUrl: String
 		externalLink: String

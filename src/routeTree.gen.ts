@@ -13,9 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LayoutLoginImport } from './routes/_layout-login'
-import { Route as IndexImport } from './routes/index'
+import { Route as LayoutHomeImport } from './routes/_layout-home'
+import { Route as ProjectsProjectidImport } from './routes/projects/$projectid'
 import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-login/signup/route'
 import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
+import { Route as LayoutHomeIndexRouteImport } from './routes/_layout-home/index/route'
 
 // Create/Update Routes
 
@@ -29,8 +31,13 @@ const LayoutLoginRoute = LayoutLoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  path: '/',
+const LayoutHomeRoute = LayoutHomeImport.update({
+  id: '/_layout-home',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsProjectidRoute = ProjectsProjectidImport.update({
+  path: '/projects/$projectid',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,12 +51,17 @@ const LayoutLoginLoginRouteRoute = LayoutLoginLoginRouteImport.update({
   getParentRoute: () => LayoutLoginRoute,
 } as any)
 
+const LayoutHomeIndexRouteRoute = LayoutHomeIndexRouteImport.update({
+  path: '/',
+  getParentRoute: () => LayoutHomeRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexImport
+    '/_layout-home': {
+      preLoaderRoute: typeof LayoutHomeImport
       parentRoute: typeof rootRoute
     }
     '/_layout-login': {
@@ -60,6 +72,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
+    '/_layout-home/': {
+      preLoaderRoute: typeof LayoutHomeIndexRouteImport
+      parentRoute: typeof LayoutHomeImport
+    }
     '/_layout-login/login': {
       preLoaderRoute: typeof LayoutLoginLoginRouteImport
       parentRoute: typeof LayoutLoginImport
@@ -68,18 +84,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLoginSignupRouteImport
       parentRoute: typeof LayoutLoginImport
     }
+    '/projects/$projectid': {
+      preLoaderRoute: typeof ProjectsProjectidImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  IndexRoute,
+  LayoutHomeRoute.addChildren([LayoutHomeIndexRouteRoute]),
   LayoutLoginRoute.addChildren([
     LayoutLoginLoginRouteRoute,
     LayoutLoginSignupRouteRoute,
   ]),
   DashboardRoute,
+  ProjectsProjectidRoute,
 ])
 
 /* prettier-ignore-end */
