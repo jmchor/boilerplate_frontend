@@ -2,16 +2,34 @@ import { useQuery } from '@apollo/client';
 import { graphql } from 'gql.tada';
 
 const ALL_PROJECTS = graphql(`
-	query Projects {
-		allProjects {
-			_id
+	query Projects($limit: Int) {
+		allProjects(limit: $limit) {
 			title
+			description
+			_id
+			createdBy {
+				username
+			}
+			frontend {
+				framework
+				gqlClient
+			}
+			backend {
+				environment
+				gqlServer
+				cms
+				database
+			}
 		}
 	}
 `);
 
-const useGetProjects = () => {
-	const { data, error, loading } = useQuery(ALL_PROJECTS);
+const useGetProjects = (limit: number) => {
+	const { data, error, loading } = useQuery(ALL_PROJECTS, {
+		variables: {
+			limit: limit,
+		},
+	});
 
 	return { data, error, loading };
 };
