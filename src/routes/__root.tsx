@@ -5,6 +5,7 @@ import { type AuthContext } from '../auth';
 import Navbar from '../components/Navbar';
 import GlobalStyles from '../styles/GlobalStyles';
 import { Container, InnerStyles, LaptopScreenSize, Message, ScreenContainer } from '../styles/RootLayoutStyles';
+import { Spacer } from '../styles/Spacer';
 
 interface MyRouterContext {
 	auth: AuthContext;
@@ -23,6 +24,7 @@ function RootComponent() {
 			<ScreenContainer>
 				{isSmallScreen ? '' : <Navbar />}
 				<InnerStyles>
+					{/* <Spacer /> */}
 					{isSmallScreen ? (
 						<Container>
 							<Message>Please use a bigger screen</Message>
