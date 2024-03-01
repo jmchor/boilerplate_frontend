@@ -13,6 +13,11 @@ html {
 	--red: #ff0000;
 	--blue: #4F7BC8;
 	--black: #393939;
+	--purple: #6F2DBD;
+	--mauve: #A663CC;
+	--wisteria: #B298DC;
+	--blueish: #B8D0EB;
+	--celeste: #B9FAF8
 	--grey: #3A3A3A;
 	--gray: var(--grey);
 	--lightblue: #8FB1EC;
