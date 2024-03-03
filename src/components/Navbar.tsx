@@ -4,15 +4,34 @@ import { useAuth } from '../auth';
 import { NavigationBar, NavigationButton, NavigationContainer, Subbar } from '../styles/NavbarStyles';
 import { SidebarData, SidebarItem } from '../data/SidebarData';
 import SubMenu from './SubMenu';
+import styled from 'styled-components';
 
 function Navbar() {
 	const auth = useAuth();
 	const navigate = useNavigate();
 
+	const ProfileImage = styled.img`
+		width: 80px;
+		height: 80px;
+		padding: 10px;
+		border-radius: 50%;
+		background: white;
+		border: 2px solid black;
+	`;
+
+	const EmptyImage = styled.div`
+		width: 80px;
+		height: 80px;
+		padding: 10px;
+		border-radius: 50%;
+		background: none;
+	`;
+
 	return (
 		<NavigationContainer>
 			<NavigationBar>
 				<Subbar>
+					{auth.user?.image && auth.hasImage ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
 					{SidebarData.map((item: SidebarItem) => {
 						return <SubMenu item={item} key={item.title} />;
 					})}
@@ -23,6 +42,7 @@ function Navbar() {
 					<NavigationButton
 						onClick={() => {
 							auth.setIsLoggingOut(true);
+							auth.setHasImage(false);
 							navigate({
 								to: '/login',
 							});
