@@ -1,4 +1,5 @@
 import { CardContainer, MetaData, TagLine, Title, TitleImage } from '../../styles/ArticleStyles';
+import { ProjectLink } from '../../styles/ProjectCardStyles';
 
 const ArticleCard = ({ article }: any) => {
 	function formatDate(isoDateString: string): string {
@@ -8,25 +9,27 @@ const ArticleCard = ({ article }: any) => {
 	}
 
 	return (
-		<CardContainer>
-			<TitleImage src={article?.imageUrl} alt='article image' />
-			<Title>
-				<h2>{article.title}</h2>
-				<h4>{article.subheadline}</h4>
-			</Title>
-			<MetaData>
-				<p>
-					<b>Created By</b> {article?.createdBy?.username} on {formatDate(article?.createdAt)}
-				</p>
-			</MetaData>
-			<TagLine>
-				{article?.tags?.map((tag: string) => (
-					<p key={tag}>
-						<i>#{tag}</i>
+		<ProjectLink to={`/articles/${article?._id}`}>
+			<CardContainer>
+				<TitleImage src={article?.imageUrl} alt='article image' />
+				<Title>
+					<h2>{article.title}</h2>
+					<h4>{article.subheadline}</h4>
+				</Title>
+				<MetaData>
+					<p>
+						<b>Created By</b> {article?.createdBy?.username} on {formatDate(article?.createdAt)}
 					</p>
-				))}
-			</TagLine>
-		</CardContainer>
+				</MetaData>
+				<TagLine>
+					{article?.tags?.map((tag: string) => (
+						<p key={tag}>
+							<i>#{tag}</i>
+						</p>
+					))}
+				</TagLine>
+			</CardContainer>
+		</ProjectLink>
 	);
 };
 export default ArticleCard;

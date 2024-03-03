@@ -1,9 +1,19 @@
 import { Link } from '@tanstack/react-router';
-import { CardContainer, MetaData, MetaDataWrapper, Title, ToolImage } from '../../styles/ProjectCardStyles';
+import {
+	CardContainer,
+	MetaData,
+	MetaDataWrapper,
+	ProjectLink,
+	Title,
+	ToolImage,
+} from '../../styles/ProjectCardStyles';
 
 const ProjectCard = ({ project }: any) => {
 	function truncateText(text: string, maxLength: number): string {
-		const words = text.split(' ');
+		let words: string[] = [];
+		if (text) {
+			words = text.split(' ');
+		}
 		if (words.length > maxLength) {
 			return words.slice(0, maxLength).join(' ') + '...';
 		}
@@ -12,7 +22,7 @@ const ProjectCard = ({ project }: any) => {
 	const truncatedTitle = truncateText(project?.title, 5);
 
 	return (
-		<Link to={`/projects/${project?._id}`}>
+		<ProjectLink to={`/projects/${project?._id}`}>
 			<CardContainer>
 				<Title>
 					<h3>{truncatedTitle}</h3>
@@ -31,7 +41,7 @@ const ProjectCard = ({ project }: any) => {
 					</p>
 				</MetaData>
 			</CardContainer>
-		</Link>
+		</ProjectLink>
 	);
 };
 export default ProjectCard;
