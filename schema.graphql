@@ -83,6 +83,7 @@ enum Tags {
 type User {
 	username: String!
 	email: String!
+	image: String
 	passwordHash: String!
 	projects: [Project]
 	articles: [Article]
@@ -208,7 +209,7 @@ type Query {
 	findProject(_id: ID): Project
 	searchProject(_id: ID, title: String): Project
 
-	allArticles: [Article]
+	allArticles(limit: Int): [Article]
 	findArticle(_id: ID): Article
 
 	currentUser: User
@@ -266,9 +267,9 @@ type Mutation {
 		createdBy: ID!
 	): Article
 
-	createUser(username: String!, email: String!, password: String!): User
+	createUser(username: String!, email: String!, password: String!, image: String): User
 
-	editUser(_id: ID!, username: String, email: String): User
+	editUser(_id: ID!, username: String, email: String, image: String): User
 
 	updatePassword(_id: ID!, oldPassword: String!, newPassword: String!): User
 
