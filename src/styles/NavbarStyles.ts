@@ -12,7 +12,7 @@ export const NavigationContainer = styled.div`
 	overflow-y: auto; /* Add scroll if content overflows */
 
 	//add box shadow only to the right border
-	box-shadow: 5px 0 15px rgba(0, 0, 0, 0.74);
+	box-shadow: 5px 0 5px rgba(0, 0, 0, 0.54);
 `;
 
 export const NavigationBar = styled.div`
@@ -23,7 +23,7 @@ export const NavigationBar = styled.div`
 	text-decoration: none;
 	width: 20rem;
 	padding: 5rem 0;
-	background-color: var(--mauve);
+	background: var(--radiantBluegrey);
 `;
 
 export const Subbar = styled.div`
@@ -72,7 +72,8 @@ export interface DropdownContainerProps {
 
 export const DropdownContainer = styled.div<DropdownContainerProps>`
 	width: 100%;
-	background-color: var(--purple);
+	background: rgba(0, 0, 0, 0.24);
+	border-radius: 3px;
 	transition: 0.8s ease-in-out; /* Added transition for height change */
 	overflow: hidden; /* Hide overflow */
 	max-height: ${({ isOpen }) => (isOpen ? '500px' : '0')}; /* Toggle max-height based on isOpen state */

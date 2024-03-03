@@ -9,9 +9,10 @@ export const CardContainer = styled.div`
 	height: 50vh;
 	text-overflow: ellipsis;
 	background-color: #f5f5f5;
-	box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.26);
+	box-shadow: 0 12px 24px 0 hsla(202, 27%, 45%, 1);
+
 	&:hover {
-		box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.54);
+		box-shadow: 0 12px 24px 0 hsla(213, 77%, 14%, 1);
 	}
 `;
 

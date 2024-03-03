@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
 export const CardContainer = styled.div`
@@ -10,11 +11,21 @@ export const CardContainer = styled.div`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	padding: 15px;
-	background-color: #f5f5f5;
-	box-shadow: 0 12px 24px 0 #4f7bc8ba;
+	background-color: white;
+	box-shadow: 0 20px 25px -10px hsla(202, 27%, 45%, 1);
 
 	&:hover {
-		box-shadow: 0 12px 24px 0 #4f7bc8fa;
+		box-shadow: 0 12px 24px -10px hsla(213, 77%, 14%, 1);
+		cursor: pointer;
+		text-decoration: none;
+	}
+`;
+
+export const ProjectLink = styled(Link)`
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
 	}
 `;
 

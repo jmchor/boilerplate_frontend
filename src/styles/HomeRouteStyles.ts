@@ -1,10 +1,13 @@
 import styled, { css } from 'styled-components';
 
-export interface LinkButtonProps {
+// export interface LinkButtonProps {
+// 	active: boolean;
+// }
+
+export interface ImageProps {
 	active: boolean;
 }
-
-export const IndexPageWrapper = styled.div`
+export const HomePageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -37,25 +40,30 @@ export const FilterContainer = styled.div`
 `;
 
 export const MoreButton = styled.button`
-	color: var(--blue);
+	color: var(--steelbluegrey);
 	background: none;
 	border: none;
 	cursor: pointer;
 `;
 
-export const LinkButton = styled.button<LinkButtonProps>`
+export const LinkButton = styled.button`
 	color: var(--blue);
 	background: none;
 	border: none;
 	font-size: 1.1em;
 	cursor: pointer;
+`;
 
-	/* Apply red color when active */
+export const Image = styled.img<ImageProps>`
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	padding: 7px;
 	${({ active }) =>
 		active &&
 		css`
-			color: red;
-		`}
+			background-color: var(--blue);
+		`};
 `;
 
 export const ContainerWithHeader = styled.div`
