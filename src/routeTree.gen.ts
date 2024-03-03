@@ -12,17 +12,25 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
+import { Route as LayoutNonavImport } from './routes/_layout-nonav'
 import { Route as LayoutLoginImport } from './routes/_layout-login'
 import { Route as LayoutHomeImport } from './routes/_layout-home'
-import { Route as ProjectsProjectidImport } from './routes/projects/$projectid'
 import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-login/signup/route'
 import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
-import { Route as LayoutHomeIndexRouteImport } from './routes/_layout-home/index/route'
+import { Route as LayoutHomeHomeRouteImport } from './routes/_layout-home/home/route'
+import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route'
+import { Route as LayoutHomeProjectsProjectidImport } from './routes/_layout-home/projects/$projectid'
+import { Route as LayoutHomeArticlesArticleidImport } from './routes/_layout-home/articles/$articleid'
 
 // Create/Update Routes
 
 const DashboardRoute = DashboardImport.update({
   path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutNonavRoute = LayoutNonavImport.update({
+  id: '/_layout-nonav',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -36,11 +44,6 @@ const LayoutHomeRoute = LayoutHomeImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProjectsProjectidRoute = ProjectsProjectidImport.update({
-  path: '/projects/$projectid',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const LayoutLoginSignupRouteRoute = LayoutLoginSignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => LayoutLoginRoute,
@@ -51,10 +54,27 @@ const LayoutLoginLoginRouteRoute = LayoutLoginLoginRouteImport.update({
   getParentRoute: () => LayoutLoginRoute,
 } as any)
 
-const LayoutHomeIndexRouteRoute = LayoutHomeIndexRouteImport.update({
-  path: '/',
+const LayoutHomeHomeRouteRoute = LayoutHomeHomeRouteImport.update({
+  path: '/home',
   getParentRoute: () => LayoutHomeRoute,
 } as any)
+
+const LayoutNonavIndexRouteRoute = LayoutNonavIndexRouteImport.update({
+  path: '/',
+  getParentRoute: () => LayoutNonavRoute,
+} as any)
+
+const LayoutHomeProjectsProjectidRoute =
+  LayoutHomeProjectsProjectidImport.update({
+    path: '/projects/$projectid',
+    getParentRoute: () => LayoutHomeRoute,
+  } as any)
+
+const LayoutHomeArticlesArticleidRoute =
+  LayoutHomeArticlesArticleidImport.update({
+    path: '/articles/$articleid',
+    getParentRoute: () => LayoutHomeRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -68,12 +88,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLoginImport
       parentRoute: typeof rootRoute
     }
+    '/_layout-nonav': {
+      preLoaderRoute: typeof LayoutNonavImport
+      parentRoute: typeof rootRoute
+    }
     '/dashboard': {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/_layout-home/': {
-      preLoaderRoute: typeof LayoutHomeIndexRouteImport
+    '/_layout-nonav/': {
+      preLoaderRoute: typeof LayoutNonavIndexRouteImport
+      parentRoute: typeof LayoutNonavImport
+    }
+    '/_layout-home/home': {
+      preLoaderRoute: typeof LayoutHomeHomeRouteImport
       parentRoute: typeof LayoutHomeImport
     }
     '/_layout-login/login': {
@@ -84,9 +112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLoginSignupRouteImport
       parentRoute: typeof LayoutLoginImport
     }
-    '/projects/$projectid': {
-      preLoaderRoute: typeof ProjectsProjectidImport
-      parentRoute: typeof rootRoute
+    '/_layout-home/articles/$articleid': {
+      preLoaderRoute: typeof LayoutHomeArticlesArticleidImport
+      parentRoute: typeof LayoutHomeImport
+    }
+    '/_layout-home/projects/$projectid': {
+      preLoaderRoute: typeof LayoutHomeProjectsProjectidImport
+      parentRoute: typeof LayoutHomeImport
     }
   }
 }
@@ -94,13 +126,17 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  LayoutHomeRoute.addChildren([LayoutHomeIndexRouteRoute]),
+  LayoutHomeRoute.addChildren([
+    LayoutHomeHomeRouteRoute,
+    LayoutHomeArticlesArticleidRoute,
+    LayoutHomeProjectsProjectidRoute,
+  ]),
   LayoutLoginRoute.addChildren([
     LayoutLoginLoginRouteRoute,
     LayoutLoginSignupRouteRoute,
   ]),
+  LayoutNonavRoute.addChildren([LayoutNonavIndexRouteRoute]),
   DashboardRoute,
-  ProjectsProjectidRoute,
 ])
 
 /* prettier-ignore-end */
