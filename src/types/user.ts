@@ -20,4 +20,5 @@ export type User = {
 	_id: string | number | null;
 	email: string;
 	username: string;
+	image: string;
 };

@@ -20,7 +20,7 @@ const LOGIN = graphql(`
 const SigninForm: React.FC = () => {
 	const [login, { loading, error }] = useMutation(LOGIN);
 	const navigate = useNavigate();
-	const { setIsLoggedIn } = useAuth();
+	const { setIsLoggedIn, setHasImage } = useAuth();
 
 	const [formData, setFormData] = useState({
 		input: '',
@@ -47,6 +47,7 @@ const SigninForm: React.FC = () => {
 			if (data?.login?.isAuthenticated === true) {
 				flushSync(() => {
 					setIsLoggedIn(true);
+					setHasImage(true);
 				});
 				navigate({ to: '/dashboard' });
 			}
