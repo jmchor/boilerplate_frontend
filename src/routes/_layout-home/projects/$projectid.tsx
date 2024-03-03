@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/projects/$projectid')({
+export const Route = createFileRoute('/_layout-home/projects/$projectid')({
 	beforeLoad: ({ context }) => {
 		console.log(context);
 		if (!context.auth.isLoggedIn || (!context.auth.isLoading && !context.auth.isLoggedIn)) {
