@@ -2,6 +2,9 @@ import { Outlet, createFileRoute } from '@tanstack/react-router';
 import styled from 'styled-components';
 
 export const Route = createFileRoute('/_layout-login')({
+	loader: ({ context }) => {
+		context.auth.setWithNav(true);
+	},
 	component: LoginLayoutComponent,
 });
 
