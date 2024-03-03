@@ -1,7 +1,7 @@
 export const SidebarData = [
 	{
 		title: 'Home',
-		path: '/',
+		path: '/home',
 
 		subNav: [],
 	},
@@ -10,7 +10,7 @@ export const SidebarData = [
 		subNav: [
 			{
 				title: 'Home',
-				path: '/',
+				path: '/home',
 			},
 			{
 				title: 'Another',
@@ -27,7 +27,7 @@ export const SidebarData = [
 		subNav: [
 			{
 				title: 'Home',
-				path: '/',
+				path: '/home',
 			},
 			{
 				title: 'Dashboard Again',
