@@ -271,6 +271,15 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "image",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "passwordHash",
             "type": {
               "kind": "NON_NULL",
@@ -1174,7 +1183,16 @@ export type introspection = {
                 "ofType": null
               }
             },
-            "args": []
+            "args": [
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            ]
           },
           {
             "name": "findArticle",
@@ -1768,6 +1786,14 @@ export type introspection = {
                     "ofType": null
                   }
                 }
+              },
+              {
+                "name": "image",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             ]
           },
@@ -1800,6 +1826,14 @@ export type introspection = {
               },
               {
                 "name": "email",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              {
+                "name": "image",
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
