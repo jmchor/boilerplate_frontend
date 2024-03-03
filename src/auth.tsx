@@ -51,6 +51,8 @@ export interface AuthContext {
 	isLoggingOut: boolean;
 	setIsLoggingOut: React.Dispatch<React.SetStateAction<boolean>>;
 	isLoading: boolean;
+	withNav: boolean;
+	setWithNav: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -59,7 +61,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>({} as User);
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
-	const [isLoading, setIsLoading] = useState<boolean>(true); // New loading state
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [withNav, setWithNav] = useState<boolean>(true);
 
 	useQuery(CURRENT_USER, {
 		skip: !isLoggedIn,
@@ -102,7 +105,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ isLoggedIn, setIsLoggedIn, user, setUser, isLoggingOut, setIsLoggingOut, isLoading }}
+			value={{
+				isLoggedIn,
+				setIsLoggedIn,
+				user,
+				setUser,
+				isLoggingOut,
+				setIsLoggingOut,
+				isLoading,
+				withNav,
+				setWithNav,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>
