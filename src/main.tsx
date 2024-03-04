@@ -6,6 +6,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 import { AuthProvider, useAuth } from './auth';
+import NProgress from 'nprogress';
+import './styles/nprogress.css';
 
 // Create a new router instance
 const router = createRouter({
@@ -15,6 +17,9 @@ const router = createRouter({
 		auth: undefined!,
 	},
 });
+
+router.subscribe('onBeforeLoad', () => NProgress.start());
+router.subscribe('onLoad', () => NProgress.done());
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
