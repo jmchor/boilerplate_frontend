@@ -17,21 +17,22 @@ import {
 	ProjectGrid,
 } from '../../../styles/HomeRouteStyles';
 import { useAuth } from '../../../auth';
+import { Project } from '../../../types/project';
+import { Article } from '../../../types/articles';
 
 export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
 });
 
 function Home() {
-	const [counts, setCounts] = useState<{ projects: number; articles: number }>({ projects: 4, articles: 3 });
+	const [counts, setCounts] = useState<{ projects: number; articles: number }>({ projects: 2, articles: 3 });
 	const [filter, setFilter] = useState<'projects' | 'articles' | 'all'>('all');
-	const [showOptional, setShowOptional] = useState(true);
 
 	const auth = useAuth();
 
 	const navigate = useNavigate();
 
-	const { data: projectData, error: projectError, loading: projectLoading } = useGetProjects(0);
+	const { data: projectData, error: projectError, loading: projectLoading } = useGetProjects(5);
 	const { data: articleData, error: articleError, loading: articleLoading } = useGetArticles();
 
 	if (projectLoading || articleLoading) return <p>Loading...</p>;
@@ -62,27 +63,18 @@ function Home() {
 				</LinkButton>
 			</FilterContainer>
 
-			{showOptional && !auth.user ? (
+			{auth.isLoggedIn ? (
 				<OptionalContainer>
-					<button onClick={() => setShowOptional(false)}> X </button>
-					<p>Don't have an account yet? Sign up now!</p>
-					<button
-						onClick={() => {
-							navigate({ to: '/signup' });
-						}}
-					>
-						Sign Up
-					</button>
-					<Spacer />
+					<h1>Welcome back, {auth.user?.username}!</h1>
 				</OptionalContainer>
 			) : null}
 
 			{filter === 'all' || filter === 'projects' ? (
 				<ContainerWithHeader>
-					<h1> Recent Projects</h1>
+					<h2> Explore Recent Projects</h2>
 					<ProjectGrid>
 						{projects.slice(0, counts.projects).map((project) => (
-							<ProjectCard key={project?._id} project={project} />
+							<ProjectCard key={project?._id} project={project as Project} />
 						))}
 						{projects.length > counts.projects ? (
 							<MoreButton onClick={() => showMore('projects')}>See More</MoreButton>
@@ -93,10 +85,10 @@ function Home() {
 
 			{filter === 'all' || filter === 'articles' ? (
 				<ContainerWithHeader>
-					<h1> Recent Articles</h1>
+					<h2> Read the Newest Articles</h2>
 					<ArticleContainer>
 						{articles.slice(0, counts.articles).map((article) => (
-							<ArticleCard key={article?._id} article={article} />
+							<ArticleCard key={article?._id} article={article as Article} />
 						))}
 						{articles.length > counts.articles ? (
 							<MoreButton onClick={() => showMore('articles')}>See More</MoreButton>
