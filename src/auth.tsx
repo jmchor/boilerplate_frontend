@@ -54,8 +54,6 @@ export interface AuthContext {
 	isLoading: boolean;
 	withNav: boolean;
 	setWithNav: React.Dispatch<React.SetStateAction<boolean>>;
-	hasImage: boolean;
-	setHasImage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -66,8 +64,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [withNav, setWithNav] = useState<boolean>(true);
-
-	const [hasImage, setHasImage] = useState<boolean>(true);
 
 	useQuery(CURRENT_USER, {
 		skip: !isLoggedIn,
@@ -120,8 +116,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				isLoading,
 				withNav,
 				setWithNav,
-				hasImage,
-				setHasImage,
 			}}
 		>
 			{children}

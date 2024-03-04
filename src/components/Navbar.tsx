@@ -31,7 +31,7 @@ function Navbar() {
 		<NavigationContainer>
 			<NavigationBar>
 				<Subbar>
-					{auth.user?.image && auth.hasImage ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
+					{auth.user?.image && auth.isLoggedIn ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
 					{SidebarData.map((item: SidebarItem) => {
 						return <SubMenu item={item} key={item.title} />;
 					})}
@@ -42,7 +42,6 @@ function Navbar() {
 					<NavigationButton
 						onClick={() => {
 							auth.setIsLoggingOut(true);
-							auth.setHasImage(false);
 							navigate({
 								to: '/login',
 							});
