@@ -1,7 +1,8 @@
 import { CardContainer, MetaData, TagLine, Title, TitleImage } from '../../styles/ArticleStyles';
 import { ProjectLink } from '../../styles/ProjectCardStyles';
+import { Article } from '../../types/articles';
 
-const ArticleCard = ({ article }: any) => {
+const ArticleCard = ({ article }: { article: Article }) => {
 	function formatDate(isoDateString: string): string {
 		const date = new Date(isoDateString);
 		const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: '2-digit' };
