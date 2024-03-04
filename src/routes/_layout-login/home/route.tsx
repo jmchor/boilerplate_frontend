@@ -1,10 +1,9 @@
-import { useNavigate, createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import ProjectCard from '../../../components/cards/ProjectCard';
 import useGetProjects from '../../../services/getProjects';
 import { useState } from 'react';
 import useGetArticles from '../../../services/getArticles';
 import ArticleCard from '../../../components/cards/ArticleCard';
-import { Spacer } from '../../../styles/Spacer';
 import {
 	ArticleContainer,
 	ContainerWithHeader,
@@ -19,8 +18,10 @@ import {
 import { useAuth } from '../../../auth';
 import { Project } from '../../../types/project';
 import { Article } from '../../../types/articles';
+import { MoonLoader } from 'react-spinners';
+import styled from 'styled-components';
 
-export const Route = createFileRoute('/_layout-home/home')({
+export const Route = createFileRoute('/_layout-login/home')({
 	component: Home,
 });
 
@@ -30,13 +31,10 @@ function Home() {
 
 	const auth = useAuth();
 
-	const navigate = useNavigate();
-
 	const { data: projectData, error: projectError, loading: projectLoading } = useGetProjects(5);
 	const { data: articleData, error: articleError, loading: articleLoading } = useGetArticles();
 
-	if (projectLoading || articleLoading) return <p>Loading...</p>;
-	if (projectError || articleError) return <p>Error</p>;
+	if (projectError || articleError) return <p>{projectError?.message || articleError?.message}</p>;
 
 	const projects = projectData?.allProjects || [];
 	const articles = articleData?.allArticles || [];
@@ -49,27 +47,44 @@ function Home() {
 		setFilter(selectedFilter);
 	};
 
+	const LoadingContainer = styled.div`
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		margin-top: 30rem;
+	`;
+
 	return (
 		<HomePageWrapper>
-			<FilterContainer>
-				<LinkButton onClick={() => handleFilterChange('all')}>
-					<Image src='/static/infinite.svg' alt='' active={filter === 'all'} />
-				</LinkButton>
-				<LinkButton onClick={() => handleFilterChange('projects')}>
-					<Image src='/static/coding.svg' alt='' active={filter === 'projects'} />
-				</LinkButton>
-				<LinkButton onClick={() => handleFilterChange('articles')}>
-					<Image src='/static/article.svg' alt='' active={filter === 'articles'} />
-				</LinkButton>
-			</FilterContainer>
+			{projectLoading || articleLoading ? (
+				<LoadingContainer>
+					<MoonLoader color='var(--blue)' />
+				</LoadingContainer>
+			) : null}
 
-			{auth.isLoggedIn ? (
+			{!projectLoading && !articleLoading && (
+				<FilterContainer>
+					<LinkButton onClick={() => handleFilterChange('all')}>
+						<Image src='/static/infinite.svg' alt='' active={filter === 'all'} />
+					</LinkButton>
+					<LinkButton onClick={() => handleFilterChange('projects')}>
+						<Image src='/static/coding.svg' alt='' active={filter === 'projects'} />
+					</LinkButton>
+					<LinkButton onClick={() => handleFilterChange('articles')}>
+						<Image src='/static/article.svg' alt='' active={filter === 'articles'} />
+					</LinkButton>
+				</FilterContainer>
+			)}
+
+			{!projectLoading && !articleLoading && auth.isLoggedIn ? (
 				<OptionalContainer>
 					<h1>Welcome back, {auth.user?.username}!</h1>
 				</OptionalContainer>
 			) : null}
 
-			{filter === 'all' || filter === 'projects' ? (
+			{(!projectLoading && filter === 'all') || (!projectLoading && filter === 'projects') ? (
 				<ContainerWithHeader>
 					<h2> Explore Recent Projects</h2>
 					<ProjectGrid>
@@ -83,7 +98,7 @@ function Home() {
 				</ContainerWithHeader>
 			) : null}
 
-			{filter === 'all' || filter === 'articles' ? (
+			{(!articleLoading && filter === 'all') || (!articleLoading && filter === 'articles') ? (
 				<ContainerWithHeader>
 					<h2> Read the Newest Articles</h2>
 					<ArticleContainer>
