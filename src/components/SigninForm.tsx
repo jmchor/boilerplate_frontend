@@ -20,7 +20,7 @@ const LOGIN = graphql(`
 const SigninForm: React.FC = () => {
 	const [login, { loading, error }] = useMutation(LOGIN);
 	const navigate = useNavigate();
-	const { setIsLoggedIn, setHasImage } = useAuth();
+	const { setIsLoggedIn } = useAuth();
 
 	const [formData, setFormData] = useState({
 		input: '',
