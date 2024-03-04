@@ -6,6 +6,12 @@ export const SidebarData = [
 		subNav: [],
 	},
 	{
+		title: 'Profile',
+		path: '/user/$username',
+
+		subNav: [],
+	},
+	{
 		title: 'Dashboard',
 		subNav: [
 			{

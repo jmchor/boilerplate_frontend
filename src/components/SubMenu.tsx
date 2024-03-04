@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { DropdownContainer, DropdownLink, NavigationButton } from '../styles/NavbarStyles';
 import { SidebarItem } from '../data/SidebarData';
+import { useAuth } from '../auth';
 
 const SubMenu = ({ item }: { item: SidebarItem }) => {
 	const [subnav, setSubnav] = useState(false);
@@ -10,11 +11,20 @@ const SubMenu = ({ item }: { item: SidebarItem }) => {
 
 	const navigate = useNavigate();
 
+	const auth = useAuth();
+
 	return (
 		<>
-			{item?.path ? (
+			{item?.path === '/user/$username' ? (
+				// Render special button for "/user/$username" path
+				<NavigationButton onClick={() => navigate({ to: `/user/${auth.user?.username}` })}>
+					{item.title}
+				</NavigationButton>
+			) : item?.path ? (
+				// Render standard button for other paths
 				<NavigationButton onClick={() => navigate({ to: item.path })}>{item.title}</NavigationButton>
 			) : (
+				// Render button with just a title if path doesn't exist
 				<NavigationButton onClick={item.subNav && showSubnav}>
 					<span>{item.title}</span>
 				</NavigationButton>
