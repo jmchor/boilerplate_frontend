@@ -17,7 +17,7 @@ const SubMenu = ({ item }: { item: SidebarItem }) => {
 		<>
 			{item?.path === '/user/$username' ? (
 				// Render special button for "/user/$username" path
-				<NavigationButton onClick={() => navigate({ to: `/user/${auth.user?.username}` })}>
+				<NavigationButton onClick={() => navigate({ to: `/user/${auth.user?.username}` as string })}>
 					{item.title}
 				</NavigationButton>
 			) : item?.path ? (
