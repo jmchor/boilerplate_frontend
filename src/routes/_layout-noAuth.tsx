@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router';
 import styled from 'styled-components';
 
-export const Route = createFileRoute('/_layout-login')({
+export const Route = createFileRoute('/_layout-noAuth')({
 	loader: ({ context }) => {
 		context.auth.setWithNav(true);
 	},
