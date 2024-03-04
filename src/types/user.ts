@@ -2,7 +2,7 @@ export type User = {
 	likedArticles:
 		| ({
 				_id: string | number | null;
-				title: string;
+				title: string | null;
 		  } | null)[]
 		| null;
 	articles:

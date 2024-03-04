@@ -48,7 +48,7 @@ export interface AuthContext {
 	isLoggedIn: boolean;
 	setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 	user: User | null;
-	setUser: (user: User | null) => void;
+	setUser: React.Dispatch<React.SetStateAction<User | null>>;
 	isLoggingOut: boolean;
 	setIsLoggingOut: React.Dispatch<React.SetStateAction<boolean>>;
 	isLoading: boolean;
