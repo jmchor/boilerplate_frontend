@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router';
 import {
 	CardContainer,
 	MetaData,
@@ -7,8 +6,9 @@ import {
 	Title,
 	ToolImage,
 } from '../../styles/ProjectCardStyles';
+import { Project } from '../../types/project';
 
-const ProjectCard = ({ project }: any) => {
+const ProjectCard = ({ project }: { project: Project }) => {
 	function truncateText(text: string, maxLength: number): string {
 		let words: string[] = [];
 		if (text) {
