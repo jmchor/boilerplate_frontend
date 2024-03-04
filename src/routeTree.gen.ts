@@ -19,6 +19,7 @@ import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-login/si
 import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
 import { Route as LayoutHomeHomeRouteImport } from './routes/_layout-home/home/route'
 import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route'
+import { Route as LayoutHomeUserUsernameImport } from './routes/_layout-home/user/$username'
 import { Route as LayoutHomeProjectsProjectidImport } from './routes/_layout-home/projects/$projectid'
 import { Route as LayoutHomeArticlesArticleidImport } from './routes/_layout-home/articles/$articleid'
 
@@ -62,6 +63,11 @@ const LayoutHomeHomeRouteRoute = LayoutHomeHomeRouteImport.update({
 const LayoutNonavIndexRouteRoute = LayoutNonavIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutNonavRoute,
+} as any)
+
+const LayoutHomeUserUsernameRoute = LayoutHomeUserUsernameImport.update({
+  path: '/user/$username',
+  getParentRoute: () => LayoutHomeRoute,
 } as any)
 
 const LayoutHomeProjectsProjectidRoute =
@@ -120,6 +126,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutHomeProjectsProjectidImport
       parentRoute: typeof LayoutHomeImport
     }
+    '/_layout-home/user/$username': {
+      preLoaderRoute: typeof LayoutHomeUserUsernameImport
+      parentRoute: typeof LayoutHomeImport
+    }
   }
 }
 
@@ -130,6 +140,7 @@ export const routeTree = rootRoute.addChildren([
     LayoutHomeHomeRouteRoute,
     LayoutHomeArticlesArticleidRoute,
     LayoutHomeProjectsProjectidRoute,
+    LayoutHomeUserUsernameRoute,
   ]),
   LayoutLoginRoute.addChildren([
     LayoutLoginLoginRouteRoute,
