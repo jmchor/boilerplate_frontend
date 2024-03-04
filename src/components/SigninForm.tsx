@@ -48,7 +48,7 @@ const SigninForm: React.FC = () => {
 				flushSync(() => {
 					setIsLoggedIn(true);
 				});
-				navigate({ to: '/dashboard' });
+				navigate({ to: '/home' });
 			}
 		} catch (error) {
 			console.error(error);
