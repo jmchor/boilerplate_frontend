@@ -13,6 +13,7 @@ export const NavigationContainer = styled.div`
 
 	//add box shadow only to the right border
 	box-shadow: 5px 0 5px rgba(0, 0, 0, 0.54);
+	z-index: 1000;
 `;
 
 export const NavigationBar = styled.div`
