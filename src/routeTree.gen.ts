@@ -10,167 +10,160 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as LayoutWithAuthImport } from './routes/_layout-withAuth'
-import { Route as DashboardImport } from './routes/dashboard'
-import { Route as LayoutNonavImport } from './routes/_layout-nonav'
-import { Route as LayoutLoginImport } from './routes/_layout-login'
-import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-login/signup/route'
-import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-login/login/route'
-import { Route as LayoutLoginHomeRouteImport } from './routes/_layout-login/home/route'
-import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route'
-import { Route as LayoutWithAuthUserUsernameImport } from './routes/_layout-withAuth/user/$username'
-import { Route as LayoutWithAuthArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid'
-import { Route as LayoutWithAuthProjectsNewImport } from './routes/_layout-withAuth/projects/new'
-import { Route as LayoutWithAuthArticlesNewImport } from './routes/_layout-withAuth/articles/new'
-import { Route as LayoutWithAuthProjectsProjectidImport } from './routes/_layout-withAuth/projects/$projectid'
+import { Route as rootRoute } from './routes/__root';
+import { Route as DashboardImport } from './routes/dashboard';
+import { Route as LayoutNonavImport } from './routes/_layout-nonav';
+import { Route as LayoutLoginImport } from './routes/_layout-login';
+import { Route as LayoutHomeImport } from './routes/_layout-withAuth';
+import { Route as LayoutLoginSignupRouteImport } from './routes/_layout-noAuth/signup/route';
+import { Route as LayoutLoginLoginRouteImport } from './routes/_layout-noAuth/login/route';
+import { Route as LayoutLoginHomeRouteImport } from './routes/_layout-noAuth/home/route';
+import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route';
+import { Route as LayoutHomeUserUsernameImport } from './routes/_layout-withAuth/user/$username';
+import { Route as LayoutHomeProjectsNewImport } from './routes/_layout-withAuth/projects/new';
+import { Route as LayoutHomeProjectsProjectidImport } from './routes/_layout-withAuth/projects/$projectid';
+import { Route as LayoutHomeArticlesNewImport } from './routes/_layout-withAuth/articles/new';
+import { Route as LayoutHomeArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid';
 
 // Create/Update Routes
 
-const LayoutWithAuthRoute = LayoutWithAuthImport.update({
-  id: '/_layout-withAuth',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const DashboardRoute = DashboardImport.update({
-  path: '/dashboard',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: '/dashboard',
+	getParentRoute: () => rootRoute,
+} as any);
 
 const LayoutNonavRoute = LayoutNonavImport.update({
-  id: '/_layout-nonav',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: '/_layout-nonav',
+	getParentRoute: () => rootRoute,
+} as any);
 
 const LayoutLoginRoute = LayoutLoginImport.update({
-  id: '/_layout-login',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: '/_layout-login',
+	getParentRoute: () => rootRoute,
+} as any);
+
+const LayoutHomeRoute = LayoutHomeImport.update({
+	id: '/_layout-home',
+	getParentRoute: () => rootRoute,
+} as any);
 
 const LayoutLoginSignupRouteRoute = LayoutLoginSignupRouteImport.update({
-  path: '/signup',
-  getParentRoute: () => LayoutLoginRoute,
-} as any)
+	path: '/signup',
+	getParentRoute: () => LayoutLoginRoute,
+} as any);
 
 const LayoutLoginLoginRouteRoute = LayoutLoginLoginRouteImport.update({
-  path: '/login',
-  getParentRoute: () => LayoutLoginRoute,
-} as any)
+	path: '/login',
+	getParentRoute: () => LayoutLoginRoute,
+} as any);
 
 const LayoutLoginHomeRouteRoute = LayoutLoginHomeRouteImport.update({
-  path: '/home',
-  getParentRoute: () => LayoutLoginRoute,
-} as any)
+	path: '/home',
+	getParentRoute: () => LayoutLoginRoute,
+} as any);
 
 const LayoutNonavIndexRouteRoute = LayoutNonavIndexRouteImport.update({
-  path: '/',
-  getParentRoute: () => LayoutNonavRoute,
-} as any)
+	path: '/',
+	getParentRoute: () => LayoutNonavRoute,
+} as any);
 
-const LayoutWithAuthUserUsernameRoute = LayoutWithAuthUserUsernameImport.update(
-  {
-    id: '/_layout-withAuth/user/$username',
-    getParentRoute: () => rootRoute,
-  } as any,
-)
+const LayoutHomeUserUsernameRoute = LayoutHomeUserUsernameImport.update({
+	path: '/user/$username',
+	getParentRoute: () => LayoutHomeRoute,
+} as any);
 
-const LayoutWithAuthArticlesArticleidRoute =
-  LayoutWithAuthArticlesArticleidImport.update({
-    id: '/_layout-withAuth/articles/$articleid',
-    getParentRoute: () => rootRoute,
-  } as any)
+const LayoutHomeProjectsNewRoute = LayoutHomeProjectsNewImport.update({
+	path: '/projects/new',
+	getParentRoute: () => LayoutHomeRoute,
+} as any);
 
-const LayoutWithAuthProjectsNewRoute = LayoutWithAuthProjectsNewImport.update({
-  id: '/_layout-withAuth/projects/new',
-  getParentRoute: () => rootRoute,
-} as any)
+const LayoutHomeProjectsProjectidRoute = LayoutHomeProjectsProjectidImport.update({
+	path: '/projects/$projectid',
+	getParentRoute: () => LayoutHomeRoute,
+} as any);
 
-const LayoutWithAuthArticlesNewRoute = LayoutWithAuthArticlesNewImport.update({
-  id: '/_layout-withAuth/articles/new',
-  getParentRoute: () => rootRoute,
-} as any)
+const LayoutHomeArticlesNewRoute = LayoutHomeArticlesNewImport.update({
+	path: '/articles/new',
+	getParentRoute: () => LayoutHomeRoute,
+} as any);
 
-const LayoutWithAuthProjectsProjectidRoute =
-  LayoutWithAuthProjectsProjectidImport.update({
-    id: '/_layout-withAuth/projects/$projectid',
-    getParentRoute: () => rootRoute,
-  } as any)
+const LayoutHomeArticlesArticleidRoute = LayoutHomeArticlesArticleidImport.update({
+	path: '/articles/$articleid',
+	getParentRoute: () => LayoutHomeRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_layout-login': {
-      preLoaderRoute: typeof LayoutLoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-nonav': {
-      preLoaderRoute: typeof LayoutNonavImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard': {
-      preLoaderRoute: typeof DashboardImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-nonav/': {
-      preLoaderRoute: typeof LayoutNonavIndexRouteImport
-      parentRoute: typeof LayoutNonavImport
-    }
-    '/_layout-login/home': {
-      preLoaderRoute: typeof LayoutLoginHomeRouteImport
-      parentRoute: typeof LayoutLoginImport
-    }
-    '/_layout-login/login': {
-      preLoaderRoute: typeof LayoutLoginLoginRouteImport
-      parentRoute: typeof LayoutLoginImport
-    }
-    '/_layout-login/signup': {
-      preLoaderRoute: typeof LayoutLoginSignupRouteImport
-      parentRoute: typeof LayoutLoginImport
-    }
-    '/_layout-withAuth': {
-      preLoaderRoute: typeof LayoutWithAuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-withAuth/projects/$projectid': {
-      preLoaderRoute: typeof LayoutWithAuthProjectsProjectidImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-withAuth/articles/new': {
-      preLoaderRoute: typeof LayoutWithAuthArticlesNewImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-withAuth/projects/new': {
-      preLoaderRoute: typeof LayoutWithAuthProjectsNewImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-withAuth/articles/$articleid': {
-      preLoaderRoute: typeof LayoutWithAuthArticlesArticleidImport
-      parentRoute: typeof rootRoute
-    }
-    '/_layout-withAuth/user/$username': {
-      preLoaderRoute: typeof LayoutWithAuthUserUsernameImport
-      parentRoute: typeof rootRoute
-    }
-  }
+	interface FileRoutesByPath {
+		'/_layout-home': {
+			preLoaderRoute: typeof LayoutHomeImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/_layout-login': {
+			preLoaderRoute: typeof LayoutLoginImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/_layout-nonav': {
+			preLoaderRoute: typeof LayoutNonavImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/dashboard': {
+			preLoaderRoute: typeof DashboardImport;
+			parentRoute: typeof rootRoute;
+		};
+		'/_layout-nonav/': {
+			preLoaderRoute: typeof LayoutNonavIndexRouteImport;
+			parentRoute: typeof LayoutNonavImport;
+		};
+		'/_layout-login/home': {
+			preLoaderRoute: typeof LayoutLoginHomeRouteImport;
+			parentRoute: typeof LayoutLoginImport;
+		};
+		'/_layout-login/login': {
+			preLoaderRoute: typeof LayoutLoginLoginRouteImport;
+			parentRoute: typeof LayoutLoginImport;
+		};
+		'/_layout-login/signup': {
+			preLoaderRoute: typeof LayoutLoginSignupRouteImport;
+			parentRoute: typeof LayoutLoginImport;
+		};
+		'/_layout-home/articles/$articleid': {
+			preLoaderRoute: typeof LayoutHomeArticlesArticleidImport;
+			parentRoute: typeof LayoutHomeImport;
+		};
+		'/_layout-home/articles/new': {
+			preLoaderRoute: typeof LayoutHomeArticlesNewImport;
+			parentRoute: typeof LayoutHomeImport;
+		};
+		'/_layout-home/projects/$projectid': {
+			preLoaderRoute: typeof LayoutHomeProjectsProjectidImport;
+			parentRoute: typeof LayoutHomeImport;
+		};
+		'/_layout-home/projects/new': {
+			preLoaderRoute: typeof LayoutHomeProjectsNewImport;
+			parentRoute: typeof LayoutHomeImport;
+		};
+		'/_layout-home/user/$username': {
+			preLoaderRoute: typeof LayoutHomeUserUsernameImport;
+			parentRoute: typeof LayoutHomeImport;
+		};
+	}
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  LayoutLoginRoute.addChildren([
-    LayoutLoginHomeRouteRoute,
-    LayoutLoginLoginRouteRoute,
-    LayoutLoginSignupRouteRoute,
-  ]),
-  LayoutNonavRoute.addChildren([LayoutNonavIndexRouteRoute]),
-  DashboardRoute,
-  LayoutWithAuthRoute,
-  LayoutWithAuthProjectsProjectidRoute,
-  LayoutWithAuthArticlesNewRoute,
-  LayoutWithAuthProjectsNewRoute,
-  LayoutWithAuthArticlesArticleidRoute,
-  LayoutWithAuthUserUsernameRoute,
-])
+	LayoutHomeRoute.addChildren([
+		LayoutHomeArticlesArticleidRoute,
+		LayoutHomeArticlesNewRoute,
+		LayoutHomeProjectsProjectidRoute,
+		LayoutHomeProjectsNewRoute,
+		LayoutHomeUserUsernameRoute,
+	]),
+	LayoutLoginRoute.addChildren([LayoutLoginHomeRouteRoute, LayoutLoginLoginRouteRoute, LayoutLoginSignupRouteRoute]),
+	LayoutNonavRoute.addChildren([LayoutNonavIndexRouteRoute]),
+	DashboardRoute,
+]);
 
 /* prettier-ignore-end */
