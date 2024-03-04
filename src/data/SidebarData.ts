@@ -29,15 +29,15 @@ export const SidebarData = [
 		],
 	},
 	{
-		title: 'Test',
+		title: 'Create',
 		subNav: [
 			{
-				title: 'Home',
-				path: '/home',
+				title: 'Project',
+				path: '/projects/new',
 			},
 			{
-				title: 'Dashboard Again',
-				path: '/dashboard',
+				title: 'Article',
+				path: '/articles/new',
 			},
 		],
 	},
