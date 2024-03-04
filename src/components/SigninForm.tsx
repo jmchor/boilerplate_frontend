@@ -47,7 +47,6 @@ const SigninForm: React.FC = () => {
 			if (data?.login?.isAuthenticated === true) {
 				flushSync(() => {
 					setIsLoggedIn(true);
-					setHasImage(true);
 				});
 				navigate({ to: '/dashboard' });
 			}
