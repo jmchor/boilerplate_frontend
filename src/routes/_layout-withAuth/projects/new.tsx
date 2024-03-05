@@ -1,5 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import CreateProjectFormComponent from '../../../components/CreateProjectFormComponent';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/new')({
-  component: () => <div>Hello /_layout-home/projects/new!</div>
-})
+	component: CreateProject,
+});
+
+function CreateProject() {
+	return (
+		<>
+			<CreateProjectFormComponent />
+		</>
+	);
+}
