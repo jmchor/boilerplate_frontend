@@ -6,22 +6,32 @@ export const CreateFormWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 2rem;
+	margin-bottom: 2rem;
 	border-radius: 5px;
 	box-shadow:
 		0 4px 8px 0 rgba(0, 0, 0, 0.2),
 		0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+	h1 {
+		margin: 0;
+	}
+	height: 100%;
+
+	@media screen and (min-width: 2000px) {
+		height: 70%;
+	}
 `;
 
 export const CreateProjectForm = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
+	padding: 0 20px;
 	font-size: 1.5rem;
 	line-height: 1.5;
 	font-weight: 600;
 	width: 60vw;
+
 	label {
 		width: 100%;
 		display: flex;
@@ -40,7 +50,7 @@ export const CreateProjectForm = styled(Form)`
 		border-radius: 5px;
 		background-color: #fff;
 		color: #333;
-		font-size: 16px;
+		font-size: 14px;
 	}
 
 	button,
@@ -62,7 +72,7 @@ export const FlexRow = styled.div`
 	width: 100%;
 	flex: 1;
 	gap: 4rem;
-	margin-bottom: 5rem;
+	margin-bottom: 3rem;
 `;
 
 export const FlexColumn = styled.div`
