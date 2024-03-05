@@ -21,7 +21,7 @@ import { Article } from '../../../types/articles';
 import { MoonLoader } from 'react-spinners';
 import styled from 'styled-components';
 
-export const Route = createFileRoute('/_layout-noAuth/home')({
+export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
 });
 

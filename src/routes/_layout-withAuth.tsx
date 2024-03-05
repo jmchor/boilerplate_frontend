@@ -10,21 +10,23 @@ export const Route = createFileRoute('/_layout-withAuth')({
 			});
 		}
 	},
-	component: HomeLayoutComponent,
+	component: WithAuthComponent,
 });
 
-const HomeWrapper = styled.div`
+const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	margin: 0 auto;
+	width: 80%;
 `;
 
-function HomeLayoutComponent() {
+function WithAuthComponent() {
 	const { setWithNav } = useAuth();
 	setWithNav(true);
 	return (
-		<HomeWrapper className='home-wrapper'>
+		<Wrapper>
 			<Outlet />
-		</HomeWrapper>
+		</Wrapper>
 	);
 }
