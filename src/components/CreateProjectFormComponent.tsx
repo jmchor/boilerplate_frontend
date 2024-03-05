@@ -90,10 +90,6 @@ const CreateProjectFormComponent = () => {
 	const [backendPackages, setBackendPackages] = useState<BackendPackages[]>([]);
 	const [backendDatabase, setBackendDatabase] = useState<Database>(undefined);
 
-	const frontendFrameworks = ['reactts', 'reactjs', 'vanillajs', 'nextjs'];
-
-	const backendEnvironments = ['nodets', 'nodejs', 'nodeExpressTS', 'nodeExpressJS'];
-
 	const backPacks = ['jsonwebtoken', 'cors', 'bcryptjs', 'dotenv', 'nodemon'];
 
 	// const [frontendPackages, setFrontendPackages] = useState<FrontendPackages[]>([]);
@@ -182,11 +178,10 @@ const CreateProjectFormComponent = () => {
 								onChange={(e) => setFrontendFramework(e.target.value as FrontendFramework)}
 							>
 								<option value=''>Select Framework</option>
-								{frontendFrameworks.map((option) => (
-									<option key={option} value={option}>
-										{option}
-									</option>
-								))}
+								<option value='reactts'>React with TypeScript</option>
+								<option value='reactjs'>React</option>
+								<option value='vanillajs'>JavaScript</option>
+								<option value='nextjs'>NextJS</option>
 							</select>
 						</label>
 						<label htmlFor='backendEnvironment'>
@@ -198,11 +193,10 @@ const CreateProjectFormComponent = () => {
 								onChange={(e) => setBackendEnvironment(e.target.value as BackendEnvironment)}
 							>
 								<option value=''>Select Environment</option>
-								{backendEnvironments.map((option) => (
-									<option key={option} value={option}>
-										{option}
-									</option>
-								))}
+								<option value='nodets'>Node with TypeScript</option>
+								<option value='nodejs'>NodeJS</option>
+								<option value='nodeExpressTS'>Node & Exrepss with TypeScript</option>
+								<option value='nodeExpressJS'>NodeJS & Express</option>
 							</select>
 						</label>
 						<label htmlFor='backendModuleType'>
