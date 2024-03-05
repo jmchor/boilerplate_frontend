@@ -3,8 +3,8 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
 import { useAuth, type AuthContext } from '../auth';
 import Navbar from '../components/Navbar';
-import GlobalStyles from '../styles/GlobalStyles';
-import { Container, InnerStyles, LaptopScreenSize, Message, ScreenContainer } from '../styles/RootLayoutStyles';
+import GlobalStyles from '../styles/GlobalStyles.js';
+import { Container, InnerStyles, LaptopScreenSize, Message, ScreenContainer } from '../styles/RootLayoutStyles.js';
 
 interface MyRouterContext {
 	auth: AuthContext;

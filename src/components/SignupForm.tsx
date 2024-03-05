@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/client';
 import { graphql } from 'gql.tada';
 import { useNavigate } from '@tanstack/react-router';
-import Form from '../styles/Form';
+import Form from '../styles/Form.js';
 import { SyncLoader } from 'react-spinners';
 
-import { SigninFormWrapper } from '../styles/SigninForm';
-import useForm from '../lib/useForm';
+import { SigninFormWrapper } from '../styles/SigninForm.js';
+import useForm from '../lib/useForm.js';
 
-import { LoaderStyles } from '../styles/LoaderStyles';
+import { LoaderStyles } from '../styles/LoaderStyles.js';
 
 const SIGNUP_MUTATION = graphql(`
 	mutation CreateUser($email: String!, $username: String!, $password: String!) {

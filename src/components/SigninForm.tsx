@@ -3,10 +3,10 @@ import { graphql } from 'gql.tada';
 import { useAuth } from '../auth';
 import { flushSync } from 'react-dom';
 import { useNavigate } from '@tanstack/react-router';
-import Form from '../styles/Form';
+import Form from '../styles/Form.js';
 import { useState } from 'react';
 
-import { SigninFormWrapper } from '../styles/SigninForm';
+import { SigninFormWrapper } from '../styles/SigninForm.js';
 
 const LOGIN = graphql(`
 	mutation Login($credentials: LoginInput!) {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { DropdownContainer, DropdownLink, NavigationButton } from '../styles/NavbarStyles';
-import { SidebarItem } from '../data/SidebarData';
+import { DropdownContainer, DropdownLink, NavigationButton } from '../styles/NavbarStyles.js';
+import { SidebarItem } from '../data/SidebarData.js';
 import { useAuth } from '../auth';
 
 const SubMenu = ({ item }: { item: SidebarItem }) => {

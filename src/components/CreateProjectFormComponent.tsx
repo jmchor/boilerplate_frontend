@@ -2,6 +2,8 @@ import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
+import Switch from '@mui/material/Switch';
+import { MoonLoader } from 'react-spinners';
 
 import {
 	BackendEnvironment,
@@ -22,8 +24,6 @@ import {
 } from '../styles/CreateProjectStyles.js';
 
 import usePreventNavigation from '../lib/usePreventNavigation.js';
-import Switch from '@mui/material/Switch';
-import { MoonLoader } from 'react-spinners';
 
 const CREATE_PROJECT = graphql(`
 	mutation CREATE_PROJECT(

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Form from './Form';
+import Form from './Form.js';
 
 export const CreateFormWrapper = styled.div`
 	display: flex;

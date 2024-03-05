@@ -1,8 +1,8 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../auth';
 
-import { NavigationBar, NavigationButton, NavigationContainer, Subbar } from '../styles/NavbarStyles';
-import { SidebarData, SidebarItem } from '../data/SidebarData';
+import { NavigationBar, NavigationButton, NavigationContainer, Subbar } from '../styles/NavbarStyles.js';
+import { SidebarData, SidebarItem } from '../data/SidebarData.js';
 import SubMenu from './SubMenu';
 import styled from 'styled-components';
 

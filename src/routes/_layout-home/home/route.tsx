@@ -1,9 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router';
-import ProjectCard from '../../../components/cards/ProjectCard';
-import useGetProjects from '../../../services/getProjects';
 import { useState } from 'react';
-import useGetArticles from '../../../services/getArticles';
+import { MoonLoader } from 'react-spinners';
+import styled from 'styled-components';
+
+import ProjectCard from '../../../components/cards/ProjectCard';
 import ArticleCard from '../../../components/cards/ArticleCard';
+import { useAuth } from '../../../auth';
+
+import useGetProjects from '../../../services/getProjects.js';
+import useGetArticles from '../../../services/getArticles.js';
 import {
 	ArticleContainer,
 	ContainerWithHeader,
@@ -14,12 +19,10 @@ import {
 	MoreButton,
 	OptionalContainer,
 	ProjectGrid,
-} from '../../../styles/HomeRouteStyles';
-import { useAuth } from '../../../auth';
-import { Project } from '../../../types/project';
-import { Article } from '../../../types/articles';
-import { MoonLoader } from 'react-spinners';
-import styled from 'styled-components';
+} from '../../../styles/HomeRouteStyles.js';
+
+import { Project } from '../../../types/project.js';
+import { Article } from '../../../types/articles.js';
 
 export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
