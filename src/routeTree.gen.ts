@@ -15,9 +15,10 @@ import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LayoutWithAuthImport } from './routes/_layout-withAuth'
 import { Route as LayoutNonavImport } from './routes/_layout-nonav'
 import { Route as LayoutNoAuthImport } from './routes/_layout-noAuth'
+import { Route as LayoutHomeImport } from './routes/_layout-home'
 import { Route as LayoutNoAuthSignupRouteImport } from './routes/_layout-noAuth/signup/route'
 import { Route as LayoutNoAuthLoginRouteImport } from './routes/_layout-noAuth/login/route'
-import { Route as LayoutNoAuthHomeRouteImport } from './routes/_layout-noAuth/home/route'
+import { Route as LayoutHomeHomeRouteImport } from './routes/_layout-home/home/route'
 import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route'
 import { Route as LayoutWithAuthUserUsernameImport } from './routes/_layout-withAuth/user/$username'
 import { Route as LayoutWithAuthProjectsNewImport } from './routes/_layout-withAuth/projects/new'
@@ -47,6 +48,11 @@ const LayoutNoAuthRoute = LayoutNoAuthImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LayoutHomeRoute = LayoutHomeImport.update({
+  id: '/_layout-home',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LayoutNoAuthSignupRouteRoute = LayoutNoAuthSignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => LayoutNoAuthRoute,
@@ -57,9 +63,9 @@ const LayoutNoAuthLoginRouteRoute = LayoutNoAuthLoginRouteImport.update({
   getParentRoute: () => LayoutNoAuthRoute,
 } as any)
 
-const LayoutNoAuthHomeRouteRoute = LayoutNoAuthHomeRouteImport.update({
+const LayoutHomeHomeRouteRoute = LayoutHomeHomeRouteImport.update({
   path: '/home',
-  getParentRoute: () => LayoutNoAuthRoute,
+  getParentRoute: () => LayoutHomeRoute,
 } as any)
 
 const LayoutNonavIndexRouteRoute = LayoutNonavIndexRouteImport.update({
@@ -100,6 +106,10 @@ const LayoutWithAuthArticlesArticleidRoute =
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_layout-home': {
+      preLoaderRoute: typeof LayoutHomeImport
+      parentRoute: typeof rootRoute
+    }
     '/_layout-noAuth': {
       preLoaderRoute: typeof LayoutNoAuthImport
       parentRoute: typeof rootRoute
@@ -120,9 +130,9 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutNonavIndexRouteImport
       parentRoute: typeof LayoutNonavImport
     }
-    '/_layout-noAuth/home': {
-      preLoaderRoute: typeof LayoutNoAuthHomeRouteImport
-      parentRoute: typeof LayoutNoAuthImport
+    '/_layout-home/home': {
+      preLoaderRoute: typeof LayoutHomeHomeRouteImport
+      parentRoute: typeof LayoutHomeImport
     }
     '/_layout-noAuth/login': {
       preLoaderRoute: typeof LayoutNoAuthLoginRouteImport
@@ -158,8 +168,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
+  LayoutHomeRoute.addChildren([LayoutHomeHomeRouteRoute]),
   LayoutNoAuthRoute.addChildren([
-    LayoutNoAuthHomeRouteRoute,
     LayoutNoAuthLoginRouteRoute,
     LayoutNoAuthSignupRouteRoute,
   ]),
