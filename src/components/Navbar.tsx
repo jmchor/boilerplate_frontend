@@ -6,26 +6,25 @@ import { SidebarData, SidebarItem } from '../data/SidebarData';
 import SubMenu from './SubMenu';
 import styled from 'styled-components';
 
+const ProfileImage = styled.img`
+	width: 80px;
+	height: 80px;
+	padding: 10px;
+	border-radius: 50%;
+	background: white;
+	border: 2px solid black;
+`;
+
+const EmptyImage = styled.div`
+	width: 80px;
+	height: 80px;
+	padding: 10px;
+	border-radius: 50%;
+	background: none;
+`;
 function Navbar() {
 	const auth = useAuth();
 	const navigate = useNavigate();
-
-	const ProfileImage = styled.img`
-		width: 80px;
-		height: 80px;
-		padding: 10px;
-		border-radius: 50%;
-		background: white;
-		border: 2px solid black;
-	`;
-
-	const EmptyImage = styled.div`
-		width: 80px;
-		height: 80px;
-		padding: 10px;
-		border-radius: 50%;
-		background: none;
-	`;
 
 	return (
 		<NavigationContainer>

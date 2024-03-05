@@ -15,13 +15,14 @@ const Form = styled.form`
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 1rem;
+		font-size: 1.3rem;
 	}
 	input,
 	textarea,
 	select {
 		width: 100%;
 		padding: 0.5rem;
-		font-size: 1.5rem;
+		font-size: 2rem;
 		border: 1px solid black;
 		&:focus {
 			outline: 0;
