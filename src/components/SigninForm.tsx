@@ -60,11 +60,25 @@ const SigninForm: React.FC = () => {
 			<Form onSubmit={handleLogin}>
 				<label htmlFor='usernameOrEmail'>
 					Username or Email:
-					<input type='text' id='input' name='input' value={formData.input} onChange={handleInputChange} />
+					<input
+						type='text'
+						id='input'
+						name='input'
+						value={formData.input}
+						onChange={handleInputChange}
+						autoComplete='on'
+					/>
 				</label>
 				<label htmlFor='password'>
 					Password:
-					<input type='password' id='password' name='password' value={formData.password} onChange={handleInputChange} />
+					<input
+						type='password'
+						id='password'
+						name='password'
+						value={formData.password}
+						onChange={handleInputChange}
+						autoComplete='on'
+					/>
 				</label>
 
 				<button type='submit' disabled={loading}>
