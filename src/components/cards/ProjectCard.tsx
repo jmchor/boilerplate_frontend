@@ -1,12 +1,6 @@
-import {
-	CardContainer,
-	MetaData,
-	MetaDataWrapper,
-	ProjectLink,
-	Title,
-	ToolImage,
-} from '../../styles/ProjectCardStyles';
+import { CardContainer, MetaData, MetaDataWrapper, ProjectLink, Title } from '../../styles/ProjectCardStyles';
 import { Project } from '../../types/project';
+import StackImages, { ProjectForImages } from '../StackImages';
 
 const ProjectCard = ({ project }: { project: Project }) => {
 	function truncateText(text: string, maxLength: number): string {
@@ -28,15 +22,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
 					<h3>{truncatedTitle}</h3>
 				</Title>
 				<MetaDataWrapper>
-					{project?.frontend?.framework === 'reactts' && <ToolImage src='../../../static/react.svg' />}
-					{project?.backend?.environment === 'nodets' && <ToolImage src='../../../static/node.svg' />}
-					{project?.backend?.gqlServer && <ToolImage src='../../../static/graphql.svg' />}
-					{project?.frontend?.framework === 'reactts' && <ToolImage src='../../../static/ts.svg' />}
-					{project?.backend?.database === 'mongodb' && <ToolImage src='../../../static/mongo.svg' />}
+					<StackImages project={project as ProjectForImages} />
 				</MetaDataWrapper>
 				<MetaData>
 					<p>
-						{' '}
 						<b>Created By</b> {project?.createdBy?.username}
 					</p>
 				</MetaData>
