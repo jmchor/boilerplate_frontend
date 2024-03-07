@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_layout-home')({
 	component: HomeLayoutComponent,
 });
 
-const HomeWrapper = styled.div`
+export const HomeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
