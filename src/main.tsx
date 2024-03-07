@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -34,7 +35,7 @@ export const InnerApp = () => {
 	return <RouterProvider router={router} context={{ auth }} />;
 };
 
-const link = createHttpLink({
+const link = createUploadLink({
 	uri: 'http://localhost:4000/graphql',
 	credentials: 'include',
 });

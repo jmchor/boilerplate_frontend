@@ -24,6 +24,10 @@ export type introspection = {
         "name": "Date"
       },
       {
+        "kind": "SCALAR",
+        "name": "Upload"
+      },
+      {
         "kind": "ENUM",
         "name": "ModuleType",
         "enumValues": [
@@ -1106,6 +1110,25 @@ export type introspection = {
       },
       {
         "kind": "OBJECT",
+        "name": "File",
+        "fields": [
+          {
+            "name": "url",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Query",
         "fields": [
           {
@@ -1914,6 +1937,30 @@ export type introspection = {
               "ofType": null
             },
             "args": []
+          },
+          {
+            "name": "uploadFile",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "File",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "file",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Upload",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
