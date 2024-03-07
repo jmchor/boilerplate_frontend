@@ -24,6 +24,10 @@ export const CURRENT_USER = graphql(`
 			articles {
 				title
 				_id
+				subheadline
+				text
+				tags
+				imageUrl
 			}
 			likedArticles {
 				title
