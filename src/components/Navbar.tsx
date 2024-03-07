@@ -7,9 +7,9 @@ import SubMenu from './SubMenu';
 import styled from 'styled-components';
 
 const ProfileImage = styled.img`
-	width: 80px;
-	height: 80px;
-	padding: 10px;
+	width: 65px;
+	height: 65px;
+	padding: 6px;
 	border-radius: 50%;
 	background: white;
 	border: 2px solid black;
