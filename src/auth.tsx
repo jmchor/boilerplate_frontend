@@ -12,18 +12,6 @@ export const CURRENT_USER = graphql(`
 			email
 			image
 			_id
-			projects {
-				title
-				_id
-			}
-			articles {
-				title
-				_id
-			}
-			likedArticles {
-				title
-				_id
-			}
 		}
 	}
 `);
