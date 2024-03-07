@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import ProjectList from '../../../components/cards/ProjectList.js';
 import { Project } from '../../../types/project';
 import { MoonLoader } from 'react-spinners';
+import ArticleList from '../../../components/cards/ArticleList.js';
+import { Article } from '../../../types/articles.js';
 export const Route = createFileRoute('/_layout-withAuth/user/$username')({
 	component: Profile,
 });
@@ -132,6 +134,7 @@ const TabsNavigation = styled.ul`
 function Profile() {
 	const { data, error, loading } = useGetCurrentUser();
 	const currentUser = data?.currentUser;
+	console.log(currentUser);
 
 	const [activeTab, setActiveTab] = useState('projects');
 
@@ -181,7 +184,7 @@ function Profile() {
 							</>
 						))
 					) : activeTab === 'articles' ? (
-						<ExtendedFlexRow>Articles</ExtendedFlexRow>
+						currentUser?.articles?.map((article) => <ArticleList article={article as Article} />)
 					) : (
 						<ExtendedFlexRow>Settings</ExtendedFlexRow>
 					)}
