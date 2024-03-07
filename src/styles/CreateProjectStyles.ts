@@ -73,6 +73,7 @@ export const FlexRow = styled.div`
 	flex: 1;
 	gap: 4rem;
 	margin-bottom: 3rem;
+	/* border: 1px solid black; */
 `;
 
 export const FlexColumn = styled.div`
@@ -81,7 +82,8 @@ export const FlexColumn = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 50%;
-	margin: 0 1rem 0 0;
+	/* margin: 0 1rem 0 0;
+	border: 2px solid red; */
 `;
 
 export const CenteredDiv = styled.div`
