@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../auth';
 
 import { NavigationBar, NavigationButton, NavigationContainer, Subbar } from '../styles/NavbarStyles.js';
@@ -30,7 +30,9 @@ function Navbar() {
 		<NavigationContainer>
 			<NavigationBar>
 				<Subbar>
-					{auth.user?.image && auth.isLoggedIn ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
+					<Link to='/home'>
+						{auth.user?.image && auth.isLoggedIn ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
+					</Link>
 					{SidebarData.map((item: SidebarItem) => {
 						return <SubMenu item={item} key={item.title} />;
 					})}
