@@ -2,8 +2,8 @@ import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
-import Switch from '@mui/material/Switch';
 import { MoonLoader } from 'react-spinners';
+import Select, { MultiValue } from 'react-select';
 
 import { useAuth } from '../auth.js';
 
@@ -18,7 +18,26 @@ const FlexBox = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	width: 80%;
-	height: 300px;
+	height: 100%;
+	align-items: start;
+	& > label {
+		margin: 0;
+	}
+`;
+
+const CustomSelect = styled(Select)`
+	padding-top: 0.5rem;
+	width: 100%;
+`;
+
+const CustomFlexRow = styled(FlexRow)`
+	margin-bottom: 0;
+	justify-content: space-between;
+	gap: 4rem;
+	& > label {
+		margin: 0;
+		width: fit-content;
+	}
 `;
 
 const CREATE_ARTICLE = graphql(`
@@ -52,28 +71,6 @@ const CREATE_ARTICLE = graphql(`
 	}
 `);
 
-const allTags = [
-	'database',
-	'backend',
-	'frontend',
-	'wordpress',
-	'keystone',
-	'technical_writing',
-	'blog',
-	'graphql',
-	'validation',
-	'tests',
-	'no_sql',
-	'sql',
-	'misc',
-	'react',
-	'typescript',
-	'programming',
-	'software_engineering',
-	'wiki',
-	'deployment',
-];
-
 const CreateArticleFormComponent = () => {
 	usePreventNavigation('Are you sure you want to leave this page?');
 
@@ -86,6 +83,10 @@ const CreateArticleFormComponent = () => {
 	const [subheadline, setSubheadline] = useState<string>('');
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [tags, setTags] = useState<ArticleTagTypes[]>([]);
+	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{
+		value: string;
+		label: string;
+	}> | null>(null);
 
 	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {
 		variables: {
@@ -97,6 +98,39 @@ const CreateArticleFormComponent = () => {
 			tags,
 		},
 	});
+
+	const options = [
+		{ value: 'database', label: 'database' },
+		{ value: 'backend', label: 'backend' },
+		{ value: 'frontend', label: 'frontend' },
+		{ value: 'wordpress', label: 'wordpress' },
+		{ value: 'keystone', label: 'keystone' },
+		{ value: 'technical_writing', label: 'technical_writing' },
+		{ value: 'blog', label: 'blog' },
+		{ value: 'graphql', label: 'graphql' },
+		{ value: 'validation', label: 'validation' },
+		{ value: 'tests', label: 'tests' },
+		{ value: 'no_sql', label: 'no_sql' },
+		{ value: 'sql', label: 'sql' },
+		{ value: 'misc', label: 'misc' },
+		{ value: 'react', label: 'react' },
+		{ value: 'typescript', label: 'typescript' },
+		{ value: 'programming', label: 'programming' },
+		{ value: 'software_engineering', label: 'software_engineering' },
+		{ value: 'wiki', label: 'wiki' },
+		{ value: 'deployment', label: 'deployment' },
+	];
+
+	const tagArray: ArticleTagTypes[] = [];
+
+	selectedOptions?.forEach((option) => {
+		tagArray.push(option.value as ArticleTagTypes);
+	});
+
+	const handleChange = (selectedOptions: MultiValue<{ value: string; label: string }>) => {
+		setSelectedOptions(selectedOptions);
+		setTags(selectedOptions.map((option) => option.value as ArticleTagTypes));
+	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -112,14 +146,10 @@ const CreateArticleFormComponent = () => {
 			},
 		}).catch(console.error);
 
-		if (data.createProject) {
+		if (data?.createArticle) {
 			navigate({ to: `/articles/${data.createArticle._id}` as string });
 		}
 	};
-
-	useEffect(() => {
-		console.log(imageUrl);
-	}, [imageUrl]);
 
 	if (loading) {
 		return (
@@ -138,7 +168,7 @@ const CreateArticleFormComponent = () => {
 					<input type='text' id='title' name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
 				</label>
 
-				<label htmlFor='subheadline'>
+				<label htmlFor=' subheadline'>
 					Subheadline
 					<input
 						type='text'
@@ -148,31 +178,31 @@ const CreateArticleFormComponent = () => {
 						onChange={(e) => setSubheadline(e.target.value)}
 					/>
 				</label>
+				<CustomFlexRow>
+					<label htmlFor='image'>
+						{' '}
+						Hero Image
+						<ImageUploader id='image' setImageUrl={setImageUrl} />
+					</label>
+					<FlexBox>
+						<label htmlFor='tags'>
+							Tags
+							<CustomSelect
+								id='tags'
+								defaultValue={selectedOptions}
+								onChange={handleChange}
+								options={options}
+								placeholder='Select Tags'
+								isMulti
+								isSearchable
+							/>
+						</label>
+					</FlexBox>
+				</CustomFlexRow>
 				<label htmlFor='text'>
 					Text
 					<textarea id='text' name='text' value={text} onChange={(e) => setText(e.target.value)} />
 				</label>
-				<FlexRow>
-					<ImageUploader setImageUrl={setImageUrl} />
-					<FlexBox>
-						{allTags.map((item) => (
-							<div key={item}>
-								<label>{item}</label>
-								<Switch
-									checked={tags.includes(item as ArticleTagTypes)}
-									onChange={(e) => {
-										if (e.target.checked) {
-											setTags([...tags, item] as ArticleTagTypes[]);
-										} else {
-											setTags(tags.filter((pkg) => pkg !== item));
-										}
-									}}
-									inputProps={{ 'aria-label': 'controlled' }}
-								/>
-							</div>
-						))}
-					</FlexBox>
-				</FlexRow>
 
 				<button type='submit' disabled={loading}>
 					Create Project
