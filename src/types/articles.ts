@@ -16,3 +16,24 @@ export type Article = {
 	} | null;
 	createdAt: string;
 };
+
+export type ArticleTagTypes =
+	| 'database'
+	| 'backend'
+	| 'frontend'
+	| 'wordpress'
+	| 'keystone'
+	| 'technical_writing'
+	| 'blog'
+	| 'graphql'
+	| 'validation'
+	| 'tests'
+	| 'no_sql'
+	| 'sql'
+	| 'misc'
+	| 'react'
+	| 'typescript'
+	| 'programming'
+	| 'software_engineering'
+	| 'wiki'
+	| 'deployment';
