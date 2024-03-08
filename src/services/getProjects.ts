@@ -26,6 +26,7 @@ const ALL_PROJECTS = graphql(`
 
 const useGetProjects = (limit: number) => {
 	const { data, error, loading } = useQuery(ALL_PROJECTS, {
+		fetchPolicy: 'network-only',
 		variables: {
 			limit: limit,
 		},
