@@ -1,7 +1,5 @@
 scalar Date
 
-scalar Upload
-
 enum ModuleType {
 	commonjs
 	module
@@ -206,10 +204,6 @@ type Authenticationstatus {
 	cookieIsPresent: Boolean
 }
 
-type File {
-	url: String!
-}
-
 type Query {
 	allProjects(limit: Int): [Project]
 	findProject(_id: ID): Project
@@ -282,6 +276,4 @@ type Mutation {
 	login(credentials: LoginInput!): Token
 
 	logout: LogoutResponse
-
-	uploadFile(file: Upload!): File!
 }
