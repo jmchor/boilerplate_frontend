@@ -31,7 +31,7 @@ const UploadWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	width: 300px;
+	width: 250px;
 `;
 
 const ImageFrame = styled.div`
