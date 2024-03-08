@@ -36,7 +36,7 @@ const ProfileWrapper = styled.div`
 	margin-top: 10rem;
 `;
 
-const ExtendedFlexRow = styled(FlexRow)`
+export const ExtendedFlexRow = styled(FlexRow)`
 	width: 100%;
 	flex: 0;
 	justify-content: center;
