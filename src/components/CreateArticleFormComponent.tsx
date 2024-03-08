@@ -1,9 +1,11 @@
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import Select, { MultiValue } from 'react-select';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import { useAuth } from '../auth.js';
 
@@ -19,9 +21,9 @@ const FlexBox = styled.div`
 	flex-wrap: wrap;
 	width: 80%;
 	height: 100%;
-	align-items: start;
 	& > label {
 		margin: 0;
+		height: fit-content;
 	}
 `;
 
@@ -31,7 +33,7 @@ const CustomSelect = styled(Select)`
 `;
 
 const CustomFlexRow = styled(FlexRow)`
-	margin-bottom: 0;
+	margin-bottom: 3rem;
 	justify-content: space-between;
 	gap: 4rem;
 	& > label {
@@ -71,6 +73,14 @@ const CREATE_ARTICLE = graphql(`
 	}
 `);
 
+const ExtendedQuill = styled(ReactQuill)`
+	width: 100%;
+
+	& .ql-editor {
+		height: 25rem;
+		font-weight: normal;
+	}
+`;
 const CreateArticleFormComponent = () => {
 	usePreventNavigation('Are you sure you want to leave this page?');
 
@@ -197,15 +207,15 @@ const CreateArticleFormComponent = () => {
 								isSearchable
 							/>
 						</label>
+						<label htmlFor='text'>
+							Text
+							<ExtendedQuill theme='snow' value={text} onChange={setText} />
+						</label>
 					</FlexBox>
 				</CustomFlexRow>
-				<label htmlFor='text'>
-					Text
-					<textarea id='text' name='text' value={text} onChange={(e) => setText(e.target.value)} />
-				</label>
 
 				<button type='submit' disabled={loading}>
-					Create Project
+					Create Article
 				</button>
 			</CreateProjectForm>
 		</CreateFormWrapper>
