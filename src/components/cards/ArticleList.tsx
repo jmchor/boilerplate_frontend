@@ -31,9 +31,10 @@ const Description = styled.div`
 	align-items: center;
 	width: 100%;
 	flex: 0;
+	background-color: #f8f8f8;
+	border-radius: 5px;
 	p {
 		margin: 0;
-		padding: 1rem 2rem;
 		text-align: justify;
 		font-size: 1.1em;
 	}
@@ -48,11 +49,20 @@ const Button = styled.button`
 
 const HeaderImage = styled.img`
 	width: 100%;
+	height: 250px;
 	object-fit: cover;
 	padding: 2rem;
 `;
 
-const ListStyles = styled.div``;
+const TextStyles = styled.div`
+	width: 95%;
+	margin: 0;
+	padding: 1rem 2rem;
+	text-align: justify;
+	font-size: 1.1em;
+	background-color: #efeeee;
+	border-radius: 5px;
+`;
 
 const ArticleList = ({ article }: { article: Article }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -63,7 +73,7 @@ const ArticleList = ({ article }: { article: Article }) => {
 		setIsExpanded(!isExpanded);
 	};
 	return (
-		<ListStyles>
+		<div>
 			<PLFlexRow>
 				<div>
 					<h3>{article?.title}</h3>
@@ -80,13 +90,13 @@ const ArticleList = ({ article }: { article: Article }) => {
 				<Description>
 					<HeaderImage src={article?.imageUrl} />
 					<h5>{article?.subheadline}</h5>
-					<p>{article?.text}</p>
+					<TextStyles dangerouslySetInnerHTML={{ __html: article?.text }} />
 
 					<p>Tags: {article?.tags?.map((tag: string) => `#${tag} `)}</p>
 				</Description>
 			)}
 			<hr />
-		</ListStyles>
+		</div>
 	);
 };
 export default ArticleList;
