@@ -81,6 +81,8 @@ const ArticleList = ({ article }: { article: Article }) => {
 					<HeaderImage src={article?.imageUrl} />
 					<h5>{article?.subheadline}</h5>
 					<p>{article?.text}</p>
+
+					<p>Tags: {article?.tags?.map((tag: string) => `#${tag} `)}</p>
 				</Description>
 			)}
 			<hr />
