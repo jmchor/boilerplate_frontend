@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { CenteredDiv } from '../../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 
 const ImagePreview = styled.img`
