@@ -25,6 +25,7 @@ import { Route as LayoutWithAuthProjectsNewImport } from './routes/_layout-withA
 import { Route as LayoutWithAuthProjectsProjectidImport } from './routes/_layout-withAuth/projects/$projectid'
 import { Route as LayoutWithAuthArticlesNewImport } from './routes/_layout-withAuth/articles/new'
 import { Route as LayoutWithAuthArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid'
+import { Route as LayoutWithAuthArticlesArticleidEditImport } from './routes/_layout-withAuth/articles_.$articleid.edit'
 
 // Create/Update Routes
 
@@ -102,6 +103,12 @@ const LayoutWithAuthArticlesArticleidRoute =
     getParentRoute: () => LayoutWithAuthRoute,
   } as any)
 
+const LayoutWithAuthArticlesArticleidEditRoute =
+  LayoutWithAuthArticlesArticleidEditImport.update({
+    path: '/articles/$articleid/edit',
+    getParentRoute: () => LayoutWithAuthRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -162,6 +169,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutWithAuthUserUsernameImport
       parentRoute: typeof LayoutWithAuthImport
     }
+    '/_layout-withAuth/articles/$articleid/edit': {
+      preLoaderRoute: typeof LayoutWithAuthArticlesArticleidEditImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
   }
 }
 
@@ -180,6 +191,7 @@ export const routeTree = rootRoute.addChildren([
     LayoutWithAuthProjectsProjectidRoute,
     LayoutWithAuthProjectsNewRoute,
     LayoutWithAuthUserUsernameRoute,
+    LayoutWithAuthArticlesArticleidEditRoute,
   ]),
   DashboardRoute,
 ])
