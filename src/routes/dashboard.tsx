@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 import { useAuth } from '../auth';
+
+import KanbanBoard from '../components/Kanban/KanbanBoard';
 
 export const Route = createFileRoute('/dashboard')({
 	beforeLoad: ({ context }) => {
@@ -20,7 +20,9 @@ export const Route = createFileRoute('/dashboard')({
 function DashboardComponent() {
 	const auth = useAuth();
 
-	const [text, setText] = useState('');
-
-	return <ReactQuill theme='snow' value={text} onChange={setText} />;
+	return (
+		<div>
+			<KanbanBoard _id={'65ef000d1468c683c5b5cc6e'} backlog={[{ title: 'test' }]} todo={[]} doing={[]} done={[]} />
+		</div>
+	);
 }
