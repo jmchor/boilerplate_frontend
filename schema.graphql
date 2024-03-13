@@ -103,15 +103,18 @@ type Article {
 	_id: ID
 	createdAt: Date
 }
+type KanbanCard {
+	title: String
+}
 
 type Kanban {
-	backlog: [String]
-	todo: [String]
-	doing: [String]
-	done: [String]
+	backlog: [KanbanCard]
+	todo: [KanbanCard]
+	doing: [KanbanCard]
+	done: [KanbanCard]
 	project: Project!
 	createdBy: User!
-	_id: ID!
+	_id: ID
 }
 
 type Project {
@@ -177,11 +180,15 @@ input ArticleInput {
 	# Any other fields from Article that are required for creating a new article
 }
 
+input KanbanCardInput {
+	title: String
+}
+
 input KanbanInput {
-	backlog: [String]
-	todo: [String]
-	doing: [String]
-	done: [String]
+	backlog: [KanbanCardInput]
+	todo: [KanbanCardInput]
+	doing: [KanbanCardInput]
+	done: [KanbanCardInput]
 	project: ID
 	createdBy: ID
 }
@@ -217,6 +224,8 @@ type Query {
 	myProjects: [Project]
 
 	checkAuthentication: Authenticationstatus!
+
+	findKanban(_id: ID): Kanban
 }
 
 type Mutation {
@@ -240,6 +249,8 @@ type Mutation {
 	deleteArticle(_id: ID!, createdBy: ID!): Boolean
 
 	deleteKanban(_id: ID!, createdBy: ID!): Boolean
+
+	editKanban(_id: ID!, backlog: [KanbanCard], todo: [KanbanCard], doing: [KanbanCard], done: [KanbanCard]): Kanban
 
 	deleteUser(_id: ID!, password: String!): Boolean
 
