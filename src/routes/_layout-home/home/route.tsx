@@ -28,6 +28,15 @@ export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
 });
 
+const LoadingContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	margin-top: 30rem;
+`;
+
 function Home() {
 	const [counts, setCounts] = useState<{ projects: number; articles: number }>({ projects: 2, articles: 3 });
 	const [filter, setFilter] = useState<'projects' | 'articles' | 'all'>('all');
@@ -49,15 +58,6 @@ function Home() {
 	const handleFilterChange = (selectedFilter: 'projects' | 'articles' | 'all') => {
 		setFilter(selectedFilter);
 	};
-
-	const LoadingContainer = styled.div`
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 1rem;
-		margin-top: 30rem;
-	`;
 
 	return (
 		<HomePageWrapper>
