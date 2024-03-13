@@ -133,8 +133,8 @@ const TabsNavigation = styled.ul`
 
 function Profile() {
 	const { data, error, loading } = useGetCurrentUser();
+
 	const currentUser = data?.currentUser;
-	console.log(currentUser);
 
 	const [activeTab, setActiveTab] = useState('projects');
 
@@ -179,12 +179,12 @@ function Profile() {
 				<ProjectContainer>
 					{activeTab === 'projects' ? (
 						currentUser?.projects?.map((project) => (
-							<>
-								<ProjectList project={project as Project} /> <hr />
-							</>
+							<div key={project?._id}>
+								<ProjectList key={project?._id} project={project as Project} />
+							</div>
 						))
 					) : activeTab === 'articles' ? (
-						currentUser?.articles?.map((article) => <ArticleList article={article as Article} />)
+						currentUser?.articles?.map((article) => <ArticleList key={article?._id} article={article as Article} />)
 					) : (
 						<ExtendedFlexRow>Settings</ExtendedFlexRow>
 					)}
