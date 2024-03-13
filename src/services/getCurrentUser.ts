@@ -45,6 +45,5 @@ export const useGetCurrentUser = () => {
 	const { data, error, loading } = useQuery(CURRENT_USER, {
 		fetchPolicy: 'network-only',
 	});
-
 	return { data, error, loading };
 };
