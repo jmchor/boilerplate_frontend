@@ -455,6 +455,31 @@ export type introspection = {
       },
       {
         "kind": "OBJECT",
+        "name": "KanbanCard",
+        "fields": [
+          {
+            "name": "title",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "_id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Kanban",
         "fields": [
           {
@@ -462,8 +487,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "KanbanCard",
                 "ofType": null
               }
             },
@@ -474,8 +499,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "KanbanCard",
                 "ofType": null
               }
             },
@@ -486,8 +511,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "KanbanCard",
                 "ofType": null
               }
             },
@@ -498,8 +523,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "KanbanCard",
                 "ofType": null
               }
             },
@@ -955,6 +980,28 @@ export type introspection = {
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "KanbanCardInput",
+        "inputFields": [
+          {
+            "name": "title",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            }
+          },
+          {
+            "name": "_id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            }
+          }
+        ]
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "KanbanInput",
         "inputFields": [
           {
@@ -962,8 +1009,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "KanbanCardInput",
                 "ofType": null
               }
             }
@@ -973,8 +1020,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "KanbanCardInput",
                 "ofType": null
               }
             }
@@ -984,8 +1031,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "KanbanCardInput",
                 "ofType": null
               }
             }
@@ -995,8 +1042,8 @@ export type introspection = {
             "type": {
               "kind": "LIST",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "KanbanCardInput",
                 "ofType": null
               }
             }
@@ -1244,6 +1291,24 @@ export type introspection = {
               }
             },
             "args": []
+          },
+          {
+            "name": "findKanban",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Kanban",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "_id",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
@@ -1479,6 +1544,82 @@ export type introspection = {
             ]
           },
           {
+            "name": "createKanban",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Kanban",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "backlog",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "todo",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "doing",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "done",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "project",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "createdBy",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "deleteKanban",
             "type": {
               "kind": "SCALAR",
@@ -1504,6 +1645,71 @@ export type introspection = {
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "editKanban",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Kanban",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "_id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "backlog",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "todo",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "doing",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "done",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "KanbanCardInput",
                     "ofType": null
                   }
                 }
