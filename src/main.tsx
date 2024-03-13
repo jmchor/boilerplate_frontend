@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
+import { StyleSheetManager } from 'styled-components';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -40,16 +41,51 @@ const link = createUploadLink({
 	credentials: 'include',
 });
 
+const cache = new InMemoryCache({
+	typePolicies: {
+		Kanban: {
+			fields: {
+				backlog: {
+					merge(existing = [], incoming) {
+						// Merge the existing backlog with the incoming backlog
+						return [...existing, ...incoming];
+					},
+				},
+				todo: {
+					merge(existing = [], incoming) {
+						// Merge the existing todo with the incoming todo
+						return [...existing, ...incoming];
+					},
+				},
+				doing: {
+					merge(existing = [], incoming) {
+						// Merge the existing doing with the incoming doing
+						return [...existing, ...incoming];
+					},
+				},
+				done: {
+					merge(existing = [], incoming) {
+						// Merge the existing done with the incoming done
+						return [...existing, ...incoming];
+					},
+				},
+			},
+		},
+	},
+});
+
 const client = new ApolloClient({
-	cache: new InMemoryCache(),
+	cache: cache,
 	link: link,
 });
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<ApolloProvider client={client}>
-			<AuthProvider>
-				<InnerApp />
-			</AuthProvider>
-		</ApolloProvider>
+		<StyleSheetManager shouldForwardProp={(prop) => prop !== 'isOpen'}>
+			<ApolloProvider client={client}>
+				<AuthProvider>
+					<InnerApp />
+				</AuthProvider>
+			</ApolloProvider>
+		</StyleSheetManager>
 	</StrictMode>
 );
