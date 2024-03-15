@@ -38,7 +38,7 @@ const Description = styled.div`
 	}
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
 	background: none;
 	border: none;
 	cursor: pointer;
