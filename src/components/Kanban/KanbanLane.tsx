@@ -30,7 +30,9 @@ const CardContainer = styled.div`
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+
+	display: flex;
+	align-items: center;
 `;
 
 const KanbanLane = ({ title, items }: KanbanLaneProps) => {

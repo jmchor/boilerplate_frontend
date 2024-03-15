@@ -1,17 +1,17 @@
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 
 const KanbanCardFrame = styled.div`
 	padding: 2rem;
 	background-color: white;
-	margin: 1rem;
+	margin: 0.5rem;
 	border-radius: 5px;
 	border: 2px solid gray;
 	box-shadow: 0px 0px 5px 2px #2121213b;
 	transform: ${({ transform }) => transform};
-	max-width: 160px;
+	max-width: 90%;
+	width: 100%;
 	word-wrap: break-word;
 `;
 
