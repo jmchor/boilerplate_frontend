@@ -16,6 +16,7 @@ import { Route as LayoutWithAuthImport } from './routes/_layout-withAuth'
 import { Route as LayoutNonavImport } from './routes/_layout-nonav'
 import { Route as LayoutNoAuthImport } from './routes/_layout-noAuth'
 import { Route as LayoutHomeImport } from './routes/_layout-home'
+import { Route as LayoutWithAuthSearchImport } from './routes/_layout-withAuth/search'
 import { Route as LayoutNoAuthSignupRouteImport } from './routes/_layout-noAuth/signup/route'
 import { Route as LayoutNoAuthLoginRouteImport } from './routes/_layout-noAuth/login/route'
 import { Route as LayoutHomeHomeRouteImport } from './routes/_layout-home/home/route'
@@ -25,6 +26,7 @@ import { Route as LayoutWithAuthProjectsNewImport } from './routes/_layout-withA
 import { Route as LayoutWithAuthProjectsProjectidImport } from './routes/_layout-withAuth/projects/$projectid'
 import { Route as LayoutWithAuthArticlesNewImport } from './routes/_layout-withAuth/articles/new'
 import { Route as LayoutWithAuthArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid'
+import { Route as LayoutWithAuthProjectsProjectidEditImport } from './routes/_layout-withAuth/projects_.$projectid.edit'
 import { Route as LayoutWithAuthArticlesArticleidEditImport } from './routes/_layout-withAuth/articles_.$articleid.edit'
 
 // Create/Update Routes
@@ -52,6 +54,11 @@ const LayoutNoAuthRoute = LayoutNoAuthImport.update({
 const LayoutHomeRoute = LayoutHomeImport.update({
   id: '/_layout-home',
   getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutWithAuthSearchRoute = LayoutWithAuthSearchImport.update({
+  path: '/search',
+  getParentRoute: () => LayoutWithAuthRoute,
 } as any)
 
 const LayoutNoAuthSignupRouteRoute = LayoutNoAuthSignupRouteImport.update({
@@ -103,6 +110,12 @@ const LayoutWithAuthArticlesArticleidRoute =
     getParentRoute: () => LayoutWithAuthRoute,
   } as any)
 
+const LayoutWithAuthProjectsProjectidEditRoute =
+  LayoutWithAuthProjectsProjectidEditImport.update({
+    path: '/projects/$projectid/edit',
+    getParentRoute: () => LayoutWithAuthRoute,
+  } as any)
+
 const LayoutWithAuthArticlesArticleidEditRoute =
   LayoutWithAuthArticlesArticleidEditImport.update({
     path: '/articles/$articleid/edit',
@@ -149,6 +162,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutNoAuthSignupRouteImport
       parentRoute: typeof LayoutNoAuthImport
     }
+    '/_layout-withAuth/search': {
+      preLoaderRoute: typeof LayoutWithAuthSearchImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
     '/_layout-withAuth/articles/$articleid': {
       preLoaderRoute: typeof LayoutWithAuthArticlesArticleidImport
       parentRoute: typeof LayoutWithAuthImport
@@ -173,6 +190,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutWithAuthArticlesArticleidEditImport
       parentRoute: typeof LayoutWithAuthImport
     }
+    '/_layout-withAuth/projects/$projectid/edit': {
+      preLoaderRoute: typeof LayoutWithAuthProjectsProjectidEditImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
   }
 }
 
@@ -186,12 +207,14 @@ export const routeTree = rootRoute.addChildren([
   ]),
   LayoutNonavRoute.addChildren([LayoutNonavIndexRouteRoute]),
   LayoutWithAuthRoute.addChildren([
+    LayoutWithAuthSearchRoute,
     LayoutWithAuthArticlesArticleidRoute,
     LayoutWithAuthArticlesNewRoute,
     LayoutWithAuthProjectsProjectidRoute,
     LayoutWithAuthProjectsNewRoute,
     LayoutWithAuthUserUsernameRoute,
     LayoutWithAuthArticlesArticleidEditRoute,
+    LayoutWithAuthProjectsProjectidEditRoute,
   ]),
   DashboardRoute,
 ])
