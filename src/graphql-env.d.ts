@@ -465,15 +465,6 @@ export type introspection = {
               "ofType": null
             },
             "args": []
-          },
-          {
-            "name": "_id",
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
-              "ofType": null
-            },
-            "args": []
           }
         ],
         "interfaces": []
@@ -643,6 +634,18 @@ export type introspection = {
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Article",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "tags",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -987,14 +990,6 @@ export type introspection = {
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            }
-          },
-          {
-            "name": "_id",
-            "type": {
-              "kind": "SCALAR",
-              "name": "ID",
               "ofType": null
             }
           }
@@ -1407,6 +1402,17 @@ export type introspection = {
                     "ofType": null
                   }
                 }
+              },
+              {
+                "name": "tags",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               }
             ]
           },
@@ -1473,6 +1479,17 @@ export type introspection = {
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              {
+                "name": "tags",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 }
