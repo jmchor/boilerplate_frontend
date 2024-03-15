@@ -1,9 +1,11 @@
 import { useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { graphql } from 'gql.tada';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import Select, { MultiValue } from 'react-select';
+import CreatableSelect from 'react-select/creatable';
+
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -15,6 +17,7 @@ import usePreventNavigation from '../lib/usePreventNavigation.js';
 import { ArticleTagTypes } from '../types/articles.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
 import styled from 'styled-components';
+import { ALL_TAGS_QUERY } from '../routes/dashboard.js';
 
 const FlexBox = styled.div`
 	display: flex;
@@ -27,7 +30,7 @@ const FlexBox = styled.div`
 	}
 `;
 
-const CustomSelect = styled(Select)`
+const CustomSelect = styled(CreatableSelect)`
 	padding-top: 0.5rem;
 	width: 100%;
 `;
@@ -43,32 +46,18 @@ const CustomFlexRow = styled(FlexRow)`
 `;
 
 const CREATE_ARTICLE = graphql(`
-	mutation CREATE_ARTICLE(
-		$title: String!
-		$text: String!
-		$createdBy: ID!
-		$subheadline: String
-		$tags: [Tags]
-		$imageUrl: String
-	) {
-		createArticle(
-			title: $title
-			text: $text
-			createdBy: $createdBy
-			subheadline: $subheadline
-			tags: $tags
-			imageUrl: $imageUrl
-		) {
+	mutation CREATE_ARTICLE($title: String!, $text: String!, $createdBy: ID!, $tags: [String]) {
+		createArticle(title: $title, text: $text, createdBy: $createdBy, tags: $tags) {
 			_id
 			title
-			subheadline
 			text
 			createdBy {
-				username
 				_id
+				username
 			}
-			imageUrl
+			subheadline
 			tags
+			imageUrl
 		}
 	}
 `);
@@ -93,10 +82,8 @@ const CreateArticleFormComponent = () => {
 	const [subheadline, setSubheadline] = useState<string>('');
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
 	const [tags, setTags] = useState<ArticleTagTypes[]>([]);
-	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{
-		value: string;
-		label: string;
-	}> | null>(null);
+	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
+	const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
 
 	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {
 		variables: {
@@ -109,27 +96,16 @@ const CreateArticleFormComponent = () => {
 		},
 	});
 
-	const options = [
-		{ value: 'database', label: 'database' },
-		{ value: 'backend', label: 'backend' },
-		{ value: 'frontend', label: 'frontend' },
-		{ value: 'wordpress', label: 'wordpress' },
-		{ value: 'keystone', label: 'keystone' },
-		{ value: 'technical_writing', label: 'technical_writing' },
-		{ value: 'blog', label: 'blog' },
-		{ value: 'graphql', label: 'graphql' },
-		{ value: 'validation', label: 'validation' },
-		{ value: 'tests', label: 'tests' },
-		{ value: 'no_sql', label: 'no_sql' },
-		{ value: 'sql', label: 'sql' },
-		{ value: 'misc', label: 'misc' },
-		{ value: 'react', label: 'react' },
-		{ value: 'typescript', label: 'typescript' },
-		{ value: 'programming', label: 'programming' },
-		{ value: 'software_engineering', label: 'software_engineering' },
-		{ value: 'wiki', label: 'wiki' },
-		{ value: 'deployment', label: 'deployment' },
-	];
+	const {
+		data: tagData,
+		error: tagError,
+		loading: tagLoading,
+	} = useQuery(ALL_TAGS_QUERY, {
+		fetchPolicy: 'network-only',
+	});
+
+	const allTags = tagData?.allTags;
+	const allTagsArray = allTags?.map((tag) => ({ value: tag.tag, label: tag.tag }));
 
 	const tagArray: ArticleTagTypes[] = [];
 
@@ -197,15 +173,7 @@ const CreateArticleFormComponent = () => {
 					<FlexBox>
 						<label htmlFor='tags'>
 							Tags
-							<CustomSelect
-								id='tags'
-								defaultValue={selectedOptions}
-								onChange={handleChange}
-								options={options}
-								placeholder='Select Tags'
-								isMulti
-								isSearchable
-							/>
+							<CustomSelect isMulti options={allTagsArray} defaultValue={selectedOptions} onChange={handleChange} />
 						</label>
 						<label htmlFor='text'>
 							Text
