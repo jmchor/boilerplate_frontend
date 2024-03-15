@@ -3,6 +3,7 @@ import { ToolImage } from '../styles/ProjectCardStyles';
 export interface ProjectForImages {
 	frontend?: {
 		framework?: string;
+		gqlClient?: boolean;
 	};
 	backend?: {
 		environment?: string;
@@ -15,34 +16,80 @@ const ToolImageComponent = ({ src }: { src: string }) => <ToolImage src={`../../
 
 const renderToolImage = (src: string): JSX.Element => <ToolImageComponent src={src} />;
 
-const renderFrontendImages = (framework?: string): JSX.Element => {
+const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Element => {
+	const gqlImage = gqlClient ? renderToolImage('graphql.svg') : null;
+
 	switch (framework) {
 		case 'reactts':
 			return (
 				<>
 					{renderToolImage('react.svg')}
 					{renderToolImage('ts.svg')}
+					{gqlImage}
 				</>
 			);
-		case 'nextJS':
-			return renderToolImage('nextjs.svg');
+		case 'nextjs':
+			return (
+				<>
+					{renderToolImage('nextjs.svg')}
+					{gqlImage}
+				</>
+			);
+
+		case 'vanillajs':
+			return (
+				<>
+					{renderToolImage('javascript.svg')}
+					{gqlImage}
+				</>
+			);
 		default:
-			return renderToolImage('react.svg');
+			return (
+				<>
+					{renderToolImage('react.svg')}
+					{gqlImage}
+				</>
+			);
 	}
 };
 
-const renderBackendImages = (environment?: string, gqlServer?: boolean, database?: string): JSX.Element => {
-	const backendImage = environment === 'nodets' ? 'node.svg' : 'express.svg';
-	const gqlImage = gqlServer ? renderToolImage('graphql.svg') : null;
+const renderBackendImages = (environment?: string, database?: string): JSX.Element => {
 	const databaseImage = database === 'mongodb' ? 'mongo.svg' : 'pg.svg';
-
-	return (
-		<>
-			{renderToolImage(backendImage)}
-			{gqlImage}
-			{renderToolImage(databaseImage)}
-		</>
-	);
+	switch (environment) {
+		case 'nodets':
+			return (
+				<>
+					{renderToolImage('node.svg')}
+					{renderToolImage(databaseImage)}
+				</>
+			);
+		case 'nodejs':
+			return (
+				<>
+					{renderToolImage('node.svg')}
+					{renderToolImage(databaseImage)}
+				</>
+			);
+		case 'nodeExpressTS':
+			return (
+				<>
+					{renderToolImage('node.svg')}
+					{renderToolImage('express.svg')}
+					{renderToolImage(databaseImage)}
+				</>
+			);
+		case 'nodeExpressJS':
+			return (
+				<>
+					{renderToolImage('node.svg')}
+					{renderToolImage('express.svg')}
+					{renderToolImage(databaseImage)}
+				</>
+			);
+		default:
+			break;
+	}
+	return <></>;
 };
 
 const StackImages = ({ project }: { project: ProjectForImages }) => {
@@ -50,8 +97,8 @@ const StackImages = ({ project }: { project: ProjectForImages }) => {
 
 	return (
 		<>
-			{frontend && frontend.framework && renderFrontendImages(frontend.framework)}
-			{backend && backend.environment && renderBackendImages(backend.environment, backend.gqlServer, backend.database)}
+			{frontend && frontend.framework && renderFrontendImages(frontend.framework, frontend.gqlClient)}
+			{backend && backend.environment && renderBackendImages(backend.environment, backend.database)}
 		</>
 	);
 };
