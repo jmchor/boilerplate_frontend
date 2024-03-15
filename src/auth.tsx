@@ -63,7 +63,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		},
 	});
 
-	const { loading, error, data: checkData } = useQuery(CHECK_AUTHENTICATION);
+	const {
+		loading,
+		error,
+		data: checkData,
+	} = useQuery(CHECK_AUTHENTICATION, {
+		pollInterval: 1000 * 60 * 10,
+	});
 
 	useEffect(() => {
 		if (!loading && !error && checkData && checkData.checkAuthentication?.cookieIsPresent) {
