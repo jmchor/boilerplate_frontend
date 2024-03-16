@@ -30,9 +30,13 @@ const CustomAutocomplete = styled(Autocomplete)`
 	input {
 		font-size: 1.5rem;
 	}
+
 	legend {
 		font-size: 1rem;
+		color: white;
 	}
+	background-color: white;
+	border-radius: 5px;
 `;
 
 const ALL_TITLES_QUERY = graphql(`
@@ -164,9 +168,7 @@ const SearchBar = () => {
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.title || option.tag}
 				sx={{ width: 600 }}
-				renderInput={(params) => (
-					<TextField sx={{ fontSize: '1.5rem' }} {...params} label='Search' onKeyPress={handleKeyPress} />
-				)}
+				renderInput={(params) => <TextField sx={{ fontSize: '1.5rem' }} {...params} onKeyPress={handleKeyPress} />}
 				renderGroup={(params) => (
 					<li key={params.key}>
 						<GroupHeader>{params.group}</GroupHeader>

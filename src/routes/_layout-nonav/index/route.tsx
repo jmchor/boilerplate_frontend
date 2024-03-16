@@ -16,6 +16,7 @@ const IndexPageWrapper = styled.div`
 	h2 {
 		margin: 0;
 		text-align: center;
+		color: white;
 	}
 `;
 
@@ -98,6 +99,10 @@ function Index() {
 			</IndexPageWrapper>
 			<Footer>
 				<p>(c) Johannes Chorzempa 2024</p>
+
+				<a href='https://www.freepik.com/free-vector/gradient-hexagonal-background_13955212.htm#query=svg%20background&position=22&from_view=keyword&track=ais&uuid=38ae1ebb-b087-4bcc-addc-508afa6900a4'>
+					Background Image by coolvector
+				</a>
 			</Footer>
 		</>
 	);

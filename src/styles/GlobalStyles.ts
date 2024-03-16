@@ -19,7 +19,7 @@ html {
 	--blueish: #B8D0EB;
 	--celeste: #B9FAF8;
 	--steelbluegrey: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
-	--Reversesteelbluegrey: linear-gradient(60deg, hsla(202, 27%, 45%, 1) 0%, hsla(213, 77%, 14%, 1) 120%);
+	--Reversesteelbluegrey: linear-gradient(60deg, hsla(202, 27%, 45%, 1) 0%, hsla(180, 100%, 25%, 1) 120%);
 	--radiantBluegrey: radial-gradient(circle, hsla(202, 27%, 45%, 1) 0%, hsla(213, 77%, 14%, 1) 100%);
 	--grey: #3A3A3A;
 	--gray: var(--grey);
@@ -46,6 +46,7 @@ body {
 	margin: 0;
 	font-size: 1.5rem;
 	line-height: 2;
+	background: url('/static/background.jpg');
 	/* background: var(--offWhite); */
 }
 

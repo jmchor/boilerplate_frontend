@@ -22,7 +22,9 @@ export const Route = createFileRoute('/_layout-withAuth/projects/$projectid')({
 const TechBox = styled.div`
 	display: flex;
 	gap: 1rem;
+
 	justify-content: space-between;
+	width: 80%;
 	ul {
 		margin: 0;
 		padding: 0;
@@ -90,9 +92,18 @@ const ProjectTitleWrapper = styled.div`
 	border-radius: 5px;
 	padding: 4rem;
 	margin-top: 5rem;
+	color: black;
+	background-color: white;
 	h1 {
 		margin: 0;
 	}
+`;
+
+const ProjectDetailWrapper = styled(HomePageWrapper)`
+	color: white;
+	background-color: #ffffff36;
+	width: 100%;
+	align-items: center;
 `;
 
 const TitleRow = styled.div`
@@ -158,7 +169,7 @@ function Project() {
 				</TitleRow>
 				<p>{project?.description}</p>
 			</ProjectTitleWrapper>
-			<HomePageWrapper>
+			<ProjectDetailWrapper>
 				<VerticalTechBox>
 					{isUserCreator && !loading ? (
 						<KanbanBoard kanbanId={kanban?._id as string} />
@@ -312,7 +323,7 @@ function Project() {
 						</Accordion>
 					</div>
 				</TechBox>
-			</HomePageWrapper>
+			</ProjectDetailWrapper>
 		</div>
 	);
 }

@@ -20,6 +20,7 @@ export const CreateFormWrapper = styled.div`
 	@media screen and (min-width: 2000px) {
 		height: 70%;
 	}
+	background-color: white;
 `;
 
 export const CreateProjectForm = styled(Form)`

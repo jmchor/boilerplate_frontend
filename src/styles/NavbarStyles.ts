@@ -3,17 +3,19 @@ import styled from 'styled-components';
 
 export const NavigationContainer = styled.div`
 	display: flex;
-	height: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 20rem; /* Adjust the width as needed */
+	width: 15rem; /* Adjust the width as needed */
 	height: 100%;
 	overflow-y: auto; /* Add scroll if content overflows */
 
 	//add box shadow only to the right border
-	box-shadow: 5px 0 5px rgba(0, 0, 0, 0.54);
+	/* box-shadow: 5px 0 5px rgba(0, 0, 0, 0.54); */
 	z-index: 1400;
+	button {
+		font-size: 1.7rem;
+	}
 `;
 
 export const NavigationBar = styled.div`
@@ -24,7 +26,7 @@ export const NavigationBar = styled.div`
 	text-decoration: none;
 	width: 20rem;
 	padding: 5rem 0;
-	background: var(--radiantBluegrey);
+	background: #ffffff17;
 `;
 
 export const Subbar = styled.div`

@@ -12,9 +12,12 @@ export const Route = createFileRoute('/_layout-home/home')({
 const CenteredWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	height: 100%;
+	height: auto;
+	margin-top: 20rem;
+	color: white;
+	background-color: none;
 `;
 
 function Home() {

@@ -36,6 +36,8 @@ const ProfileWrapper = styled.div`
 	margin-top: 10rem;
 	/* border: 1px solid #ccc; */
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: white;
+	border-radius: 5px;
 `;
 
 export const ExtendedFlexRow = styled(FlexRow)`
@@ -59,6 +61,7 @@ const FirstProfileRow = styled(FlexRow)`
 const ExtendedFlexColumn = styled(FlexColumn)`
 	width: 100%;
 	margin-bottom: -10rem;
+	align-items: flex-start;
 	/* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 
 	hr {
@@ -90,11 +93,12 @@ const Tabs = styled.div`
 `;
 
 const TabsNavigation = styled.ul`
+	margin-left: 3rem;
 	width: 80%;
-	margin: 2rem auto;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-start;
+	gap: 4rem;
 	border-radius: 2rem;
 	padding-left: 0px;
 	@media (max-width: 768px) {
@@ -102,35 +106,24 @@ const TabsNavigation = styled.ul`
 	}
 
 	li {
-		width: 50%;
-		padding: 0%.5;
 		list-style: none;
 		text-align: center;
 		cursor: pointer;
-		transition: all 0.7s;
-		border-bottom-left-radius: 2rem;
-		border-top-left-radius: 2rem;
-
-		&:nth-child(3) {
-			border-radius: 0;
-			border-bottom-right-radius: 2rem;
-			border-top-right-radius: 2rem;
-		}
-
-		&:nth-child(2) {
-			border-radius: 0;
-		}
-
-		&:hover {
-			background: rgba(103, 121, 221, 0.15);
-			color: black;
-		}
+		transition: all 0.1s;
 
 		&.active {
-			background: var(--blue);
-			color: white;
+			color: var(--blue);
+			border-bottom: 3px solid var(--blue);
 		}
 	}
+`;
+
+const BorderStyledDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
 `;
 
 function Profile() {
@@ -163,7 +156,9 @@ function Profile() {
 					<ProfilePicture src={currentUser?.image as string} alt='' />
 					<h2>{currentUser?.username}</h2>
 				</FirstProfileRow>
-				<hr />
+				<BorderStyledDiv>
+					<hr />
+				</BorderStyledDiv>
 				<TabsNavigation>
 					<li className={activeTab === 'projects' ? 'active' : ''} onClick={() => handleTabClick('projects')}>
 						Projects
