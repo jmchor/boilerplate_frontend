@@ -1,41 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
-import { MoonLoader } from 'react-spinners';
-import styled from 'styled-components';
 
-import ProjectCard from '../../../components/cards/ProjectCard';
-import ArticleCard from '../../../components/cards/ArticleCard';
-import { useAuth } from '../../../auth';
-
-import useGetProjects from '../../../services/getProjects.js';
-import useGetArticles from '../../../services/getArticles.js';
-import {
-	ArticleContainer,
-	ContainerWithHeader,
-	FilterContainer,
-	HomePageWrapper,
-	Image,
-	LinkButton,
-	MoreButton,
-	OptionalContainer,
-	ProjectGrid,
-} from '../../../styles/HomeRouteStyles.js';
-
-import { Project } from '../../../types/project.js';
-import { Article } from '../../../types/articles.js';
 import SearchBar from '../../../components/SearchBar.js';
+import { HomePageWrapper, OptionalContainer } from '../../../styles/HomeRouteStyles.js';
+import { useAuth } from '../../../auth.js';
+import styled from 'styled-components';
 
 export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
 });
 
-const LoadingContainer = styled.div`
+const CenteredWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 1rem;
-	margin-top: 30rem;
+	height: 100%;
 `;
 
 function Home() {
@@ -43,13 +22,14 @@ function Home() {
 
 	return (
 		<HomePageWrapper>
-			{auth.isLoggedIn ? (
-				<OptionalContainer>
-					<h1>Welcome back, {auth.user?.username}!</h1>
-				</OptionalContainer>
-			) : null}
-
-			<SearchBar />
+			<CenteredWrapper>
+				{auth.isLoggedIn ? (
+					<OptionalContainer>
+						<h1>Welcome back, {auth.user?.username}!</h1>
+					</OptionalContainer>
+				) : null}
+				<SearchBar />
+			</CenteredWrapper>
 		</HomePageWrapper>
 	);
 }
