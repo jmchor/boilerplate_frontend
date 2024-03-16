@@ -25,6 +25,7 @@ const GroupItems = styled.ul`
 `;
 
 const CustomAutocomplete = styled(Autocomplete)`
+	width: 100%;
 	label,
 	input {
 		font-size: 1.5rem;
@@ -65,10 +66,20 @@ const SEARCH_ARTICLE_QUERY = graphql(`
 `);
 
 const SearchBarStyles = styled.div`
-	width: 100%;
 	margin-bottom: 3rem;
 	display: flex;
+	gap: 1rem;
+	flex-direction: column;
 	justify-content: center;
+	input {
+		width: 100%;
+	}
+`;
+
+const ButtonContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	gap: 5rem;
 `;
 
 const SearchBar = () => {
@@ -126,6 +137,12 @@ const SearchBar = () => {
 		}
 	};
 
+	const handleRandomButtonClick = () => {
+		const randomIndex = Math.floor(Math.random() * newOptions.length);
+		const randomOption = newOptions[randomIndex];
+		handleSearch(randomOption);
+	};
+
 	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
 			handleButtonClick();
@@ -146,7 +163,7 @@ const SearchBar = () => {
 				isOptionEqualToValue={(option, value) => option.title === value.title || option.tag === value.tag}
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.title || option.tag}
-				sx={{ width: 600, marginLeft: '3rem' }}
+				sx={{ width: 600 }}
 				renderInput={(params) => (
 					<TextField sx={{ fontSize: '1.5rem' }} {...params} label='Search' onKeyPress={handleKeyPress} />
 				)}
@@ -157,7 +174,10 @@ const SearchBar = () => {
 					</li>
 				)}
 			/>
-			<button onClick={handleButtonClick}>Search</button>
+			<ButtonContainer>
+				<button onClick={handleButtonClick}>Search</button>
+				<button onClick={handleRandomButtonClick}>Random</button>
+			</ButtonContainer>
 		</SearchBarStyles>
 	);
 };
