@@ -31,9 +31,11 @@ const ProfileWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 100%;
+	height: auto;
 	gap: 3rem;
 	margin-top: 10rem;
+	/* border: 1px solid #ccc; */
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
 export const ExtendedFlexRow = styled(FlexRow)`
@@ -57,7 +59,7 @@ const FirstProfileRow = styled(FlexRow)`
 const ExtendedFlexColumn = styled(FlexColumn)`
 	width: 100%;
 	margin-bottom: -10rem;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	/* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 
 	hr {
 		width: 95%;
