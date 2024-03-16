@@ -56,6 +56,8 @@ const ListStyles = styled.div``;
 const ProjectList = ({ project }: { project: Project }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
+	console.log(project);
+
 	const navigate = useNavigate();
 
 	const handleExpand = () => {
