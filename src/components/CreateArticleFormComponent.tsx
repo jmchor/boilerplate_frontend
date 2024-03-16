@@ -17,7 +17,7 @@ import usePreventNavigation from '../lib/usePreventNavigation.js';
 import { ArticleTagTypes } from '../types/articles.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
 import styled from 'styled-components';
-import { ALL_TAGS_QUERY } from '../routes/dashboard.js';
+import { ALL_TAGS_QUERY } from './SearchBar.js';
 
 const FlexBox = styled.div`
 	display: flex;
