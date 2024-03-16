@@ -14,6 +14,7 @@ export const CURRENT_USER = graphql(`
 				description
 				frontend {
 					framework
+					gqlClient
 				}
 				backend {
 					environment
