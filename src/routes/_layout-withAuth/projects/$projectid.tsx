@@ -23,7 +23,7 @@ const TechBox = styled.div`
 	display: flex;
 	gap: 1rem;
 
-	justify-content: space-between;
+	justify-content: center;
 	width: 80%;
 	ul {
 		margin: 0;
@@ -32,6 +32,7 @@ const TechBox = styled.div`
 		li {
 			margin: 0;
 			padding: 0;
+			color: var(--darkpurple);
 		}
 	}
 `;
@@ -89,7 +90,7 @@ const CustomAccordionSummary = styled(AccordionSummary)`
 
 const ProjectTitleWrapper = styled.div`
 	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
+	border-radius: 5px 5px 0 0;
 	padding: 4rem;
 	margin-top: 5rem;
 	color: black;

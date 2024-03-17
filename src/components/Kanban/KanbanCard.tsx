@@ -18,6 +18,7 @@ const KanbanCardFrame = styled.div`
 const KanbanText = styled.div`
 	word-wrap: break-word;
 	text-align: center;
+	color: var(--darkpurple);
 `;
 
 const KanbanCard = ({ title, index, parent }: { title: string; index: number; parent: string }) => {

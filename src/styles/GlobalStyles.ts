@@ -12,12 +12,14 @@ const GlobalStyles = createGlobalStyle`
 html {
 	--red: #ff0000;
 	--blue: #346fa1;
-	--black: #393939;
-	--purple: #6F2DBD;
-	--mauve: #A663CC;
-	--wisteria: #B298DC;
-	--blueish: #B8D0EB;
-	--celeste: #B9FAF8;
+
+	--bandaid: #b39686;
+	--muddygreen: #616044;
+	--muddygold: #766961;
+	--dirtypurple: #4b475e;
+	--darkpurple:#31365e;
+	--purpleblack:#2c2c36;
+
 	--steelbluegrey: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
 	--Reversesteelbluegrey: linear-gradient(60deg, hsla(202, 27%, 45%, 1) 0%, hsla(180, 100%, 25%, 1) 120%);
 	--radiantBluegrey: radial-gradient(circle, hsla(202, 27%, 45%, 1) 0%, hsla(213, 77%, 14%, 1) 100%);
@@ -48,11 +50,12 @@ body {
 	line-height: 2;
 	background: url('/static/background.jpg');
 	/* background: var(--offWhite); */
+	color: var(--darkpurple);
 }
 
 a {
 	text-decoration: none;
-	color: var(--black);
+	color: var(--darkpurple);
 }
 
 a:hover {
@@ -62,9 +65,11 @@ a:hover {
 button {
 	font-family: 'Work Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	width: auto;
-	background: var(--blue);
+	background: none;
+
 	color: white;
-	border: 0;
+	border: 2px solid var(--bandaid);
+	border-radius: 5px;
 	font-size: 2rem;
 	font-weight: 600;
 	padding: 0.5rem 1.2rem;

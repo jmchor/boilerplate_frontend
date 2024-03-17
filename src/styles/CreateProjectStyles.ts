@@ -57,9 +57,9 @@ export const CreateProjectForm = styled(Form)`
 	button,
 	input[type='submit'] {
 		width: auto;
-		background: var(--blue);
-		color: white;
-		border: 0;
+		background: none;
+		color: black;
+		border: 2px solid var(--darkpurple);
 		font-size: 2rem;
 		font-weight: 600;
 		padding: 0.5rem 1.2rem;

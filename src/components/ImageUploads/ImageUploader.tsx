@@ -9,7 +9,7 @@ const ImagePreview = styled.img`
 `;
 
 const FileInputButton = styled.label`
-	background-color: var(--blue);
+	background-color: var(--darkpurple);
 	color: #fff;
 	padding: 8px 12px;
 	border: none;

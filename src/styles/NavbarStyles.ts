@@ -26,7 +26,7 @@ export const NavigationBar = styled.div`
 	text-decoration: none;
 	width: 20rem;
 	padding: 5rem 0;
-	background: #ffffff17;
+	/* background: #ffffff17; */
 `;
 
 export const Subbar = styled.div`
