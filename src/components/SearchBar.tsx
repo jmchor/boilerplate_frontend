@@ -96,17 +96,33 @@ const SearchBar = () => {
 
 	const allRoutes = [{ title: 'User Profile', type: 'route', route: `/user/${user?.username}` }];
 
-	const [searchProject, { data: projectData, error: projectError, loading: projectLoading }] =
-		useLazyQuery(SEARCH_PROJECT_QUERY);
+	const [searchProject, { data: projectData, error: projectError, loading: projectLoading }] = useLazyQuery(
+		SEARCH_PROJECT_QUERY,
+		{
+			fetchPolicy: 'network-only',
+		}
+	);
 
-	const [searchArticle, { data: articleData, error: articleError, loading: articleLoading }] =
-		useLazyQuery(SEARCH_ARTICLE_QUERY);
+	const [searchArticle, { data: articleData, error: articleError, loading: articleLoading }] = useLazyQuery(
+		SEARCH_ARTICLE_QUERY,
+		{
+			fetchPolicy: 'network-only',
+		}
+	);
 
-	const { data, error, loading } = useQuery(ALL_TITLES_QUERY);
+	const { data, error, loading } = useQuery(ALL_TITLES_QUERY, {
+		fetchPolicy: 'network-only',
+	});
 
 	const allTitles = data?.allTitles;
 
-	const { data: tagData, error: tagError, loading: tagLoading } = useQuery(ALL_TAGS_QUERY);
+	const {
+		data: tagData,
+		error: tagError,
+		loading: tagLoading,
+	} = useQuery(ALL_TAGS_QUERY, {
+		fetchPolicy: 'network-only',
+	});
 
 	const allTags = tagData?.allTags;
 
