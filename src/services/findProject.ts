@@ -55,5 +55,6 @@ export const useFindProject = (id: string) => {
 		variables: {
 			id,
 		},
+		fetchPolicy: 'network-only',
 	});
 };
