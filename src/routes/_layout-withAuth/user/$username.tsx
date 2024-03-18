@@ -109,11 +109,10 @@ const TabsNavigation = styled.ul`
 		list-style: none;
 		text-align: center;
 		cursor: pointer;
-		transition: all 0.1s;
 
 		&.active {
-			color: var(--blue);
-			border-bottom: 3px solid var(--blue);
+			color: var(--dirtypurple);
+			border-bottom: 3px solid var(--dirtypurple);
 		}
 	}
 `;
