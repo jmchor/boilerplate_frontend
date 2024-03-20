@@ -10,7 +10,7 @@ export const CURRENT_USER = graphql(`
 		currentUser {
 			username
 			email
-			image
+			imageUrl
 			_id
 		}
 	}
@@ -42,6 +42,7 @@ export interface AuthContext {
 	isLoading: boolean;
 	withNav: boolean;
 	setWithNav: React.Dispatch<React.SetStateAction<boolean>>;
+	cookieLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -64,20 +65,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	});
 
 	const {
-		loading,
+		loading: cookieLoading,
 		error,
 		data: checkData,
 	} = useQuery(CHECK_AUTHENTICATION, {
 		pollInterval: 1000 * 60 * 10,
+
+		onCompleted: (data) => {
+			if (data?.checkAuthentication?.cookieIsPresent) {
+				flushSync(() => {
+					setIsLoggedIn(true);
+				});
+			}
+		},
+		fetchPolicy: 'cache-and-network',
 	});
 
-	useEffect(() => {
-		if (!loading && !error && checkData && checkData.checkAuthentication?.cookieIsPresent) {
-			setIsLoggedIn(true);
-		} else {
-			setIsLoggedIn(false);
-		}
-	}, [loading, error, checkData]);
+	// useEffect(() => {
+	// 	if (!loading && !error && checkData && checkData.checkAuthentication?.cookieIsPresent) {
+	// 		setIsLoggedIn(true);
+	// 	} else {
+	// 		setIsLoggedIn(false);
+	// 	}
+	// }, [loading, error, checkData]);
 
 	const [logout] = useMutation(LOGOUT, {
 		onCompleted: () => {
@@ -92,11 +102,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		}
 	}, [isLoggingOut, logout]);
 
-	if (loading) return <p>Loading...</p>;
-	if (error) {
-		console.error('Error checking authentication:', error);
-		return <p>Error checking authentication. Please try again later.</p>;
-	}
+	// if (loading) return <p>Loading...</p>;
+	// if (error) {
+	// 	console.error('Error checking authentication:', error);
+	// 	return <p>Error checking authentication. Please try again later.</p>;
+	// }
 
 	return (
 		<AuthContext.Provider
@@ -110,6 +120,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				isLoading,
 				withNav,
 				setWithNav,
+				cookieLoading,
 			}}
 		>
 			{children}
