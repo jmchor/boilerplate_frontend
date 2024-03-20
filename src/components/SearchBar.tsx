@@ -72,7 +72,7 @@ const SEARCH_ARTICLE_QUERY = graphql(`
 const SearchBarStyles = styled.div`
 	margin-bottom: 3rem;
 	display: flex;
-	gap: 1rem;
+	gap: 3rem;
 	flex-direction: column;
 	justify-content: center;
 	input {
