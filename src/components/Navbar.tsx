@@ -9,10 +9,11 @@ import styled from 'styled-components';
 const ProfileImage = styled.img`
 	width: 65px;
 	height: 65px;
-	padding: 6px;
+	padding: 1px;
 	border-radius: 50%;
 	background: white;
 	border: 2px solid black;
+	object-fit: cover;
 `;
 
 const EmptyImage = styled.div`
@@ -26,12 +27,18 @@ function Navbar() {
 	const auth = useAuth();
 	const navigate = useNavigate();
 
+	console.log('HERE', auth);
+
 	return (
 		<NavigationContainer>
 			<NavigationBar>
 				<Subbar>
 					<Link to='/home'>
-						{auth.user?.image && auth.isLoggedIn ? <ProfileImage src={auth.user?.image} alt='' /> : <EmptyImage />}
+						{auth.user?.imageUrl && auth.isLoggedIn ? (
+							<ProfileImage src={auth.user?.imageUrl} alt='' />
+						) : (
+							<EmptyImage />
+						)}
 					</Link>
 					{SidebarData.map((item: SidebarItem) => {
 						return <SubMenu item={item} key={item.title} />;
