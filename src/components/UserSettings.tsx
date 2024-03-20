@@ -1,6 +1,6 @@
 import { graphql } from 'gql.tada';
 import { useEffect, useState } from 'react';
-import { CenteredDiv, CreateFormWrapper, CreateProjectForm } from '../styles/CreateProjectStyles';
+import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexColumn } from '../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useGetCurrentUser } from '../services/getCurrentUser';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import ImageUploader from './ImageUploads/ImageUploader';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from '@tanstack/react-router';
 import { CURRENT_USER, useAuth } from '../auth';
+import { CustomFlexRow, FlexBox } from './CreateArticleFormComponent';
 
 const EDIT_USER = graphql(`
 	mutation EDIT_USER($id: ID!, $username: String, $email: String, $imageUrl: String) {
@@ -89,19 +90,31 @@ const UserSettings = () => {
 	return (
 		<UserEditFormWrapper>
 			<CreateProjectForm onSubmit={handleSubmit}>
-				<label>
-					Username
-					<input type='text' value={userName} onChange={(e) => setUsername(e.target.value)} />
-				</label>
-				<label>
-					Email
-					<input type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-				</label>
-				<label htmlFor='image'>
-					{' '}
-					User Image
-					<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={currentUser?.imageUrl} />
-				</label>
+				<EditCustomFlexRow>
+					<label htmlFor='image'>
+						{' '}
+						User Image
+						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={currentUser?.imageUrl} />
+					</label>
+					<UserEditFlexBox>
+						<label>
+							Username
+							<input type='text' value={userName} onChange={(e) => setUsername(e.target.value)} />
+						</label>
+						<label>
+							Email
+							<input type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
+						</label>
+						<ButtonFlexColumn>
+							<button onClick={() => navigate({ to: `/user/${currentUser?.username}/editpassword` as string })}>
+								Update Password
+							</button>
+							<button onClick={() => navigate({ to: `/user/${currentUser?.username}/delete` as string })}>
+								Delete Account
+							</button>
+						</ButtonFlexColumn>
+					</UserEditFlexBox>
+				</EditCustomFlexRow>
 
 				<button type='submit' disabled={loading}>
 					Confirm Changes
@@ -115,4 +128,31 @@ export default UserSettings;
 const UserEditFormWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+`;
+
+const UserEditFlexBox = styled(FlexBox)`
+	gap: 3rem;
+	justify-content: center;
+	align-items: flex-start !important;
+`;
+
+const ButtonFlexColumn = styled(FlexColumn)`
+	gap: 1rem;
+	button {
+		font-size: 16px;
+		width: 20rem;
+		background-color: var(--darkpurple);
+		color: white;
+	}
+`;
+
+const EditCustomFlexRow = styled(CustomFlexRow)`
+	align-items: flex-start;
+	margin-bottom: 4rem;
+	button {
+		font-size: 16px;
+		width: 20rem;
+		background-color: var(--darkpurple);
+		color: white;
+	}
 `;
