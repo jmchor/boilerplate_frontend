@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { graphql } from 'gql.tada';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
-import Select, { MultiValue } from 'react-select';
+import { MultiValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 
 import ReactQuill from 'react-quill';
@@ -19,7 +19,7 @@ import ImageUploader from './ImageUploads/ImageUploader.js';
 import styled from 'styled-components';
 import { ALL_TAGS_QUERY } from './SearchBar.js';
 
-const FlexBox = styled.div`
+export const FlexBox = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	width: 80%;
@@ -30,12 +30,12 @@ const FlexBox = styled.div`
 	}
 `;
 
-const CustomSelect = styled(CreatableSelect)`
+export const CustomSelect = styled(CreatableSelect)`
 	padding-top: 0.5rem;
 	width: 100%;
 `;
 
-const CustomFlexRow = styled(FlexRow)`
+export const CustomFlexRow = styled(FlexRow)`
 	margin-bottom: 3rem;
 	justify-content: space-between;
 	gap: 4rem;
@@ -62,7 +62,7 @@ const CREATE_ARTICLE = graphql(`
 	}
 `);
 
-const ExtendedQuill = styled(ReactQuill)`
+export const ExtendedQuill = styled(ReactQuill)`
 	width: 100%;
 
 	& .ql-editor {
@@ -81,9 +81,9 @@ const CreateArticleFormComponent = () => {
 	const [text, setText] = useState<string>('');
 	const [subheadline, setSubheadline] = useState<string>('');
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
-	const [tags, setTags] = useState<ArticleTagTypes[]>([]);
+	const [tags, setTags] = useState<string[]>([]);
 	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
-	const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
+	// const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
 
 	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {
 		variables: {
@@ -107,15 +107,15 @@ const CreateArticleFormComponent = () => {
 	const allTags = tagData?.allTags;
 	const allTagsArray = allTags?.map((tag) => ({ value: tag.tag, label: tag.tag }));
 
-	const tagArray: ArticleTagTypes[] = [];
+	const tagArray: string[] = [];
 
 	selectedOptions?.forEach((option) => {
-		tagArray.push(option.value as ArticleTagTypes);
+		tagArray.push(option.value as string);
 	});
 
 	const handleChange = (selectedOptions: MultiValue<{ value: string; label: string }>) => {
 		setSelectedOptions(selectedOptions);
-		setTags(selectedOptions.map((option) => option.value as ArticleTagTypes));
+		setTags(selectedOptions.map((option) => option.value as string));
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
