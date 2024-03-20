@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { BsCaretDownSquare, BsCaretUpSquare, BsBoxArrowInUpRight } from 'react-icons/bs';
 import { useNavigate } from '@tanstack/react-router';
 
-const PLFlexRow = styled(FlexRow)`
+export const PLFlexRow = styled(FlexRow)`
 	width: 100%;
 	flex: 0;
 	margin-bottom: 0;
@@ -45,18 +45,16 @@ export const Button = styled.button`
 	width: fit-content;
 `;
 
-const ImageRow = styled.div`
+export const ImageRow = styled.div`
 	flex: 1;
 	display: flex;
 	/* justify-content: flex-end !important; */
 `;
 
-const ListStyles = styled.div``;
+export const ListStyles = styled.div``;
 
 const ProjectList = ({ project }: { project: Project }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
-
-	console.log(project);
 
 	const navigate = useNavigate();
 
