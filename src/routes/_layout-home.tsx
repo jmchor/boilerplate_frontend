@@ -10,9 +10,14 @@ export const Route = createFileRoute('/_layout-home')({
 
 export const HomeWrapper = styled.div`
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
 	height: 100%;
+	margin: 0 auto;
+	width: 80%;
+
+	@media screen and (min-width: 2000px) {
+		justify-content: center;
+	}
 `;
 
 function HomeLayoutComponent() {
