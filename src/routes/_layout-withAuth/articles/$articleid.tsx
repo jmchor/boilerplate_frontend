@@ -1,9 +1,10 @@
-import { createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
 import { graphql } from 'gql.tada';
 import styled from 'styled-components';
 import { CenteredDiv } from '../../../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useQuery } from '@apollo/client';
+import { FaLink } from 'react-icons/fa';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid')({
 	component: Article,
@@ -24,9 +25,15 @@ const ArticleWrapper = styled.div`
 	h1 {
 		margin: 5rem 0 0 0;
 	}
+	button {
+		color: black;
+		font-size: 1.2rem;
+		margin-bottom: 2rem;
+		cursor: pointer;
+	}
 `;
 
-const FIND_ARTICLE = graphql(`
+export const FIND_ARTICLE = graphql(`
 	query FIND_ARTICLE($id: ID) {
 		findArticle(_id: $id) {
 			title
@@ -74,13 +81,13 @@ const ArticleText = styled.div`
 function Article() {
 	const articleId = useParams({ from: '/_layout-withAuth/articles/$articleid', select: (params) => params.articleid });
 
+	const navigate = useNavigate();
+
 	const { data, error, loading } = useQuery(FIND_ARTICLE, {
 		variables: {
 			id: articleId,
 		},
 	});
-
-	console.log(data);
 
 	if (loading) {
 		return (
@@ -108,8 +115,14 @@ function Article() {
 				{' '}
 				by {data?.findArticle?.createdBy?.username}
 			</p>
+			<button onClick={() => navigate({ to: `/articles/${articleId}/link` })}>
+				{' '}
+				<FaLink /> Link Article to Project
+			</button>
 			<hr width='80%' />
 			<ArticleText dangerouslySetInnerHTML={{ __html: data?.findArticle?.text }} />
+			<hr width='80%' />
+			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag} `)}</p>}
 		</ArticleWrapper>
 	);
 }
