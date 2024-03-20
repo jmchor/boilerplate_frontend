@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
+import { Link, createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
 import { useFindProject } from '../../../services/findProject';
 import KanbanBoard from '../../../components/Kanban/KanbanBoard';
 import { HomePageWrapper } from '../../../styles/HomeRouteStyles';
@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import { BsBoxArrowInUpRight, BsCaretDownSquare } from 'react-icons/bs';
+import { BsCaretDownSquare } from 'react-icons/bs';
 import { Button } from '../../../components/cards/ProjectList';
 import { FiEdit } from 'react-icons/fi';
 
@@ -100,7 +100,7 @@ const ProjectTitleWrapper = styled.div`
 	}
 `;
 
-const ProjectDetailWrapper = styled(HomePageWrapper)`
+export const ProjectDetailWrapper = styled(HomePageWrapper)`
 	color: white;
 	background-color: #ffffff36;
 	width: 100%;
@@ -110,6 +110,10 @@ const ProjectDetailWrapper = styled(HomePageWrapper)`
 const TitleRow = styled.div`
 	display: flex;
 	justify-content: flex-start;
+`;
+
+const LinkedArticlesHeadline = styled.h3`
+	margin: 2.05rem;
 `;
 
 function Project() {
@@ -211,6 +215,27 @@ function Project() {
 								</Accordion>
 							</li>
 						</TechList>
+						<div>
+							<LinkedArticlesHeadline>Linked Articles</LinkedArticlesHeadline>
+							<Accordion>
+								<CustomAccordionSummary
+									expandIcon={<BsCaretDownSquare />}
+									aria-controls='panel1-content'
+									id='panel1-header'
+								>
+									<p>Linked Articles</p>
+								</CustomAccordionSummary>
+								<AccordionDetails>
+									<ul>
+										{project?.articles?.map((article) => (
+											<li key={article?._id}>
+												<Link to={`/articles/${article?._id}` as string}>{article?.title}</Link>
+											</li>
+										))}
+									</ul>
+								</AccordionDetails>
+							</Accordion>
+						</div>
 					</TechBoxInner>
 					<TechBoxInner>
 						<h3>Backend</h3>
@@ -320,6 +345,29 @@ function Project() {
 										Download Full Script
 									</button>
 								</DownloadButtonContainer>
+							</AccordionDetails>
+						</Accordion>
+					</div>
+				</TechBox>
+				<TechBox>
+					<div>
+						<h3>Linked Articles</h3>
+						<Accordion>
+							<CustomAccordionSummary
+								expandIcon={<BsCaretDownSquare />}
+								aria-controls='panel1-content'
+								id='panel1-header'
+							>
+								<p>Linked Articles</p>
+							</CustomAccordionSummary>
+							<AccordionDetails>
+								<ul>
+									{project?.articles?.map((article) => (
+										<li key={article?._id}>
+											<Link to={`/articles/${article?._id}` as string}>{article?.title}</Link>
+										</li>
+									))}
+								</ul>
 							</AccordionDetails>
 						</Accordion>
 					</div>
