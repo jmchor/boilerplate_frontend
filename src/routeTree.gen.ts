@@ -26,6 +26,8 @@ import { Route as LayoutWithAuthProjectsNewImport } from './routes/_layout-withA
 import { Route as LayoutWithAuthProjectsProjectidImport } from './routes/_layout-withAuth/projects/$projectid'
 import { Route as LayoutWithAuthArticlesNewImport } from './routes/_layout-withAuth/articles/new'
 import { Route as LayoutWithAuthArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid'
+import { Route as LayoutWithAuthUserUsernameEditpasswordImport } from './routes/_layout-withAuth/user_.$username.editpassword'
+import { Route as LayoutWithAuthUserUsernameDeleteImport } from './routes/_layout-withAuth/user_.$username.delete'
 import { Route as LayoutWithAuthProjectsProjectidEditImport } from './routes/_layout-withAuth/projects_.$projectid.edit'
 import { Route as LayoutWithAuthArticlesArticleidLinkImport } from './routes/_layout-withAuth/articles_.$articleid.link'
 import { Route as LayoutWithAuthArticlesArticleidEditImport } from './routes/_layout-withAuth/articles_.$articleid.edit'
@@ -108,6 +110,18 @@ const LayoutWithAuthArticlesNewRoute = LayoutWithAuthArticlesNewImport.update({
 const LayoutWithAuthArticlesArticleidRoute =
   LayoutWithAuthArticlesArticleidImport.update({
     path: '/articles/$articleid',
+    getParentRoute: () => LayoutWithAuthRoute,
+  } as any)
+
+const LayoutWithAuthUserUsernameEditpasswordRoute =
+  LayoutWithAuthUserUsernameEditpasswordImport.update({
+    path: '/user/$username/editpassword',
+    getParentRoute: () => LayoutWithAuthRoute,
+  } as any)
+
+const LayoutWithAuthUserUsernameDeleteRoute =
+  LayoutWithAuthUserUsernameDeleteImport.update({
+    path: '/user/$username/delete',
     getParentRoute: () => LayoutWithAuthRoute,
   } as any)
 
@@ -205,6 +219,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutWithAuthProjectsProjectidEditImport
       parentRoute: typeof LayoutWithAuthImport
     }
+    '/_layout-withAuth/user/$username/delete': {
+      preLoaderRoute: typeof LayoutWithAuthUserUsernameDeleteImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
+    '/_layout-withAuth/user/$username/editpassword': {
+      preLoaderRoute: typeof LayoutWithAuthUserUsernameEditpasswordImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
   }
 }
 
@@ -227,6 +249,8 @@ export const routeTree = rootRoute.addChildren([
     LayoutWithAuthArticlesArticleidEditRoute,
     LayoutWithAuthArticlesArticleidLinkRoute,
     LayoutWithAuthProjectsProjectidEditRoute,
+    LayoutWithAuthUserUsernameDeleteRoute,
+    LayoutWithAuthUserUsernameEditpasswordRoute,
   ]),
   DashboardRoute,
 ])
