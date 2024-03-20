@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MoonLoader } from 'react-spinners';
 
@@ -41,11 +41,18 @@ const ImageFrame = styled.div`
 	height: 200px;
 `;
 
-const ImageUploader = ({ setImageUrl }: { setImageUrl: React.Dispatch<React.SetStateAction<string | null>> }) => {
+const ImageUploader = ({
+	setImageUrl,
+	existingImage,
+}: {
+	setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
+	existingImage: string | null;
+}) => {
 	const [image, setImage] = useState<File | null>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string | null>(null);
 	const [success, setSuccess] = useState<boolean>(false);
+	const [defaultImage, setDefaultImage] = useState<string | null>('');
 
 	const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
 	const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
@@ -70,10 +77,20 @@ const ImageUploader = ({ setImageUrl }: { setImageUrl: React.Dispatch<React.SetS
 			}
 			setImageUrl(res.secure_url);
 			setLoading(false);
+
+			console.log('Image Changed');
 		} catch (error) {
 			setLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		if (existingImage) {
+			setDefaultImage(existingImage);
+		} else {
+			setDefaultImage('../../../static/no-image.svg');
+		}
+	}, [existingImage]);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = e.target;
@@ -96,7 +113,7 @@ const ImageUploader = ({ setImageUrl }: { setImageUrl: React.Dispatch<React.SetS
 					{preview ? (
 						<ImagePreview src={preview} alt='preview' />
 					) : (
-						<ImagePreview src={'../../../static/no-image.svg'} alt='preview' />
+						<ImagePreview src={defaultImage as string} alt='preview' />
 					)}
 				</ImageFrame>
 			) : (
