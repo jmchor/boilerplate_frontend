@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useGetCurrentUser } from '../../../services/getCurrentUser.js';
 import { CenteredDiv, FlexColumn, FlexRow } from '../../../styles/CreateProjectStyles.js';
 import { useState } from 'react';
@@ -8,7 +8,16 @@ import { Project } from '../../../types/project';
 import { MoonLoader } from 'react-spinners';
 import ArticleList from '../../../components/cards/ArticleList.js';
 import { Article } from '../../../types/articles.js';
+import { useAuth } from '../../../auth.js';
+import UserSettings from '../../../components/UserSettings.js';
 export const Route = createFileRoute('/_layout-withAuth/user/$username')({
+	beforeLoad: ({ context }) => {
+		if (!context.auth.isLoading && !context.auth.isLoggedIn) {
+			throw redirect({
+				to: '/login',
+			});
+		}
+	},
 	component: Profile,
 });
 
@@ -80,6 +89,7 @@ const ProfilePicture = styled.img`
 	top: -4rem;
 	border: 2px double black;
 	background-color: #898989;
+	object-fit: cover;
 `;
 
 const Tabs = styled.div`
@@ -152,7 +162,7 @@ function Profile() {
 		<ProfileWrapper>
 			<ExtendedFlexColumn>
 				<FirstProfileRow>
-					<ProfilePicture src={currentUser?.image as string} alt='' />
+					<ProfilePicture src={currentUser?.imageUrl as string} alt='' />
 					<h2>{currentUser?.username}</h2>
 				</FirstProfileRow>
 				<BorderStyledDiv>
@@ -182,7 +192,9 @@ function Profile() {
 					) : activeTab === 'articles' ? (
 						currentUser?.articles?.map((article) => <ArticleList key={article?._id} article={article as Article} />)
 					) : (
-						<ExtendedFlexRow>Settings</ExtendedFlexRow>
+						<ExtendedFlexRow>
+							<UserSettings />
+						</ExtendedFlexRow>
 					)}
 				</ProjectContainer>
 			</Tabs>
