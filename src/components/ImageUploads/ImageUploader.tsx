@@ -5,7 +5,9 @@ import { MoonLoader } from 'react-spinners';
 const ImagePreview = styled.img`
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	object-fit: cover;
+	padding: 5px;
+	background: #e6e6e6;
 `;
 
 const FileInputButton = styled.label`
@@ -15,6 +17,7 @@ const FileInputButton = styled.label`
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
+	width: 20rem !important;
 
 	&:aria-disabled {
 		opacity: 0.5;
@@ -32,6 +35,13 @@ const UploadWrapper = styled.div`
 	align-items: center;
 	gap: 1rem;
 	width: 250px;
+
+	button {
+		font-size: 16px;
+		width: 20rem;
+		background-color: var(--darkpurple);
+		color: white;
+	}
 `;
 
 const ImageFrame = styled.div`
