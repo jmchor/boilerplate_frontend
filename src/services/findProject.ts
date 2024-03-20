@@ -41,6 +41,7 @@ const FIND_PROJECT_QUERY = graphql(`
 			}
 			articles {
 				_id
+				title
 			}
 			_id
 			createdBy {
