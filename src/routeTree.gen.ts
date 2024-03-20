@@ -27,6 +27,7 @@ import { Route as LayoutWithAuthProjectsProjectidImport } from './routes/_layout
 import { Route as LayoutWithAuthArticlesNewImport } from './routes/_layout-withAuth/articles/new'
 import { Route as LayoutWithAuthArticlesArticleidImport } from './routes/_layout-withAuth/articles/$articleid'
 import { Route as LayoutWithAuthProjectsProjectidEditImport } from './routes/_layout-withAuth/projects_.$projectid.edit'
+import { Route as LayoutWithAuthArticlesArticleidLinkImport } from './routes/_layout-withAuth/articles_.$articleid.link'
 import { Route as LayoutWithAuthArticlesArticleidEditImport } from './routes/_layout-withAuth/articles_.$articleid.edit'
 
 // Create/Update Routes
@@ -116,6 +117,12 @@ const LayoutWithAuthProjectsProjectidEditRoute =
     getParentRoute: () => LayoutWithAuthRoute,
   } as any)
 
+const LayoutWithAuthArticlesArticleidLinkRoute =
+  LayoutWithAuthArticlesArticleidLinkImport.update({
+    path: '/articles/$articleid/link',
+    getParentRoute: () => LayoutWithAuthRoute,
+  } as any)
+
 const LayoutWithAuthArticlesArticleidEditRoute =
   LayoutWithAuthArticlesArticleidEditImport.update({
     path: '/articles/$articleid/edit',
@@ -190,6 +197,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutWithAuthArticlesArticleidEditImport
       parentRoute: typeof LayoutWithAuthImport
     }
+    '/_layout-withAuth/articles/$articleid/link': {
+      preLoaderRoute: typeof LayoutWithAuthArticlesArticleidLinkImport
+      parentRoute: typeof LayoutWithAuthImport
+    }
     '/_layout-withAuth/projects/$projectid/edit': {
       preLoaderRoute: typeof LayoutWithAuthProjectsProjectidEditImport
       parentRoute: typeof LayoutWithAuthImport
@@ -214,6 +225,7 @@ export const routeTree = rootRoute.addChildren([
     LayoutWithAuthProjectsNewRoute,
     LayoutWithAuthUserUsernameRoute,
     LayoutWithAuthArticlesArticleidEditRoute,
+    LayoutWithAuthArticlesArticleidLinkRoute,
     LayoutWithAuthProjectsProjectidEditRoute,
   ]),
   DashboardRoute,
