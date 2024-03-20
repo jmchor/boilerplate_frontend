@@ -94,8 +94,8 @@ const ProfilePicture = styled.img`
 
 const Tabs = styled.div`
 	width: 100%;
-	margin: 3.5rem auto 1.5rem;
-	padding: 2rem 1rem;
+	margin: 2rem auto 1.5rem;
+	padding: 0;
 	border-radius: 2rem;
 	@media (max-width: 769px) {
 		padding: 2rem 0;
