@@ -6,12 +6,15 @@ export const CURRENT_USER = graphql(`
 		currentUser {
 			username
 			email
-			image
+			imageUrl
 			_id
 			projects {
 				title
 				_id
 				description
+				articles {
+					_id
+				}
 				frontend {
 					framework
 					gqlClient
