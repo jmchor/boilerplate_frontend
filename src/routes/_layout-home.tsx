@@ -13,7 +13,6 @@ export const HomeWrapper = styled.div`
 	flex-direction: column;
 	height: 100%;
 	margin: 0 auto;
-	width: 80%;
 
 	@media screen and (min-width: 2000px) {
 		justify-content: center;
