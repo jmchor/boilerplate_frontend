@@ -19,6 +19,8 @@ import { Route as LayoutHomeImport } from './routes/_layout-home'
 import { Route as LayoutWithAuthSearchImport } from './routes/_layout-withAuth/search'
 import { Route as LayoutNoAuthSignupRouteImport } from './routes/_layout-noAuth/signup/route'
 import { Route as LayoutNoAuthLoginRouteImport } from './routes/_layout-noAuth/login/route'
+import { Route as LayoutNoAuthArticlesRouteImport } from './routes/_layout-noAuth/articles/route'
+import { Route as LayoutNoAuthAboutRouteImport } from './routes/_layout-noAuth/about/route'
 import { Route as LayoutHomeHomeRouteImport } from './routes/_layout-home/home/route'
 import { Route as LayoutNonavIndexRouteImport } from './routes/_layout-nonav/index/route'
 import { Route as LayoutWithAuthUserUsernameImport } from './routes/_layout-withAuth/user/$username'
@@ -71,6 +73,16 @@ const LayoutNoAuthSignupRouteRoute = LayoutNoAuthSignupRouteImport.update({
 
 const LayoutNoAuthLoginRouteRoute = LayoutNoAuthLoginRouteImport.update({
   path: '/login',
+  getParentRoute: () => LayoutNoAuthRoute,
+} as any)
+
+const LayoutNoAuthArticlesRouteRoute = LayoutNoAuthArticlesRouteImport.update({
+  path: '/articles',
+  getParentRoute: () => LayoutNoAuthRoute,
+} as any)
+
+const LayoutNoAuthAboutRouteRoute = LayoutNoAuthAboutRouteImport.update({
+  path: '/about',
   getParentRoute: () => LayoutNoAuthRoute,
 } as any)
 
@@ -175,6 +187,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutHomeHomeRouteImport
       parentRoute: typeof LayoutHomeImport
     }
+    '/_layout-noAuth/about': {
+      preLoaderRoute: typeof LayoutNoAuthAboutRouteImport
+      parentRoute: typeof LayoutNoAuthImport
+    }
+    '/_layout-noAuth/articles': {
+      preLoaderRoute: typeof LayoutNoAuthArticlesRouteImport
+      parentRoute: typeof LayoutNoAuthImport
+    }
     '/_layout-noAuth/login': {
       preLoaderRoute: typeof LayoutNoAuthLoginRouteImport
       parentRoute: typeof LayoutNoAuthImport
@@ -235,6 +255,8 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   LayoutHomeRoute.addChildren([LayoutHomeHomeRouteRoute]),
   LayoutNoAuthRoute.addChildren([
+    LayoutNoAuthAboutRouteRoute,
+    LayoutNoAuthArticlesRouteRoute,
     LayoutNoAuthLoginRouteRoute,
     LayoutNoAuthSignupRouteRoute,
   ]),
