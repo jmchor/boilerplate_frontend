@@ -25,7 +25,9 @@ const All_ARTICLES_QUERY = graphql(`
 `);
 
 const useGetArticles = () => {
-	const { data, error, loading } = useQuery(All_ARTICLES_QUERY);
+	const { data, error, loading } = useQuery(All_ARTICLES_QUERY, {
+		fetchPolicy: 'network-only',
+	});
 
 	return { data, error, loading };
 };
