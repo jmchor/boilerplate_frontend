@@ -44,6 +44,7 @@ export const StyledLink = styled(Link)`
 
 export const NavigationButton = styled.button`
 	background: none;
+	width: 10rem;
 	a {
 		text-decoration: none;
 		color: white;
