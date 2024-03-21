@@ -82,3 +82,21 @@ export const DropdownContainer = styled.div<DropdownContainerProps>`
 	overflow: hidden; /* Hide overflow */
 	max-height: ${({ isOpen }) => (isOpen ? '500px' : '0')}; /* Toggle max-height based on isOpen state */
 `;
+
+export const ProfileImage = styled.img`
+	width: 65px;
+	height: 65px;
+	padding: 1px;
+	border-radius: 50%;
+	background: white;
+	border: 2px solid black;
+	object-fit: cover;
+`;
+
+export const EmptyImage = styled.div`
+	width: 80px;
+	height: 80px;
+	padding: 10px;
+	border-radius: 50%;
+	background: none;
+`;

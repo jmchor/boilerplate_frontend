@@ -1,7 +1,7 @@
 import ProjectCard from '../components/cards/ProjectCard';
 import ArticleCard from '../components/cards/ArticleCard';
 
-import { ArticleContainer, ContainerWithHeader, HomePageWrapper, ProjectGrid } from '../styles/HomeRouteStyles.js';
+import { ContainerWithHeader, HomePageWrapper, ProjectGrid } from '../styles/HomeRouteStyles.js';
 
 import { Project } from '../types/project.js';
 import { Article } from '../types/articles.js';

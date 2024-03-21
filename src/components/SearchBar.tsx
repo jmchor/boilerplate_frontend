@@ -1,44 +1,17 @@
 import { useNavigate } from '@tanstack/react-router';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 
-import styled from 'styled-components';
 import { graphql } from 'gql.tada';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../auth';
-
-const GroupHeader = styled.div`
-	position: sticky;
-	top: -8px;
-	padding: 4px 10px;
-	color: var(--blue);
-	background-color: white;
-	font-size: 1.5rem;
-	font-weight: 600;
-	text-transform: uppercase;
-`;
-
-const GroupItems = styled.ul`
-	padding: 0;
-	font-size: 1.5rem;
-`;
-
-const CustomAutocomplete = styled(Autocomplete)`
-	width: 100%;
-	label,
-	input {
-		font-size: 1.5rem;
-		display: flex;
-	}
-
-	legend {
-		font-size: 1rem;
-		color: white;
-	}
-	background-color: white;
-	border-radius: 5px;
-`;
+import {
+	ButtonContainer,
+	CustomAutocomplete,
+	GroupHeader,
+	GroupItems,
+	SearchBarStyles,
+} from '../styles/SearchbarStyles';
 
 const ALL_TITLES_QUERY = graphql(`
 	query ALL_TITLES_QUERY {
@@ -69,23 +42,6 @@ const SEARCH_ARTICLE_QUERY = graphql(`
 		searchArticleByTitle(title: $title)
 	}
 `);
-
-const SearchBarStyles = styled.div`
-	margin-bottom: 3rem;
-	display: flex;
-	gap: 3rem;
-	flex-direction: column;
-	justify-content: center;
-	input {
-		width: 100%;
-	}
-`;
-
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	gap: 5rem;
-`;
 
 const SearchBar = () => {
 	const [newOptions, setNewOptions] = useState<object[]>([]);
@@ -185,14 +141,7 @@ const SearchBar = () => {
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.title || option.tag}
 				sx={{ width: 600 }}
-				renderInput={(params) => (
-					<TextField
-						sx={{ fontSize: '1.5rem' }}
-						{...params}
-						onKeyPress={handleKeyPress}
-						label='Search for projects, articles, or tags'
-					/>
-				)}
+				renderInput={(params) => <TextField sx={{ fontSize: '1.5rem' }} {...params} onKeyPress={handleKeyPress} />}
 				renderGroup={(params) => (
 					<li key={params.key}>
 						<GroupHeader>{params.group}</GroupHeader>

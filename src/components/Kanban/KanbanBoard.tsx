@@ -1,20 +1,12 @@
-import {
-	DndContext,
-	rectIntersection,
-	KeyboardSensor,
-	PointerSensor,
-	useSensor,
-	useSensors,
-	MouseSensor,
-} from '@dnd-kit/core';
+import { DndContext, rectIntersection, PointerSensor, useSensor, useSensors, MouseSensor } from '@dnd-kit/core';
 import KanbanLane from './KanbanLane';
 import AddCard from './AddCard';
 import { useEffect, useState } from 'react';
 import { Cards } from '../../types/Cards';
-import styled from 'styled-components';
 import { graphql } from 'gql.tada';
 import { useMutation, useQuery } from '@apollo/client';
 import { flushSync } from 'react-dom';
+import { Container, LaneContainer } from '../../styles/KanbanStyles';
 
 const UPDATE_KANBAN_MUTATION = graphql(`
 	mutation EditKanban(
@@ -202,16 +194,3 @@ const KanbanBoard = ({ kanbanId }: { kanbanId: string }) => {
 };
 
 export default KanbanBoard;
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 2rem;
-`;
-
-const LaneContainer = styled.div`
-	display: flex;
-	flex: 1;
-	justify-content: center;
-	gap: 1rem;
-`;

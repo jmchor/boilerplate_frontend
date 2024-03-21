@@ -1,14 +1,13 @@
 import { graphql } from 'gql.tada';
 import { useEffect, useState } from 'react';
-import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexColumn } from '../styles/CreateProjectStyles';
+import { CenteredDiv, CreateProjectForm } from '../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useGetCurrentUser } from '../services/getCurrentUser';
-import styled from 'styled-components';
 import ImageUploader from './ImageUploads/ImageUploader';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from '@tanstack/react-router';
 import { CURRENT_USER, useAuth } from '../auth';
-import { CustomFlexRow, FlexBox } from './CreateArticleFormComponent';
+import { ButtonFlexColumn, EditCustomFlexRow, UserEditFlexBox, UserEditFormWrapper } from '../styles/UserSettingStyles';
 
 const EDIT_USER = graphql(`
 	mutation EDIT_USER($id: ID!, $username: String, $email: String, $imageUrl: String) {
@@ -124,35 +123,3 @@ const UserSettings = () => {
 	);
 };
 export default UserSettings;
-
-const UserEditFormWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const UserEditFlexBox = styled(FlexBox)`
-	gap: 3rem;
-	justify-content: center;
-	align-items: flex-start !important;
-`;
-
-const ButtonFlexColumn = styled(FlexColumn)`
-	gap: 1rem;
-	button {
-		font-size: 16px;
-		width: 20rem;
-		background-color: var(--darkpurple);
-		color: white;
-	}
-`;
-
-const EditCustomFlexRow = styled(CustomFlexRow)`
-	align-items: flex-start;
-	margin-bottom: 4rem;
-	button {
-		font-size: 16px;
-		width: 20rem;
-		background-color: var(--darkpurple);
-		color: white;
-	}
-`;

@@ -252,35 +252,8 @@ const CreateProjectFormComponent = () => {
 									inputProps={{ 'aria-label': 'controlled' }}
 								/>
 							</label>
-							{/* <label htmlFor='backendGqlServer'>
-								GraphQL Server
-								<Switch
-									type='checkbox'
-									id='backendGqlServer'
-									name='backend.gqlServer'
-									checked={backendGqlServer}
-									onChange={(e) => setBackendGqlServer(e.target.checked)}
-									inputProps={{ 'aria-label': 'controlled' }}
-								/>
-							</label> */}
 						</FlexColumn>
 						<FlexColumn>
-							{/* {frontPacks.map((item) => (
-								<div key={item}>
-									<label>{item}</label>
-									<Switch
-										checked={frontendPackages.includes(item as FrontendPackages)}
-										onChange={(e) => {
-											if (e.target.checked) {
-												setFrontendPackages([...frontendPackages, item]);
-											} else {
-												setFrontendPackages(frontendPackages.filter((pkg) => pkg !== item));
-											}
-										}}
-										inputProps={{ 'aria-label': 'controlled' }}
-									/>
-								</div>
-							))} */}
 							{backPacks.map((item) => (
 								<div key={item}>
 									<label>{item === 'jsonwebtoken' ? 'jwt' : item}</label>
