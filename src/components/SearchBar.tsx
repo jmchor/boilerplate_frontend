@@ -29,6 +29,7 @@ const CustomAutocomplete = styled(Autocomplete)`
 	label,
 	input {
 		font-size: 1.5rem;
+		display: flex;
 	}
 
 	legend {
@@ -88,7 +89,7 @@ const ButtonContainer = styled.div`
 
 const SearchBar = () => {
 	const [newOptions, setNewOptions] = useState<object[]>([]);
-	const [selectedOption, setSelectedOption] = useState<object | null>(null); // State to store selected option
+	const [selectedOption, setSelectedOption] = useState<object | null>(null);
 
 	const navigate = useNavigate();
 
@@ -178,13 +179,20 @@ const SearchBar = () => {
 			<CustomAutocomplete
 				id='grouped-demo'
 				freeSolo
-				onChange={(event, value) => handleOptionSelected(value)} // Handle option selection
+				onChange={(event, value) => handleOptionSelected(value)}
 				options={newOptions}
 				isOptionEqualToValue={(option, value) => option.title === value.title || option.tag === value.tag}
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.title || option.tag}
 				sx={{ width: 600 }}
-				renderInput={(params) => <TextField sx={{ fontSize: '1.5rem' }} {...params} onKeyPress={handleKeyPress} />}
+				renderInput={(params) => (
+					<TextField
+						sx={{ fontSize: '1.5rem' }}
+						{...params}
+						onKeyPress={handleKeyPress}
+						label='Search for projects, articles, or tags'
+					/>
+				)}
 				renderGroup={(params) => (
 					<li key={params.key}>
 						<GroupHeader>{params.group}</GroupHeader>
