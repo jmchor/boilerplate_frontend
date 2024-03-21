@@ -16,13 +16,13 @@ export const Route = createFileRoute('/_layout-home/home')({
 	component: Home,
 });
 
-const heights: number[] = [300, 330, 360, 390, 420, 450, 480, 510, 540, 570];
+export const heights: number[] = [300, 330, 360, 390, 420, 450, 480, 510, 540, 570];
 
-const StyledPaper = styled(Paper)`
+export const StyledPaper = styled(Paper)`
 	text-align: center;
 `;
 
-const CenteredWrapper = styled.div`
+export const CenteredWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -33,7 +33,7 @@ const CenteredWrapper = styled.div`
 	background-color: none;
 `;
 
-const SmallCenteredWrapper = styled.div`
+export const SmallCenteredWrapper = styled.div`
 	margin-top: 10rem;
 `;
 
@@ -57,7 +57,7 @@ function Home() {
 		);
 	} else {
 		return (
-			<HomePageWrapper>
+			<HomePageWrapper className='home'>
 				<SmallCenteredWrapper>
 					{articles && (
 						<Box sx={{ width: '100%', minHeight: '100vh' }}>
