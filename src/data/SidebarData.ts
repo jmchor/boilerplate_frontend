@@ -12,23 +12,6 @@ export const SidebarData = [
 		subNav: [],
 	},
 	{
-		title: 'Dashboard',
-		subNav: [
-			{
-				title: 'Home',
-				path: '/home',
-			},
-			{
-				title: 'Another',
-				path: '/dashboard',
-			},
-			{
-				title: 'Dashboard',
-				path: '/dashboard',
-			},
-		],
-	},
-	{
 		title: 'Create',
 		subNav: [
 			{
@@ -40,6 +23,12 @@ export const SidebarData = [
 				path: '/articles/new',
 			},
 		],
+	},
+	{ title: 'Articles', path: '/articles' },
+
+	{
+		title: 'About',
+		path: '/about',
 	},
 ];
 
