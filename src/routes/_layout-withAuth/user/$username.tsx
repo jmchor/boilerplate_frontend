@@ -42,7 +42,7 @@ const ProfileWrapper = styled.div`
 	align-items: center;
 	height: auto;
 	gap: 3rem;
-	margin-top: 10rem;
+	margin-top: 5rem;
 	/* border: 1px solid #ccc; */
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	background-color: white;
@@ -94,7 +94,7 @@ const ProfilePicture = styled.img`
 
 const Tabs = styled.div`
 	width: 100%;
-	margin: 2rem auto 1.5rem;
+	margin: 5rem auto 1.5rem;
 	padding: 0;
 	border-radius: 2rem;
 	@media (max-width: 769px) {
@@ -185,12 +185,16 @@ function Profile() {
 				<ProjectContainer>
 					{activeTab === 'projects' ? (
 						currentUser?.projects?.map((project) => (
-							<div key={project?._id}>
+							<ProjectListContainer key={project?._id}>
 								<ProjectList key={project?._id} project={project as Project} />
-							</div>
+							</ProjectListContainer>
 						))
 					) : activeTab === 'articles' ? (
-						currentUser?.articles?.map((article) => <ArticleList key={article?._id} article={article as Article} />)
+						currentUser?.articles?.map((article) => (
+							<ProjectListContainer key={article?._id}>
+								<ArticleList key={article?._id} article={article as Article} />
+							</ProjectListContainer>
+						))
 					) : (
 						<ExtendedFlexRow>
 							<UserSettings />
@@ -201,3 +205,7 @@ function Profile() {
 		</ProfileWrapper>
 	);
 }
+
+const ProjectListContainer = styled.div`
+	padding: 0 2rem 0 1rem;
+`;
