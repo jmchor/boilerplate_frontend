@@ -12,9 +12,6 @@ export const Route = createFileRoute('/_layout-withAuth/search')({
 	},
 });
 
-//get the tag in question from the params
-//use the article and project by tag search to display a grid of all the things
-
 const ARTICLE_TAG_QUERY = graphql(`
 	query ARTICLE_TAG_QUERY($tag: String) {
 		searchArticlesByTag(tag: $tag) {

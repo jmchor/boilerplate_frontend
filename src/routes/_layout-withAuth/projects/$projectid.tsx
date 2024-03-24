@@ -1,120 +1,35 @@
 import { Link, createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { useFindProject } from '../../../services/findProject';
+import { useFindProject } from '../../../services/findProject.js';
 import KanbanBoard from '../../../components/Kanban/KanbanBoard';
-import { HomePageWrapper } from '../../../styles/HomeRouteStyles';
 import { useAuth } from '../../../auth';
 import { useEffect, useState } from 'react';
 import { MoonLoader } from 'react-spinners';
-import { CenteredDiv } from '../../../styles/CreateProjectStyles';
-import styled from 'styled-components';
+import { CenteredDiv } from '../../../styles/CreateProjectStyles.js';
 
 import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import { BsCaretDownSquare } from 'react-icons/bs';
-import { Button } from '../../../components/cards/ProjectList';
+
 import { FiEdit } from 'react-icons/fi';
+import { Button } from '../../../styles/ArticleListStyles.js';
+import {
+	CustomAccordionSummary,
+	CustomListItem,
+	DownloadButtonContainer,
+	LinkedArticlesHeadline,
+	PackageList,
+	ProjectDetailWrapper,
+	ProjectTitleWrapper,
+	TechBox,
+	TechBoxInner,
+	TechList,
+	TitleRow,
+	VerticalTechBox,
+} from '../../../styles/ProjectDetailStyles.js';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid')({
 	component: Project,
 });
-
-const TechBox = styled.div`
-	display: flex;
-	gap: 1rem;
-
-	justify-content: center;
-	width: 80%;
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		li {
-			margin: 0;
-			padding: 0;
-			color: var(--darkpurple);
-		}
-	}
-`;
-
-const TechBoxInner = styled.div`
-	width: 50%;
-	text-align: center;
-`;
-
-const TechList = styled.ul`
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-`;
-
-const CustomListItem = styled.li`
-	border-radius: 4px;
-	background: #fff;
-	box-shadow:
-		0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-		0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-	min-height: 48px;
-	padding: 0 16px !important;
-	display: flex;
-	align-items: center;
-	font-size: 16px;
-
-	b {
-		margin: 12px 0;
-	}
-`;
-
-const VerticalTechBox = styled(TechBox)`
-	flex-direction: column;
-	padding: 5rem 0 10rem 0;
-`;
-
-const PackageList = styled.ul`
-	margin-left: 2rem !important;
-`;
-
-const DownloadButtonContainer = styled.div`
-	display: flex;
-	justify-content: end;
-	align-items: center;
-`;
-
-const CustomAccordionSummary = styled(AccordionSummary)`
-	p {
-		margin: 0;
-		font-size: 16px;
-	}
-`;
-
-const ProjectTitleWrapper = styled.div`
-	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 5px 5px 0 0;
-	padding: 4rem;
-	margin-top: 5rem;
-	color: black;
-	background-color: white;
-	h1 {
-		margin: 0;
-	}
-`;
-
-export const ProjectDetailWrapper = styled(HomePageWrapper)`
-	color: white;
-	background-color: #ffffff36;
-	width: 100%;
-	align-items: center;
-`;
-
-const TitleRow = styled.div`
-	display: flex;
-	justify-content: flex-start;
-`;
-
-const LinkedArticlesHeadline = styled.h3`
-	margin: 2.05rem;
-`;
 
 function Project() {
 	const projectId = useParams({ from: '/_layout-withAuth/projects/$projectid', select: (p) => p.projectid });

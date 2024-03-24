@@ -1,6 +1,6 @@
-import { CardContainer, MetaData, TagLine, Title, TitleImage } from '../../styles/ArticleStyles';
-import { ProjectLink } from '../../styles/ProjectCardStyles';
-import { Article } from '../../types/articles';
+import { CardContainer, MetaData, TagLine, Title, TitleImage } from '../../styles/ArticleStyles.js';
+import { ProjectLink } from '../../styles/ProjectCardStyles.js';
+import { Article } from '../../types/articles.js';
 
 const ArticleCard = ({ article }: { article: Article }) => {
 	function formatDate(isoDateString: string): string {

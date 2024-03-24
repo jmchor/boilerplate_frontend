@@ -6,7 +6,7 @@ import { Cards } from '../../types/Cards';
 import { graphql } from 'gql.tada';
 import { useMutation, useQuery } from '@apollo/client';
 import { flushSync } from 'react-dom';
-import { Container, LaneContainer } from '../../styles/KanbanStyles';
+import { Container, LaneContainer } from '../../styles/KanbanStyles.js';
 
 const UPDATE_KANBAN_MUTATION = graphql(`
 	mutation EditKanban(

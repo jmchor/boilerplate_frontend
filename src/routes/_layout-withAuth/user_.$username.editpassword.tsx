@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser';
+import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser.js';
 import { graphql } from 'gql.tada';
-import { CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles';
+import { CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 

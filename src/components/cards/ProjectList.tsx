@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FlexRow } from '../../styles/CreateProjectStyles.js';
 import { Project } from '../../types/project';
 import StackImages, { ProjectForImages } from '../StackImages';
 import { useState } from 'react';

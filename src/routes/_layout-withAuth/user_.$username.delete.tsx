@@ -1,17 +1,11 @@
 import { useMutation } from '@apollo/client';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { graphql } from 'gql.tada';
-import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser';
-import {
-	CenteredDiv,
-	CreateFormWrapper,
-	CreateProjectForm,
-	FlexColumn,
-	FlexRow,
-} from '../../styles/CreateProjectStyles';
+import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser.js';
+import { CenteredDiv } from '../../styles/CreateProjectStyles.js';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useAuth } from '../../auth';
+import { DeleteButton, DeleteContainer, DeleteFormWrapper, DeleteUserForm } from '../../styles/UserDeleteStyles.js';
 
 export const Route = createFileRoute('/_layout-withAuth/user/$username/delete')({
 	component: DeleteUser,
@@ -90,33 +84,3 @@ function DeleteUser() {
 		</DeleteContainer>
 	);
 }
-
-const DeleteFormWrapper = styled(CreateFormWrapper)`
-	height: auto;
-	padding: 5rem;
-	margin-top: 20rem;
-	width: 50rem;
-	input,
-	label {
-		width: 60%;
-		gap: 20px;
-		font-size: 16px;
-	}
-	button {
-		font-size: 12px;
-	}
-`;
-const DeleteUserForm = styled(CreateProjectForm)`
-	gap: 1rem;
-`;
-
-const DeleteButton = styled.button`
-	font-size: 20px !important;
-	color: white !important;
-	background-color: var(--darkpurple) !important;
-`;
-
-const DeleteContainer = styled.div`
-	display: flex;
-	justify-content: center;
-`;

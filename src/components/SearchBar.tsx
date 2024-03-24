@@ -11,7 +11,7 @@ import {
 	GroupHeader,
 	GroupItems,
 	SearchBarStyles,
-} from '../styles/SearchbarStyles';
+} from '../styles/SearchbarStyles.js';
 
 const ALL_TITLES_QUERY = graphql(`
 	query ALL_TITLES_QUERY {

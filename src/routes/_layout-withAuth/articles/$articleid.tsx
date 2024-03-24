@@ -1,37 +1,14 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
 import { graphql } from 'gql.tada';
-import styled from 'styled-components';
-import { CenteredDiv } from '../../../styles/CreateProjectStyles';
+import { CenteredDiv } from '../../../styles/CreateProjectStyles.js';
 import { MoonLoader } from 'react-spinners';
 import { useQuery } from '@apollo/client';
 import { FaLink } from 'react-icons/fa';
+import { ArticleText, ArticleWrapper, Banner } from '../../../styles/ArticleDetailStyles.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid')({
 	component: Article,
 });
-
-const ArticleWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: auto;
-	width: 100%;
-	background-color: white;
-	box-shadow:
-		0 4px 8px 0 rgba(0, 0, 0, 0.2),
-		0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	border-radius: 5px;
-	h1 {
-		margin: 5rem 0 0 0;
-	}
-	button {
-		color: black;
-		font-size: 1.2rem;
-		margin-bottom: 2rem;
-		cursor: pointer;
-	}
-`;
 
 export const FIND_ARTICLE = graphql(`
 	query FIND_ARTICLE($id: ID) {
@@ -54,29 +31,6 @@ export const FIND_ARTICLE = graphql(`
 		}
 	}
 `);
-
-const Banner = styled.img`
-	width: 100%;
-	height: 30vh;
-	object-fit: cover;
-`;
-
-const ArticleText = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 0 10rem;
-	text-align: justify;
-	margin-top: 5rem;
-	margin-bottom: 3rem;
-
-	p,
-	h1,
-	h2,
-	h3 {
-		margin: 0;
-	}
-`;
 
 function Article() {
 	const articleId = useParams({ from: '/_layout-withAuth/articles/$articleid', select: (params) => params.articleid });

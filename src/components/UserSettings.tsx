@@ -1,13 +1,18 @@
 import { graphql } from 'gql.tada';
 import { useEffect, useState } from 'react';
-import { CenteredDiv, CreateProjectForm } from '../styles/CreateProjectStyles';
+import { CenteredDiv, CreateProjectForm } from '../styles/CreateProjectStyles.js';
 import { MoonLoader } from 'react-spinners';
-import { useGetCurrentUser } from '../services/getCurrentUser';
+import { useGetCurrentUser } from '../services/getCurrentUser.js';
 import ImageUploader from './ImageUploads/ImageUploader';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from '@tanstack/react-router';
 import { CURRENT_USER, useAuth } from '../auth';
-import { ButtonFlexColumn, EditCustomFlexRow, UserEditFlexBox, UserEditFormWrapper } from '../styles/UserSettingStyles';
+import {
+	ButtonFlexColumn,
+	EditCustomFlexRow,
+	UserEditFlexBox,
+	UserEditFormWrapper,
+} from '../styles/UserSettingStyles.js';
 
 const EDIT_USER = graphql(`
 	mutation EDIT_USER($id: ID!, $username: String, $email: String, $imageUrl: String) {

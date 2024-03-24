@@ -1,12 +1,12 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { CenteredDiv, CreateFormWrapper, CreateProjectForm } from '../../styles/CreateProjectStyles';
+import { CenteredDiv } from '../../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth';
 import { useFindProject } from '../../services/findProject';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
-import styled from 'styled-components';
+import { EditProjectForm, EditProjectWrapper } from '../../styles/ProjectEditStyles';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid/edit')({
 	component: EditProject,
@@ -20,20 +20,6 @@ const EDIT_PROJECT = graphql(`
 		}
 	}
 `);
-
-const EditProjectWrapper = styled(CreateFormWrapper)`
-	justify-content: flex-start;
-	h1 {
-		margin: 5rem 0 0 0;
-	}
-	height: auto;
-	margin-top: 10rem;
-`;
-
-const EditProjectForm = styled(CreateProjectForm)`
-	gap: 2rem;
-	margin-bottom: 8rem;
-`;
 
 function EditProject() {
 	const projectId = useParams({ from: '/_layout-withAuth/projects/$projectid', select: (p) => p.projectid });

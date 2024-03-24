@@ -1,7 +1,7 @@
 import { useDroppable } from '@dnd-kit/core';
 import KanbanCard from './KanbanCard';
 import { Cards } from '../../types/Cards';
-import { CardContainer, LaneStyle, Text } from '../../styles/KanbanStyles';
+import { CardContainer, LaneStyle, Text } from '../../styles/KanbanStyles.js';
 
 interface KanbanLaneProps {
 	title: string;

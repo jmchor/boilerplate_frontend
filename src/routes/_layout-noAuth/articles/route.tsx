@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { HomePageWrapper } from '../../../styles/HomeRouteStyles';
-import { SmallCenteredWrapper, StyledPaper, heights } from '../../_layout-home/home/route';
+import { SmallCenteredWrapper, StyledPaper, heights } from '../../../styles/HomeRouteStyles.js';
 
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import ArticleCard from '../../../components/cards/ArticleCard';
-import { Article } from '../../../types/articles';
-import useGetArticles from '../../../services/getArticles';
+import ArticleCard from '../../../components/cards/ArticleCard.js';
+import { Article } from '../../../types/articles.js';
+import useGetArticles from '../../../services/getArticles.js';
 
 export const Route = createFileRoute('/_layout-noAuth/articles')({
 	component: AllArticles,

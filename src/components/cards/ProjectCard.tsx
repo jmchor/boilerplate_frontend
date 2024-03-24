@@ -1,4 +1,4 @@
-import { CardContainer, MetaData, MetaDataWrapper, ProjectLink, Title } from '../../styles/ProjectCardStyles';
+import { CardContainer, MetaData, MetaDataWrapper, ProjectLink, Title } from '../../styles/ProjectCardStyles.js';
 import { Project } from '../../types/project';
 import StackImages, { ProjectForImages } from '../StackImages';
 

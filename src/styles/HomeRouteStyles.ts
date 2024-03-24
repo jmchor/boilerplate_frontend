@@ -1,8 +1,30 @@
+import { Paper } from '@mui/material';
 import styled, { css } from 'styled-components';
 
 // export interface LinkButtonProps {
 // 	active: boolean;
 // }
+
+export const heights: number[] = [300, 330, 360, 390, 420, 450, 480, 510, 540, 570];
+
+export const StyledPaper = styled(Paper)`
+	text-align: center;
+`;
+
+export const CenteredWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: auto;
+	margin-top: 20rem;
+	color: white;
+	background-color: none;
+`;
+
+export const SmallCenteredWrapper = styled.div`
+	margin-top: 10rem;
+`;
 
 export interface ImageProps {
 	active: boolean;

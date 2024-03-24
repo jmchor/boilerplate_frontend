@@ -1,4 +1,4 @@
-import { ToolImage } from '../styles/ProjectCardStyles';
+import { ToolImage } from '../styles/ProjectCardStyles.js';
 
 export interface ProjectForImages {
 	frontend?: {

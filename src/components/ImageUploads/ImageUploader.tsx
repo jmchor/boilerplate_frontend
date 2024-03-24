@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { MoonLoader } from 'react-spinners';
-import { FileInput, FileInputButton, ImageFrame, ImagePreview, UploadWrapper } from '../../styles/ImageUploaderStyles';
+import {
+	FileInput,
+	FileInputButton,
+	ImageFrame,
+	ImagePreview,
+	UploadWrapper,
+} from '../../styles/ImageUploaderStyles.js';
 
 const ImageUploader = ({
 	setImageUrl,

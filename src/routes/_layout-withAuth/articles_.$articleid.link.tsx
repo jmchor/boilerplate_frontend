@@ -1,14 +1,12 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
 import { useGetCurrentUser } from '../../services/getCurrentUser';
 
-import { ProjectDetailWrapper } from './projects/$projectid';
+import { ProjectDetailWrapper } from '../../styles/ProjectDetailStyles.js';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
-import styled from 'styled-components';
-import { MoonLoader } from 'react-spinners';
-import { CenteredDiv } from '../../styles/CreateProjectStyles';
 import React from 'react';
 import LinkProjectList from '../../components/cards/LinkProjectList';
+import { LinkWrapper, ProjectLinkContainer } from '../../styles/ArticleLinkStyles.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid/link')({
 	component: LinkArticleToProject,
@@ -26,17 +24,6 @@ const LINK_ARTICLE_TO_PROJECT = graphql(`
 		}
 	}
 `);
-
-const LinkWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
-	height: 100%;
-`;
-
-const ProjectLinkContainer = styled.div`
-	cursor: pointer;
-`;
 
 function LinkArticleToProject() {
 	const { data, loading } = useGetCurrentUser();

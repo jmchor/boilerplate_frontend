@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AddCardButton, AddCardContainer, TitleInput } from '../../styles/AddCardStyles';
+import { AddCardButton, AddCardContainer, TitleInput } from '../../styles/AddCardStyles.js';
 
 const AddCard = ({ addCard }: { addCard: (title: string) => void }) => {
 	const [title, setTitle] = useState<string>('');
