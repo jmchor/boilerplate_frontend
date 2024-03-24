@@ -19,7 +19,7 @@ function Index() {
 			<IndexPageWrapper>
 				<BoilerLink to={'/home'}>
 					<BoilerFrame>
-						<IndexImage src='/static/boiler.svg' />
+						<IndexImage src='/boiler.svg' />
 						<h1>
 							<span>
 								B

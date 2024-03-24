@@ -55,7 +55,7 @@ const ImageUploader = ({
 		if (existingImage) {
 			setDefaultImage(existingImage);
 		} else {
-			setDefaultImage('../../../static/no-image.svg');
+			setDefaultImage('../../../no-image.svg');
 		}
 	}, [existingImage]);
 

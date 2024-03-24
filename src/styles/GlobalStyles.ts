@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
 	@font-face {
 	font-family: 'Work Sans';
-	src: url()('/static/fonts.css');
+	src: url()('/fonts.css');
 
 	font-weight: normal;
 	font-style: normal;
@@ -48,7 +48,7 @@ body {
 	margin: 0;
 	font-size: 1.5rem;
 	line-height: 2;
-	background: url('/static/background.jpg');
+	background: url('/background.jpg');
 	/* background: var(--offWhite); */
 	color: var(--darkpurple);
 }

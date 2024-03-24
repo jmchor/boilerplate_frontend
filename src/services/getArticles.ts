@@ -26,7 +26,7 @@ const All_ARTICLES_QUERY = graphql(`
 
 const useGetArticles = () => {
 	const { data, error, loading } = useQuery(All_ARTICLES_QUERY, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 	});
 
 	return { data, error, loading };

@@ -12,7 +12,7 @@ export interface ProjectForImages {
 	};
 }
 
-const ToolImageComponent = ({ src }: { src: string }) => <ToolImage src={`../../static/${src}`} alt={src} />;
+const ToolImageComponent = ({ src }: { src: string }) => <ToolImage src={`../../${src}`} alt={src} />;
 
 const renderToolImage = (src: string): JSX.Element => <ToolImageComponent src={src} />;
 
