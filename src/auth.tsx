@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [withNav, setWithNav] = useState<boolean>(true);
 	const [cookieThere, setCookieThere] = useState<boolean>(false);
 
-	const { loading, error, data, startPolling } = useQuery(CURRENT_USER, {
+	const { startPolling } = useQuery(CURRENT_USER, {
 		onCompleted: (data) => {
 			flushSync(() => {
 				setUser(data?.currentUser);
@@ -68,11 +68,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const {
 		loading: cookieLoading,
-
 		data: checkData,
+		startPolling: startPolling2,
 	} = useQuery(CHECK_AUTHENTICATION, {
-		pollInterval: 1000,
-
 		onCompleted: (data) => {
 			if (data?.checkAuthentication?.cookieIsPresent) {
 				console.log('cookieIsPresent', data?.checkAuthentication?.cookieIsPresent);
@@ -85,13 +83,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		},
 	});
 
-	// useEffect(() => {
-	// 	if (!loading && !error && checkData && checkData.checkAuthentication?.cookieIsPresent) {
-	// 		setIsLoggedIn(true);
-	// 	} else {
-	// 		setIsLoggedIn(false);
-	// 	}
-	// }, [loading, error, checkData]);
+	useEffect(() => {
+		startPolling2(1000);
+		startPolling(1000);
+	}, []);
 
 	const [logout] = useMutation(LOGOUT, {
 		onCompleted: () => {
