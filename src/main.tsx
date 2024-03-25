@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { StyleSheetManager } from 'styled-components';
 
@@ -37,7 +37,7 @@ export const InnerApp = () => {
 };
 
 const link = createUploadLink({
-	uri: 'http://localhost:4000/graphql',
+	uri: '/graphql',
 	credentials: 'include',
 });
 
