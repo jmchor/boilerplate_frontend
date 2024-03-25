@@ -20,6 +20,8 @@ const router = createRouter({
 	},
 });
 
+const GRAPHQL_SERVER = import.meta.env.VITE_GRAPHQL_SERVER;
+
 router.subscribe('onBeforeLoad', () => NProgress.start());
 router.subscribe('onLoad', () => NProgress.done());
 
@@ -37,7 +39,7 @@ export const InnerApp = () => {
 };
 
 const link = createUploadLink({
-	uri: 'https://boilerplate-backend-wfhn.onrender.com/graphql',
+	uri: GRAPHQL_SERVER,
 	credentials: 'include',
 });
 
