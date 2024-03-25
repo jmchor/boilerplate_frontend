@@ -11,8 +11,6 @@ import { AuthProvider, useAuth } from './auth';
 import NProgress from 'nprogress';
 import './styles/nprogress.css';
 
-const GRAPQHL_SERVER = import.meta.env.GRAPHQL_SERVER || 'http://localhost:4000/graphql';
-
 // Create a new router instance
 const router = createRouter({
 	routeTree,
@@ -39,7 +37,7 @@ export const InnerApp = () => {
 };
 
 const link = createUploadLink({
-	uri: GRAPQHL_SERVER,
+	uri: 'https://boilerplate-backend-wfhn.onrender.com/graphql',
 	credentials: 'include',
 });
 

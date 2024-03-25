@@ -20,7 +20,9 @@ export const HomeWrapper = styled.div`
 `;
 
 function HomeLayoutComponent() {
-	const { setWithNav, auth } = useAuth();
+	const { setWithNav } = useAuth();
+
+	const auth = useAuth();
 
 	console.log(auth);
 
