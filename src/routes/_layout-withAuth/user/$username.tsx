@@ -22,6 +22,7 @@ import {
 	Tabs,
 	TabsNavigation,
 } from '../../../styles/UserProfileStyles.js';
+import { useLazyQuery } from '@apollo/client';
 export const Route = createFileRoute('/_layout-withAuth/user/$username')({
 	beforeLoad: ({ context }) => {
 		if (!context.auth.isLoading && !context.auth.isLoggedIn) {

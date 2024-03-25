@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		startPolling2(1000);
+		console.log('starting polling');
 		startPolling(1000);
 	}, []);
 
