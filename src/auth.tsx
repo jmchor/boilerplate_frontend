@@ -57,27 +57,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [withNav, setWithNav] = useState<boolean>(true);
 	const [cookieThere, setCookieThere] = useState<boolean>(false);
 
-	useQuery(CURRENT_USER, {
-		skip: !isLoggedIn,
+	const { loading, error, data, startPolling } = useQuery(CURRENT_USER, {
 		onCompleted: (data) => {
 			flushSync(() => {
 				setUser(data?.currentUser);
 				setIsLoading(false);
 			});
 		},
-		pollInterval: 1000,
 	});
 
 	const {
 		loading: cookieLoading,
-		error,
+
 		data: checkData,
 	} = useQuery(CHECK_AUTHENTICATION, {
 		pollInterval: 1000,
 
 		onCompleted: (data) => {
 			if (data?.checkAuthentication?.cookieIsPresent) {
+				console.log('cookieIsPresent', data?.checkAuthentication?.cookieIsPresent);
 				flushSync(() => {
+					startPolling(1000);
 					setIsLoggedIn(true);
 					setCookieThere(true);
 				});
