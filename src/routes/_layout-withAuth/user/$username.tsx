@@ -39,6 +39,10 @@ function Profile() {
 	const currentUser = data?.currentUser;
 	console.log('CURRENT USER', currentUser);
 
+	const { cookieThere } = useAuth();
+
+	console.log('cookieThere', cookieThere);
+
 	const [activeTab, setActiveTab] = useState('projects');
 
 	const handleTabClick = (tab: string) => {

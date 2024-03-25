@@ -43,6 +43,8 @@ export interface AuthContext {
 	withNav: boolean;
 	setWithNav: React.Dispatch<React.SetStateAction<boolean>>;
 	cookieLoading: boolean;
+	cookieThere: boolean;
+	setCookieThere: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -53,6 +55,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [withNav, setWithNav] = useState<boolean>(true);
+	const [cookieThere, setCookieThere] = useState<boolean>(false);
 
 	useQuery(CURRENT_USER, {
 		skip: !isLoggedIn,
@@ -76,7 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			if (data?.checkAuthentication?.cookieIsPresent) {
 				flushSync(() => {
 					setIsLoggedIn(true);
-					console.log('LOGGED IN');
+					setCookieThere(true);
 				});
 			}
 		},
@@ -95,6 +98,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		onCompleted: () => {
 			setIsLoggedIn(false);
 			setIsLoggingOut(false);
+			setCookieThere(false);
 		},
 	});
 
@@ -123,6 +127,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				withNav,
 				setWithNav,
 				cookieLoading,
+				cookieThere,
 			}}
 		>
 			{children}
