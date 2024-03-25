@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				setIsLoading(false);
 			});
 		},
+		pollInterval: 1000,
 	});
 
 	const {

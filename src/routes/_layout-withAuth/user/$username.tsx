@@ -37,6 +37,7 @@ function Profile() {
 	const { data, error, loading } = useGetCurrentUser();
 
 	const currentUser = data?.currentUser;
+	console.log('CURRENT USER', currentUser);
 
 	const [activeTab, setActiveTab] = useState('projects');
 
