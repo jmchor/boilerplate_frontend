@@ -47,7 +47,7 @@ export const CURRENT_USER = graphql(`
 
 export const useGetCurrentUser = () => {
 	const { data, error, loading } = useQuery(CURRENT_USER, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'network-and-cache',
 	});
 	return { data, error, loading };
 };

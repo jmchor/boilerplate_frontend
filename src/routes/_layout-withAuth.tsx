@@ -26,7 +26,9 @@ const Wrapper = styled.div`
 `;
 
 function WithAuthComponent() {
-	const { setWithNav } = useAuth();
+	const { setWithNav, auth } = useAuth();
+
+	console.log(auth);
 	setWithNav(true);
 	return (
 		<Wrapper>
