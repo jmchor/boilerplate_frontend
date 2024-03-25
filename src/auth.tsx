@@ -70,16 +70,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		error,
 		data: checkData,
 	} = useQuery(CHECK_AUTHENTICATION, {
-		pollInterval: 1000 * 60 * 10,
+		pollInterval: 1000,
 
 		onCompleted: (data) => {
 			if (data?.checkAuthentication?.cookieIsPresent) {
 				flushSync(() => {
 					setIsLoggedIn(true);
+					console.log('LOGGED IN');
 				});
 			}
 		},
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: 'network-only',
 	});
 
 	// useEffect(() => {
