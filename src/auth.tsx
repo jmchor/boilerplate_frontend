@@ -83,7 +83,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				});
 			}
 		},
-		fetchPolicy: 'network-only',
 	});
 
 	// useEffect(() => {
