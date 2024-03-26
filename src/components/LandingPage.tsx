@@ -1,7 +1,7 @@
 import ProjectCard from '../components/cards/ProjectCard';
 import ArticleCard from '../components/cards/ArticleCard';
 
-import { ContainerWithHeader, HomePageWrapper, ProjectGrid } from '../styles/HomeRouteStyles.js';
+import { ArticleGrid, ContainerWithHeader, HomePageWrapper, ProjectGrid } from '../styles/HomeRouteStyles.js';
 
 import { Project } from '../types/project.js';
 import { Article } from '../types/articles.js';
@@ -21,11 +21,11 @@ const LandingPage = ({ projects, articles }: { projects: Project[]; articles: Ar
 
 			{articles && (
 				<ContainerWithHeader>
-					<ProjectGrid>
+					<ArticleGrid>
 						{articles.map((article) => (
 							<ArticleCard key={article?._id} article={article as Article} />
 						))}
-					</ProjectGrid>
+					</ArticleGrid>
 				</ContainerWithHeader>
 			)}
 		</HomePageWrapper>
