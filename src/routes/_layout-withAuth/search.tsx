@@ -19,6 +19,11 @@ const ARTICLE_TAG_QUERY = graphql(`
 			title
 			subheadline
 			_id
+			createdBy {
+				username
+			}
+			tags
+			createdAt
 		}
 	}
 `);
@@ -76,6 +81,8 @@ function SearchResults() {
 	const projects = projectData?.searchProjectsByTag || [];
 
 	const articles = data?.searchArticlesByTag || [];
+
+	console.log(projects, articles);
 
 	return <LandingPage projects={projects} articles={articles} />;
 }
