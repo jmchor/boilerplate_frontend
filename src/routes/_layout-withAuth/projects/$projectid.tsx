@@ -264,7 +264,7 @@ function Project() {
 						</Accordion>
 					</div>
 				</TechBox>
-				{project?.articles?.length && project?.articles?.length > 0 && (
+				{project?.articles?.length && project?.articles?.length > 0 ? (
 					<TechBox>
 						<div>
 							<h3>Linked Articles</h3>
@@ -288,7 +288,7 @@ function Project() {
 							</Accordion>
 						</div>
 					</TechBox>
-				)}
+				) : null}
 			</ProjectDetailWrapper>
 		</div>
 	);
