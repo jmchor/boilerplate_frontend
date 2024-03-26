@@ -150,6 +150,14 @@ const CreateProjectFormComponent = () => {
 		);
 	}
 
+	if (error) {
+		return (
+			<CenteredDiv>
+				<h1>Error: {error.message}</h1>
+			</CenteredDiv>
+		);
+	}
+
 	return (
 		<CreateFormWrapper>
 			<h1>Create Project</h1>
@@ -239,7 +247,7 @@ const CreateProjectFormComponent = () => {
 							</select>
 						</label>
 					</FlexColumn>
-					<FlexRow>
+					<FlexRow className='form-flex'>
 						<FlexColumn>
 							<label htmlFor='frontendGqlClient'>
 								GraphQL
@@ -253,7 +261,7 @@ const CreateProjectFormComponent = () => {
 								/>
 							</label>
 						</FlexColumn>
-						<FlexColumn>
+						<wrapColumn>
 							{backPacks.map((item) => (
 								<div key={item}>
 									<label>{item === 'jsonwebtoken' ? 'jwt' : item}</label>
@@ -270,7 +278,7 @@ const CreateProjectFormComponent = () => {
 									/>
 								</div>
 							))}
-						</FlexColumn>
+						</wrapColumn>
 					</FlexRow>
 				</FlexRow>
 
