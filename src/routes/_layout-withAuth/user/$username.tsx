@@ -2,7 +2,6 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useGetCurrentUser } from '../../../services/getCurrentUser.js';
 import { CenteredDiv, FlexColumn, FlexRow } from '../../../styles/CreateProjectStyles.js';
 import { useState } from 'react';
-import styled from 'styled-components';
 import ProjectList from '../../../components/cards/ProjectList.js';
 import { Project } from '../../../types/project';
 import { MoonLoader } from 'react-spinners';
@@ -22,7 +21,6 @@ import {
 	Tabs,
 	TabsNavigation,
 } from '../../../styles/UserProfileStyles.js';
-import { useLazyQuery } from '@apollo/client';
 export const Route = createFileRoute('/_layout-withAuth/user/$username')({
 	beforeLoad: ({ context }) => {
 		if (!context.auth.isLoading && !context.auth.isLoggedIn) {
@@ -35,14 +33,13 @@ export const Route = createFileRoute('/_layout-withAuth/user/$username')({
 });
 
 function Profile() {
-	const { data, error, loading } = useGetCurrentUser();
+	const { data, error, loading, startPolling, stopPolling } = useGetCurrentUser();
+	startPolling(10);
+	setTimeout(() => {
+		stopPolling();
+	}, 1000);
 
 	const currentUser = data?.currentUser;
-	console.log('CURRENT USER', currentUser);
-
-	const { cookieThere } = useAuth();
-
-	console.log('cookieThere', cookieThere);
 
 	const [activeTab, setActiveTab] = useState('projects');
 
