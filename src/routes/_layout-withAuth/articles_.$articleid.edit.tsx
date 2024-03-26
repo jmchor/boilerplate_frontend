@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import { MultiValue } from 'react-select';
-import { FIND_ARTICLE } from './articles/$articleid';
+import { FIND_ARTICLE } from './articles/$articleid.js';
 import { CenteredDiv, CreateFormWrapper, CreateProjectForm } from '../../styles/CreateProjectStyles.js';
 import { useAuth } from '../../auth';
 import 'react-quill/dist/quill.snow.css';
@@ -106,6 +106,7 @@ function EditArticle() {
 		setSubheadline(data?.findArticle?.subheadline as string);
 		setImageUrl(data?.findArticle?.imageUrl as string);
 		setTags(data?.findArticle?.tags as string[]);
+		setExternalLink(data?.findArticle?.externalLink as string);
 		setSelectedOptions(
 			data?.findArticle?.tags?.map((tag) => ({ value: tag, label: tag })) as MultiValue<{
 				value: string;
@@ -127,6 +128,7 @@ function EditArticle() {
 		data?.findArticle?.subheadline,
 		data?.findArticle?.imageUrl,
 		data?.findArticle?.createdBy?._id,
+		data?.findArticle?.externalLink,
 	]);
 
 	if (loading || editArticleLoading) {
@@ -187,6 +189,17 @@ function EditArticle() {
 						onChange={(e) => setSubheadline(e.target.value)}
 					/>
 				</label>
+				<label htmlFor='externalLink'>
+					External Link
+					<input
+						type='text'
+						id='externalLink'
+						name='externalLink'
+						value={externalLink}
+						onChange={(e) => setExternalLink(e.target.value)}
+					></input>
+				</label>
+
 				<CustomFlexRow>
 					<label htmlFor='image'>
 						{' '}

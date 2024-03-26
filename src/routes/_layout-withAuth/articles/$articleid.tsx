@@ -58,6 +58,8 @@ function Article() {
 			</CenteredDiv>
 		);
 	}
+
+	console.log(data?.findArticle);
 	return (
 		<ArticleWrapper>
 			<Banner src={data?.findArticle?.imageUrl} alt='' />
@@ -75,6 +77,13 @@ function Article() {
 			</button>
 			<hr width='80%' />
 			<ArticleText dangerouslySetInnerHTML={{ __html: data?.findArticle?.text }} />
+			{data?.findArticle?.externalLink && (
+				<p style={{ color: 'gray', fontSize: '1.4rem', margin: '0 0 2rem 0' }}>
+					<a style={{ color: 'gray' }} href={data?.findArticle?.externalLink} target='_blank' rel='noreferrer'>
+						To the original article
+					</a>
+				</p>
+			)}
 			<hr width='80%' />
 			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag} `)}</p>}
 		</ArticleWrapper>

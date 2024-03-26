@@ -98,6 +98,7 @@ const CreateArticleFormComponent = () => {
 	const [text, setText] = useState<string>('');
 	const [subheadline, setSubheadline] = useState<string>('');
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
+	const [externalLink, setExternalLink] = useState<string>('');
 	const [tags, setTags] = useState<string[]>([]);
 	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
 	// const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
@@ -139,6 +140,7 @@ const CreateArticleFormComponent = () => {
 				text,
 				subheadline,
 				imageUrl,
+				externalLink,
 			},
 		}).catch(console.error);
 
@@ -173,6 +175,17 @@ const CreateArticleFormComponent = () => {
 						value={subheadline}
 						onChange={(e) => setSubheadline(e.target.value)}
 					/>
+				</label>
+				<label htmlFor='externalLink'>
+					External Link
+					<input
+						type='text'
+						id='externalLink'
+						name='externalLink'
+						value={externalLink}
+						onChange={(e) => setExternalLink(e.target.value)}
+						placeholder='https://www.example.com'
+					></input>
 				</label>
 				<CustomFlexRow>
 					<label htmlFor='image'>
