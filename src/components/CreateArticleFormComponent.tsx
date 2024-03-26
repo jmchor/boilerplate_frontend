@@ -46,8 +46,24 @@ export const CustomFlexRow = styled(FlexRow)`
 `;
 
 const CREATE_ARTICLE = graphql(`
-	mutation CREATE_ARTICLE($title: String!, $text: String!, $createdBy: ID!, $tags: [String]) {
-		createArticle(title: $title, text: $text, createdBy: $createdBy, tags: $tags) {
+	mutation CREATE_ARTICLE(
+		$title: String!
+		$text: String!
+		$createdBy: ID!
+		$tags: [String]
+		$imageUrl: String
+		$subheadline: String
+		$externalLink: String
+	) {
+		createArticle(
+			title: $title
+			text: $text
+			createdBy: $createdBy
+			tags: $tags
+			imageUrl: $imageUrl
+			subheadline: $subheadline
+			externalLink: $externalLink
+		) {
 			_id
 			title
 			text
@@ -58,6 +74,7 @@ const CREATE_ARTICLE = graphql(`
 			subheadline
 			tags
 			imageUrl
+			externalLink
 		}
 	}
 `);
@@ -85,16 +102,7 @@ const CreateArticleFormComponent = () => {
 	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
 	// const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
 
-	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {
-		variables: {
-			title,
-			createdBy: user?._id as string,
-			text,
-			subheadline,
-			imageUrl,
-			tags,
-		},
-	});
+	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {});
 
 	const {
 		data: tagData,
@@ -112,6 +120,9 @@ const CreateArticleFormComponent = () => {
 	selectedOptions?.forEach((option) => {
 		tagArray.push(option.value as string);
 	});
+	useEffect(() => {
+		console.log(imageUrl);
+	}, [imageUrl]);
 
 	const handleChange = (selectedOptions: MultiValue<{ value: string; label: string }>) => {
 		setSelectedOptions(selectedOptions);
@@ -128,7 +139,6 @@ const CreateArticleFormComponent = () => {
 				text,
 				subheadline,
 				imageUrl,
-				tags,
 			},
 		}).catch(console.error);
 
