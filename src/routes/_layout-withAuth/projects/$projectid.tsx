@@ -89,7 +89,7 @@ function Project() {
 				</TitleRow>
 				<p>{project?.description}</p>
 			</ProjectTitleWrapper>
-			<ProjectDetailWrapper>
+			<ProjectDetailWrapper className='HERE'>
 				<VerticalTechBox>
 					{isUserCreator && !loading ? (
 						<KanbanBoard kanbanId={kanban?._id as string} />
@@ -264,31 +264,6 @@ function Project() {
 						</Accordion>
 					</div>
 				</TechBox>
-				{project?.articles?.length && project?.articles?.length > 0 ? (
-					<TechBox>
-						<div>
-							<h3>Linked Articles</h3>
-							<Accordion>
-								<CustomAccordionSummary
-									expandIcon={<BsCaretDownSquare />}
-									aria-controls='panel1-content'
-									id='panel1-header'
-								>
-									<p>Linked Articles</p>
-								</CustomAccordionSummary>
-								<AccordionDetails>
-									<ul>
-										{project?.articles?.map((article) => (
-											<li key={article?._id}>
-												<Link to={`/articles/${article?._id}` as string}>{article?.title}</Link>
-											</li>
-										))}
-									</ul>
-								</AccordionDetails>
-							</Accordion>
-						</div>
-					</TechBox>
-				) : null}
 			</ProjectDetailWrapper>
 		</div>
 	);

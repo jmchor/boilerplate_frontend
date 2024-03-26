@@ -44,6 +44,13 @@ export const ProjectGrid = styled.div`
 	padding: 1rem;
 	place-items: center;
 `;
+export const ArticleGrid = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-gap: 5rem;
+	padding: 1rem;
+	place-items: center;
+`;
 export const ArticleContainer = styled.div`
 	display: flex;
 	flex-direction: column;

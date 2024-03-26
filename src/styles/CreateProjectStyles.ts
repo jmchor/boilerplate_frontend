@@ -6,8 +6,9 @@ export const CreateFormWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 2rem;
+	margin-top: 2rem;
 	border-radius: 5px;
+	padding-top: 20px;
 	box-shadow:
 		0 4px 8px 0 rgba(0, 0, 0, 0.2),
 		0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -27,7 +28,7 @@ export const CreateProjectForm = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 0 20px;
+	padding: 20px;
 	font-size: 1.5rem;
 	line-height: 1.5;
 	font-weight: 600;
@@ -73,7 +74,7 @@ export const FlexRow = styled.div`
 	width: 100%;
 	flex: 1;
 	gap: 4rem;
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 	/* border: 1px solid black; */
 `;
 
@@ -92,4 +93,9 @@ export const CenteredDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100vh; /* Full viewport height */
+`;
+
+export const wrapColumn = styled(FlexColumn)`
+	flex-wrap: wrap;
+	height: 100px;
 `;

@@ -16,7 +16,7 @@ export const Route = createFileRoute('/_layout-withAuth')({
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: auto;
 	margin: 0 auto;
 	width: 80%;
 

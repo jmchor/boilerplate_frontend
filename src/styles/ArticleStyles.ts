@@ -7,7 +7,8 @@ export const CardContainer = styled.div`
 	align-items: center;
 	overflow: hidden;
 	height: 100%;
-
+	min-width: 300px;
+	max-width: 345px;
 	text-overflow: ellipsis;
 	background-color: #f5f5f5;
 	box-shadow: 0 12px 24px 0 hsla(213, 77%, 14%, 1);

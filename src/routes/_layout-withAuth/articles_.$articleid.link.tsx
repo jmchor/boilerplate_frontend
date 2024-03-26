@@ -26,8 +26,14 @@ const LINK_ARTICLE_TO_PROJECT = graphql(`
 `);
 
 function LinkArticleToProject() {
-	const { data, loading } = useGetCurrentUser();
+	const { data, loading, startPolling, stopPolling } = useGetCurrentUser();
 	const navigate = useNavigate();
+
+	startPolling(10);
+
+	setTimeout(() => {
+		stopPolling();
+	}, 1000);
 
 	const articleId = useParams({
 		from: '/_layout-withAuth/articles/$articleid/link',
@@ -50,20 +56,21 @@ function LinkArticleToProject() {
 	};
 
 	return (
-		<ProjectDetailWrapper>
-			<h1> Link Article with one of the following projects</h1>
-
-			<LinkWrapper>
-				{data?.currentUser?.projects?.map((project) => (
-					<React.Fragment key={project._id}>
-						{!project.articles.includes(articleId) && (
-							<ProjectLinkContainer onClick={() => handleClick(articleId, project._id)}>
-								<LinkProjectList project={project} />
-							</ProjectLinkContainer>
-						)}
-					</React.Fragment>
-				))}
-			</LinkWrapper>
-		</ProjectDetailWrapper>
+		<div>
+			<ProjectDetailWrapper>
+				<h1> Link Article with one of the following projects</h1>
+				<LinkWrapper>
+					{data?.currentUser?.projects?.map((project) => (
+						<React.Fragment key={project._id}>
+							{!project.articles.includes(articleId) && (
+								<ProjectLinkContainer onClick={() => handleClick(articleId, project._id)}>
+									<LinkProjectList project={project} />
+								</ProjectLinkContainer>
+							)}
+						</React.Fragment>
+					))}
+				</LinkWrapper>
+			</ProjectDetailWrapper>
+		</div>
 	);
 }

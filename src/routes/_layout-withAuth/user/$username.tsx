@@ -64,7 +64,7 @@ function Profile() {
 			<ExtendedFlexColumn>
 				<FirstProfileRow>
 					<ProfilePicture src={currentUser?.imageUrl as string} alt='' />
-					<h2>{currentUser?.username}</h2>
+					<h1>{currentUser?.username}</h1>
 				</FirstProfileRow>
 				<BorderStyledDiv>
 					<hr />

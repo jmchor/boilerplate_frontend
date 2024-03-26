@@ -62,6 +62,9 @@ export const DownloadButtonContainer = styled.div`
 	display: flex;
 	justify-content: end;
 	align-items: center;
+	button {
+		color: var(--darkpurple);
+	}
 `;
 
 export const CustomAccordionSummary = styled(AccordionSummary)`
@@ -88,6 +91,8 @@ export const ProjectDetailWrapper = styled(HomePageWrapper)`
 	background-color: #ffffff36;
 	width: 100%;
 	align-items: center;
+	padding-bottom: 5rem;
+	margin-bottom: 5rem;
 `;
 
 export const TitleRow = styled.div`

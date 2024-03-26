@@ -1,6 +1,4 @@
-import { useLazyQuery } from '@apollo/client';
 import { createFileRoute } from '@tanstack/react-router';
-import { graphql } from 'gql.tada';
 import styled from 'styled-components';
 
 export const Route = createFileRoute('/_layout-noAuth/about')({
@@ -25,22 +23,11 @@ const AboutContainer = styled.div`
 	}
 `;
 
-const CHECK_AUTHENTICATION = graphql(`
-	query CheckAuthentication {
-		checkAuthentication {
-			cookieIsPresent
-		}
-	}
-`);
-
 function About() {
-	const [checkAuth, { data, error, loading }] = useLazyQuery(CHECK_AUTHENTICATION);
-
 	return (
 		<AboutContainer>
 			<h1>This is Boilerplate.</h1>
 
-			<button onClick={() => checkAuth()}> Check Auth </button>
 			<p>
 				<br />
 			</p>
