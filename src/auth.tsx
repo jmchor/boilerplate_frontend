@@ -73,7 +73,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	} = useQuery(CHECK_AUTHENTICATION, {
 		onCompleted: (data) => {
 			if (data?.checkAuthentication?.cookieIsPresent) {
-				console.log('cookieIsPresent', data?.checkAuthentication?.cookieIsPresent);
 				flushSync(() => {
 					startPolling(1000);
 					setIsLoggedIn(true);
@@ -85,7 +84,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		startPolling2(1000);
-		console.log('starting polling');
 		startPolling(1000);
 	}, []);
 

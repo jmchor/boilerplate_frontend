@@ -26,12 +26,8 @@ const Wrapper = styled.div`
 `;
 
 function WithAuthComponent() {
-	const { setWithNav, cookieThere } = useAuth();
+	const { setWithNav } = useAuth();
 
-	const auth = useAuth();
-
-	console.log(auth);
-	console.log('COOKIE THERE', cookieThere);
 	setWithNav(true);
 	return (
 		<Wrapper>

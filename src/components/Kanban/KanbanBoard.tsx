@@ -71,8 +71,6 @@ const KanbanBoard = ({ kanbanId }: { kanbanId: string }) => {
 			console.error('Query error:', error);
 		},
 		onCompleted: (data) => {
-			console.log('Query completed:', data);
-
 			flushSync(() => {
 				setTodoItems(data?.findKanban?.todo);
 				setDoneItems(data?.findKanban?.done);
@@ -124,9 +122,7 @@ const KanbanBoard = ({ kanbanId }: { kanbanId: string }) => {
 			// Handle error
 			console.error('Mutation error:', error);
 		},
-		onCompleted: (data) => {
-			console.log('Mutation completed:', data);
-		},
+		onCompleted: (data) => {},
 		refetchQueries: ['FindKanban'],
 	});
 

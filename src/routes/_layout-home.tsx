@@ -22,10 +22,6 @@ export const HomeWrapper = styled.div`
 function HomeLayoutComponent() {
 	const { setWithNav } = useAuth();
 
-	const auth = useAuth();
-
-	console.log(auth);
-
 	setWithNav(true);
 
 	usePreventNavigation('Are you sure you want to leave this page?');

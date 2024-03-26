@@ -44,8 +44,6 @@ const ImageUploader = ({
 			}
 			setImageUrl(res.secure_url);
 			setLoading(false);
-
-			console.log('Image Changed');
 		} catch (error) {
 			setLoading(false);
 		}

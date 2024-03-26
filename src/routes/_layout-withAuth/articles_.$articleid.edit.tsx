@@ -129,8 +129,6 @@ function EditArticle() {
 		data?.findArticle?.createdBy?._id,
 	]);
 
-	console.log('selectedOptions', selectedOptions);
-
 	if (loading || editArticleLoading) {
 		return (
 			<CenteredDiv>

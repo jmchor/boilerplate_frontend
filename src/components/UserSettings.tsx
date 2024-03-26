@@ -52,10 +52,6 @@ const UserSettings = () => {
 		}
 	}, [currentUser]);
 
-	useEffect(() => {
-		console.log(imageUrl);
-	}, [imageUrl]);
-
 	if (loading) {
 		return (
 			<CenteredDiv>
