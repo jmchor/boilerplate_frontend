@@ -4,7 +4,7 @@ import { useAuth } from '../auth';
 
 export const Route = createFileRoute('/_layout-withAuth')({
 	loader: ({ context }) => {
-		if (!context.auth.cookieLoading && !context.auth.isLoggedIn) {
+		if (context.auth.cookieLoading === false && context.auth.isLoggedIn === false) {
 			throw redirect({
 				to: '/login',
 			});
@@ -27,6 +27,9 @@ const Wrapper = styled.div`
 
 function WithAuthComponent() {
 	const { setWithNav } = useAuth();
+
+	const auth = useAuth();
+	console.log(auth);
 
 	setWithNav(true);
 	return (

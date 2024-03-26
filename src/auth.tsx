@@ -43,8 +43,6 @@ export interface AuthContext {
 	withNav: boolean;
 	setWithNav: React.Dispatch<React.SetStateAction<boolean>>;
 	cookieLoading: boolean;
-	cookieThere: boolean;
-	setCookieThere: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -55,7 +53,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [withNav, setWithNav] = useState<boolean>(true);
-	const [cookieThere, setCookieThere] = useState<boolean>(false);
 
 	const { startPolling } = useQuery(CURRENT_USER, {
 		onCompleted: (data) => {
@@ -120,7 +117,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				withNav,
 				setWithNav,
 				cookieLoading,
-				cookieThere,
 			}}
 		>
 			{children}

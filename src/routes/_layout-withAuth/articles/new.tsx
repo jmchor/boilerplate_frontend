@@ -3,7 +3,7 @@ import CreateArticleFormComponent from '../../../components/CreateArticleFormCom
 
 export const Route = createFileRoute('/_layout-withAuth/articles/new')({
 	loader: ({ context }) => {
-		if (!context.auth.cookieLoading && !context.auth.isLoggedIn) {
+		if (context.auth.cookieLoading === false && context.auth.isLoggedIn === false) {
 			throw redirect({
 				to: '/login',
 			});
