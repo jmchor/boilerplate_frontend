@@ -55,6 +55,8 @@ function LinkArticleToProject() {
 		});
 	};
 
+	console.log(data?.currentUser?.projects[0]);
+
 	return (
 		<div>
 			<ProjectDetailWrapper>
@@ -62,7 +64,7 @@ function LinkArticleToProject() {
 				<LinkWrapper>
 					{data?.currentUser?.projects?.map((project) => (
 						<React.Fragment key={project._id}>
-							{!project.articles.includes(articleId) && (
+							{!project.articles.some((article) => article._id === articleId) && (
 								<ProjectLinkContainer onClick={() => handleClick(articleId, project._id)}>
 									<LinkProjectList project={project} />
 								</ProjectLinkContainer>
