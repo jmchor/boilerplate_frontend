@@ -34,7 +34,7 @@
 
 ### Local Setup
 
-If you want to run the app locally (because nobody needs to see what you are working on), you are welcome to clone the repo - or fork it, if you'd like to work on your own version. If you find a bug (more like "when"), submit a pull request!
+If you want to run the app locally (because nobody needs to see what you are working on), you are welcome to clone the repo or download the current release - or fork it, if you'd like to work on your own version. If you find a bug (more like "when"), submit a pull request!
 
 #### Clone the repos
 
