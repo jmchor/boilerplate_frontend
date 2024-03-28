@@ -1,8 +1,10 @@
 <p align="center">
         <img src="https://img.shields.io/npm/v/npm" />
+        <img src="https://img.shields.io/badge/TypeScript%20-%233178C6?logo=typescript&logoColor=white&labelColor=%23afb8c1" />
         <img src="https://badges.aleen42.com/src/vitejs.svg" />
         <img src="https://badges.aleen42.com/src/react.svg" />
-        <img src="https://img.shields.io/github/v/tag/jmchor/boilerplate_frontend" />
+        <img src="https://img.shields.io/github/v/tag/jmchor/boilerplate_frontend?color=violet" />
+        <img src="https://img.shields.io/website?url=https%3A%2F%2Fboilerplate.jmchor.dev" />
 
 </p>
 </br>
