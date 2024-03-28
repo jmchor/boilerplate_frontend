@@ -26,10 +26,20 @@ import {
 	TitleRow,
 	VerticalTechBox,
 } from '../../../styles/ProjectDetailStyles.js';
+import styled from 'styled-components';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid')({
 	component: Project,
 });
+
+const ImageContainer = styled.div`
+	width: 100%;
+	height: 200px;
+`;
+
+const TextContainer = styled.div`
+	padding: 4rem;
+`;
 
 function Project() {
 	const projectId = useParams({ from: '/_layout-withAuth/projects/$projectid', select: (p) => p.projectid });
@@ -81,13 +91,16 @@ function Project() {
 	return (
 		<div>
 			<ProjectTitleWrapper>
-				<TitleRow>
-					<h1>{project?.title}</h1>{' '}
-					<Button onClick={() => navigate({ to: `/projects/${project?._id}/edit` as string })}>
-						<FiEdit color='black' />
-					</Button>
-				</TitleRow>
-				<p>{project?.description}</p>
+				<ImageContainer style={{ background: `url(${project?.imageUrl}) no-repeat center/cover` }}></ImageContainer>
+				<TextContainer>
+					<TitleRow>
+						<h1>{project?.title}</h1>{' '}
+						<Button onClick={() => navigate({ to: `/projects/${project?._id}/edit` as string })}>
+							<FiEdit color='black' />
+						</Button>
+					</TitleRow>
+					<p>{project?.description}</p>
+				</TextContainer>
 			</ProjectTitleWrapper>
 			<ProjectDetailWrapper className='HERE'>
 				<VerticalTechBox>
