@@ -77,7 +77,7 @@ export const CustomAccordionSummary = styled(AccordionSummary)`
 export const ProjectTitleWrapper = styled.div`
 	box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 5px 5px 0 0;
-	padding: 4rem;
+
 	margin-top: 5rem;
 	color: black;
 	background-color: white;
