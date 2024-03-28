@@ -38,9 +38,13 @@ If you want to run the app locally (because nobody needs to see what you are wor
 
 #### Clone the repos
 
-`git clone https://github.com/jmchor/boilerplate_frontend.git`
+```bash
+git clone https://github.com/jmchor/boilerplate_frontend.git
+```
 
-`git clone https://github.com/jmchor/boilerplate_backend.git`
+```bash
+git clone https://github.com/jmchor/boilerplate_backend.git
+```
 
 ##### Frontend
 
