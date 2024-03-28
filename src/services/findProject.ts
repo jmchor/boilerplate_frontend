@@ -6,6 +6,7 @@ const FIND_PROJECT_QUERY = graphql(`
 		findProject(_id: $id) {
 			title
 			description
+			imageUrl
 			frontend {
 				framework
 				gqlClient
