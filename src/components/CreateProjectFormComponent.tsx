@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import Switch from '@mui/material/Switch';
@@ -24,6 +24,7 @@ import {
 } from '../styles/CreateProjectStyles.js';
 
 import usePreventNavigation from '../lib/usePreventNavigation.js';
+import ImageUploader from './ImageUploads/ImageUploader.js';
 
 const CREATE_PROJECT = graphql(`
 	mutation CREATE_PROJECT(
@@ -32,6 +33,7 @@ const CREATE_PROJECT = graphql(`
 		$frontend: FrontendConfigInput!
 		$backend: BackendConfigInput!
 		$description: String
+		$imageUrl: String
 	) {
 		createProject(
 			title: $title
@@ -39,9 +41,11 @@ const CREATE_PROJECT = graphql(`
 			frontend: $frontend
 			backend: $backend
 			description: $description
+			imageUrl: $imageUrl
 		) {
 			title
 			description
+			imageUrl
 			createdBy {
 				_id
 				username
@@ -82,6 +86,7 @@ const CreateProjectFormComponent = () => {
 
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+	const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
 	const [frontendFramework, setFrontendFramework] = useState<FrontendFramework>(undefined);
 	const [frontendGqlClient, setFrontendGqlClient] = useState<boolean>(false);
 	const [backendEnvironment, setBackendEnvironment] = useState<BackendEnvironment>(undefined);
@@ -111,8 +116,13 @@ const CreateProjectFormComponent = () => {
 				database: backendDatabase,
 			},
 			description,
+			imageUrl,
 		},
 	});
+
+	useEffect(() => {
+		console.log(imageUrl);
+	}, [imageUrl]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -121,6 +131,7 @@ const CreateProjectFormComponent = () => {
 			variables: {
 				title,
 				description,
+				imageUrl,
 				createdBy: user?._id as string,
 				frontend: {
 					framework: frontendFramework,
@@ -176,6 +187,11 @@ const CreateProjectFormComponent = () => {
 					/>
 				</label>
 				<FlexRow>
+					<label htmlFor='image'>
+						{' '}
+						Hero Image
+						<ImageUploader id='image' setImageUrl={setImageUrl} />
+					</label>
 					<FlexColumn>
 						<label htmlFor='frontendFramework'>
 							Frontend
