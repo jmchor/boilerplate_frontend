@@ -17,7 +17,8 @@ export const FileInputButton = styled.label`
 	border-radius: 4px;
 	width: 20rem !important;
 
-	&:aria-disabled {
+	&[aria-disabled='true'] {
+		cursor: not-allowed;
 		opacity: 0.5;
 	}
 `;
