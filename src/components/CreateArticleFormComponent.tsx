@@ -190,7 +190,7 @@ const CreateArticleFormComponent = () => {
 				<CustomFlexRow>
 					<label htmlFor='image'>
 						{' '}
-						Hero Image
+						Header Image
 						<ImageUploader id='image' setImageUrl={setImageUrl} />
 					</label>
 					<FlexBox>
