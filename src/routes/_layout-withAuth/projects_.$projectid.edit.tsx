@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { CenteredDiv } from '../../styles/CreateProjectStyles';
+import { CenteredDiv, FlexColumn, FlexRow } from '../../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth';
@@ -7,16 +7,18 @@ import { useFindProject } from '../../services/findProject';
 import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import { EditProjectForm, EditProjectWrapper } from '../../styles/ProjectEditStyles';
+import ImageUploader from '../../components/ImageUploads/ImageUploader';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid/edit')({
 	component: EditProject,
 });
 
 const EDIT_PROJECT = graphql(`
-	mutation EDIT_PROJECT($id: ID!, $createdBy: ID!, $description: String, $title: String) {
-		editProject(_id: $id, createdBy: $createdBy, description: $description, title: $title) {
+	mutation EDIT_PROJECT($id: ID!, $createdBy: ID!, $description: String, $title: String, $imageUrl: String) {
+		editProject(_id: $id, createdBy: $createdBy, description: $description, title: $title, imageUrl: $imageUrl) {
 			title
 			description
+			imageUrl
 		}
 	}
 `);
@@ -30,6 +32,7 @@ function EditProject() {
 	const [isUserCreator, setIsUserCreator] = useState<boolean>(false);
 	const [title, setTitle] = useState<string | undefined>('');
 	const [description, setDescription] = useState<string>('');
+	const [imageUrl, setImageUrl] = useState<string | undefined>('');
 
 	const navigate = useNavigate();
 
@@ -39,17 +42,25 @@ function EditProject() {
 			createdBy: user?._id as string,
 			title,
 			description,
+			imageUrl,
 		},
 	});
 
 	useEffect(() => {
 		setDescription(data?.findProject?.description as string);
 		setTitle(data?.findProject?.title as string);
+		setImageUrl(data?.findProject?.imageUrl as string);
 
 		if (user?._id === data?.findProject?.createdBy?._id) {
 			setIsUserCreator(true);
 		}
-	}, [user?._id, data?.findProject?.createdBy?._id, data?.findProject?.description, data?.findProject?.title]);
+	}, [
+		user?._id,
+		data?.findProject?.createdBy?._id,
+		data?.findProject?.description,
+		data?.findProject?.title,
+		data?.findProject?.imageUrl,
+	]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -102,6 +113,11 @@ function EditProject() {
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						/>
+					</label>
+					<label htmlFor='image'>
+						{' '}
+						Hero Image
+						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={data?.findProject?.imageUrl} />
 					</label>
 				</>
 				<button type='submit' disabled={loading}>
