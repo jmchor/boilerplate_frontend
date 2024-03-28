@@ -16,6 +16,7 @@ const ImageUploader = ({
 	existingImage: string | null;
 }) => {
 	const [image, setImage] = useState<File | null>(null);
+	const [isSelected, setIsSelected] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string | null>(null);
 	const [success, setSuccess] = useState<boolean>(false);
@@ -58,10 +59,13 @@ const ImageUploader = ({
 	}, [existingImage]);
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log('Image selected', isSelected);
+
 		const { files } = e.target;
 		const selectedFiles = files as FileList;
 		const file = selectedFiles[0];
 		setImage(file);
+		setIsSelected(true);
 
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
@@ -71,6 +75,12 @@ const ImageUploader = ({
 		};
 	};
 
+	useEffect(() => {
+		if (image) {
+			setIsSelected(true);
+			console.log('Image selected', isSelected);
+		}
+	}, [image]);
 	return (
 		<UploadWrapper>
 			{!loading ? (
@@ -87,9 +97,9 @@ const ImageUploader = ({
 				</ImageFrame>
 			)}
 
-			<FileInputButton htmlFor='file-upload' aria-disabled={image ? false : true}>
+			<FileInputButton htmlFor='file-upload' aria-disabled={isSelected}>
 				Choose File
-				<FileInput id='file-upload' type='file' onChange={handleImageChange} accept='image/*' />
+				<FileInput id='file-upload' type='file' onChange={handleImageChange} accept='image/*' disabled={isSelected} />
 			</FileInputButton>
 			<div>
 				{!success ? (
