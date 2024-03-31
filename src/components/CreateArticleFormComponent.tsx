@@ -141,6 +141,7 @@ const CreateArticleFormComponent = () => {
 				subheadline,
 				imageUrl,
 				externalLink,
+				tags,
 			},
 		}).catch(console.error);
 
