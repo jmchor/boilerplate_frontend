@@ -63,6 +63,7 @@ function SearchResults() {
 		onError: (error) => {
 			console.log(error);
 		},
+		fetchPolicy: 'network-only',
 	});
 
 	const {
@@ -76,6 +77,8 @@ function SearchResults() {
 		onError: (error) => {
 			console.log(error);
 		},
+
+		fetchPolicy: 'network-only',
 	});
 
 	const projects = projectData?.searchProjectsByTag || [];
