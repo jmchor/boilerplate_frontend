@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import { MultiValue } from 'react-select';
 import { FIND_ARTICLE } from './articles/$articleid.js';
-import { CenteredDiv, CreateFormWrapper, CreateProjectForm } from '../../styles/CreateProjectStyles.js';
+import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useAuth } from '../../auth';
 import 'react-quill/dist/quill.snow.css';
 import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../../components/CreateArticleFormComponent';
@@ -49,6 +49,12 @@ const EDIT_ARTICLE = graphql(`
 			externalLink
 			_id
 		}
+	}
+`);
+
+const DELETE_ARTICLE = graphql(`
+	mutation DELETE_ARTICLE($id: ID!, $createdBy: ID!) {
+		deleteArticle(_id: $id, createdBy: $createdBy)
 	}
 `);
 
@@ -99,6 +105,13 @@ function EditArticle() {
 
 	const allTags = tagData?.allTags;
 	const allTagsArray = allTags?.map((tag) => ({ value: tag.tag, label: tag.tag }));
+
+	const [deleteArticle, { loading: deleteArticleLoading, error: deleteArticleError }] = useMutation(DELETE_ARTICLE, {
+		variables: {
+			id: articleId,
+			createdBy: data?.findArticle?.createdBy?._id as string,
+		},
+	});
 
 	useEffect(() => {
 		setTitle(data?.findArticle?.title as string);
@@ -170,6 +183,16 @@ function EditArticle() {
 		}
 	};
 
+	const handleDelete = async () => {
+		console.log('articleId', articleId);
+		if (window.confirm('Are you sure you want to delete this article?')) {
+			const res = await deleteArticle();
+			if (res) {
+				navigate({ to: '/articles' as string });
+			}
+		}
+	};
+
 	return (
 		<CreateFormWrapper>
 			<h1>Edit Article</h1>
@@ -218,9 +241,14 @@ function EditArticle() {
 					</FlexBox>
 				</CustomFlexRow>
 
-				<button type='submit' disabled={loading}>
-					Confirm Changes
-				</button>
+				<FlexRow>
+					<button type='submit' disabled={loading}>
+						Confirm Changes
+					</button>
+					<button type='button' onClick={handleDelete}>
+						Delete Article
+					</button>
+				</FlexRow>
 			</CreateProjectForm>
 		</CreateFormWrapper>
 	);
