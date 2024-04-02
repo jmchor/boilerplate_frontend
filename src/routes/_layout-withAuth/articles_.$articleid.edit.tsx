@@ -1,5 +1,4 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { graphql } from 'gql.tada';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
@@ -102,7 +101,7 @@ function EditArticle() {
 		data?.findArticle?.externalLink,
 	]);
 
-	if (loading || editArticleLoading) {
+	if (loading || editArticleLoading || deleteArticleLoading || tagLoading) {
 		return (
 			<CenteredDiv>
 				<MoonLoader color='var(--blue)' />
@@ -110,10 +109,10 @@ function EditArticle() {
 		);
 	}
 
-	if (error || editArticleError) {
+	if (error || editArticleError || deleteArticleError || tagError) {
 		return (
 			<CenteredDiv>
-				<h1>Error: {error.message}</h1>
+				<h1>Error: {error?.message}</h1>
 			</CenteredDiv>
 		);
 	}
@@ -185,7 +184,7 @@ function EditArticle() {
 					<label htmlFor='image'>
 						{' '}
 						Hero Image
-						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={data?.findArticle?.imageUrl} />
+						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={data?.findArticle?.imageUrl as string} />
 					</label>
 					<FlexBox>
 						<label htmlFor='tags'>

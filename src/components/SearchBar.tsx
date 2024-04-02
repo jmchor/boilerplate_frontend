@@ -13,6 +13,8 @@ import {
 	SearchBarStyles,
 } from '../styles/SearchbarStyles.js';
 import { ALL_TAGS_QUERY, ALL_TITLES_QUERY, SEARCH_ARTICLE_QUERY, SEARCH_PROJECT_QUERY } from '../gql/queries.js';
+import { CenteredDiv } from '../styles/CreateProjectStyles.js';
+import { MoonLoader } from 'react-spinners';
 
 const SearchBar = () => {
 	const [newOptions, setNewOptions] = useState<object[]>([]);
@@ -100,19 +102,34 @@ const SearchBar = () => {
 	const handleOptionSelected = (option: object | null) => {
 		setSelectedOption(option); // Update selected option when an option is selected in Autocomplete
 	};
+	if (loading || projectLoading || articleLoading || tagLoading) {
+		return (
+			<CenteredDiv>
+				<MoonLoader color='var(--blue)' />
+			</CenteredDiv>
+		);
+	}
+
+	if (error || projectError || articleError || tagError) {
+		return (
+			<CenteredDiv>
+				<h1>Error: {error?.message}</h1>
+			</CenteredDiv>
+		);
+	}
 
 	return (
 		<SearchBarStyles>
 			<CustomAutocomplete
 				id='grouped-demo'
 				freeSolo
-				onChange={(event, value) => handleOptionSelected(value)}
+				onChange={(event, value) => handleOptionSelected(value as object)}
 				options={newOptions}
 				isOptionEqualToValue={(option, value) => option.title === value.title || option.tag === value.tag}
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.title || option.tag}
 				sx={{ width: 600 }}
-				renderInput={(params) => <TextField sx={{ fontSize: '1.5rem' }} {...params} onKeyPress={handleKeyPress} />}
+				renderInput={(params) => <TextField sx={{ fontSize: '1.5rem' }} {...params} onKeyDown={handleKeyPress} />}
 				renderGroup={(params) => (
 					<li key={params.key}>
 						<GroupHeader>{params.group}</GroupHeader>

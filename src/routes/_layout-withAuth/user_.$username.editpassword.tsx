@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useGetCurrentUser } from '../../services/getCurrentUser.js';
-import { CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
+import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { UPDATE_PASSWORD } from '../../gql/mutations.js';
 import { CURRENT_USER } from '../../gql/queries.js';
+import { MoonLoader } from 'react-spinners';
 
 export const Route = createFileRoute('/_layout-withAuth/user/$username/editpassword')({
 	component: UpdatePassword,
@@ -46,10 +47,26 @@ function UpdatePassword() {
 
 	const currentUser = data?.currentUser;
 
+	if (loading || updatePasswordLoading) {
+		return (
+			<CenteredDiv>
+				<MoonLoader color='var(--blue)' />
+			</CenteredDiv>
+		);
+	}
+
+	if (error) {
+		return (
+			<CenteredDiv>
+				<h1>Error: {error.message}</h1>
+			</CenteredDiv>
+		);
+	}
+
 	return (
 		<CreateFormWrapper>
 			<CreateProjectForm onSubmit={handleSubmit}>
-				{updatePasswordError && <p>{updatePasswordError}</p>}
+				{updatePasswordError && <p>{updatePasswordError.message}</p>}
 				<label htmlFor='oldPassword'>
 					Old Password
 					<input

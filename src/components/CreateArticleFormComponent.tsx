@@ -68,13 +68,9 @@ const CreateArticleFormComponent = () => {
 	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
 	// const [options, setOptions] = useState<{ value: string; label: string }[]>([]);
 
-	const [createArticle, { loading, error }] = useMutation(CREATE_ARTICLE, {});
+	const [createArticle, { loading }] = useMutation(CREATE_ARTICLE, {});
 
-	const {
-		data: tagData,
-		error: tagError,
-		loading: tagLoading,
-	} = useQuery(ALL_TAGS_QUERY, {
+	const { data: tagData } = useQuery(ALL_TAGS_QUERY, {
 		fetchPolicy: 'network-only',
 	});
 

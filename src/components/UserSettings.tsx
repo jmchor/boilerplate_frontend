@@ -14,6 +14,7 @@ import {
 } from '../styles/UserSettingStyles.js';
 import { EDIT_USER } from '../gql/mutations.js';
 import { AUTH_CURRENT_USER } from '../gql/queries.js';
+import { User } from '../types/user.js';
 
 const UserSettings = () => {
 	const { data, error, loading } = useGetCurrentUser();
@@ -27,7 +28,7 @@ const UserSettings = () => {
 	const navigate = useNavigate();
 	const { setUser } = useAuth();
 
-	const [editUser, { data: editUserData, loading: editUserLoading, error: editUserError }] = useMutation(EDIT_USER, {
+	const [editUser, { loading: editUserLoading, error: editUserError }] = useMutation(EDIT_USER, {
 		variables: {
 			id: currentUser?._id,
 			username: userName,
@@ -40,11 +41,11 @@ const UserSettings = () => {
 		if (currentUser) {
 			setUsername(currentUser.username);
 			setEmail(currentUser.email);
-			setImageUrl(currentUser?.imageUrl);
+			setImageUrl(currentUser?.imageUrl as string);
 		}
 	}, [currentUser]);
 
-	if (loading) {
+	if (loading || editUserLoading) {
 		return (
 			<CenteredDiv>
 				<MoonLoader color='var(--blue)' />
@@ -52,10 +53,10 @@ const UserSettings = () => {
 		);
 	}
 
-	if (error) {
+	if (error || editUserError) {
 		return (
 			<CenteredDiv>
-				<h1>Error: {error.message}</h1>
+				<h1>Error: {error?.message}</h1>
 			</CenteredDiv>
 		);
 	}
@@ -74,7 +75,7 @@ const UserSettings = () => {
 		});
 
 		if (res) {
-			setUser(res.data.editUser);
+			setUser(res?.data?.editUser as User);
 			navigate({ to: `/user/${currentUser?.username}` as string });
 		}
 	};

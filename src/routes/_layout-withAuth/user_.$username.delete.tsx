@@ -7,6 +7,7 @@ import { useAuth } from '../../auth';
 import { DeleteButton, DeleteContainer, DeleteFormWrapper, DeleteUserForm } from '../../styles/UserDeleteStyles.js';
 import { DELETE_USER } from '../../gql/mutations.js';
 import { CURRENT_USER } from '../../gql/queries.js';
+import { MoonLoader } from 'react-spinners';
 
 export const Route = createFileRoute('/_layout-withAuth/user/$username/delete')({
 	component: DeleteUser,
@@ -46,6 +47,22 @@ function DeleteUser() {
 		}
 	};
 
+	if (loading || deleteUserLoading) {
+		return (
+			<CenteredDiv>
+				<MoonLoader color='var(--blue)' />
+			</CenteredDiv>
+		);
+	}
+
+	if (error) {
+		return (
+			<CenteredDiv>
+				<h1>Error: {error.message}</h1>
+			</CenteredDiv>
+		);
+	}
+
 	if (deleteUserData) {
 		return (
 			<CenteredDiv>
@@ -57,7 +74,7 @@ function DeleteUser() {
 		<DeleteContainer>
 			<DeleteFormWrapper>
 				<DeleteUserForm onSubmit={handleSubmit}>
-					{deleteUserError && <p>{deleteUserError}</p>}
+					{deleteUserError && <p>{deleteUserError.message}</p>}
 					<label htmlFor='oldPassword'>
 						Enter Password
 						<input

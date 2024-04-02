@@ -49,7 +49,7 @@ function Article() {
 				{' '}
 				by {data?.findArticle?.createdBy?.username}
 			</p>
-			<button onClick={() => navigate({ to: `/articles/${articleId}/link` })}>
+			<button onClick={() => navigate({ to: `/articles/${articleId}/link` as string })}>
 				{' '}
 				<FaLink /> Link Article to Project
 			</button>
@@ -63,7 +63,7 @@ function Article() {
 				</p>
 			)}
 			<hr width='80%' />
-			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag} `)}</p>}
+			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag}`)}</p>}
 		</ArticleWrapper>
 	);
 }

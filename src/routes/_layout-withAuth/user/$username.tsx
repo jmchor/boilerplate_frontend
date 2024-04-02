@@ -1,13 +1,12 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useGetCurrentUser } from '../../../services/getCurrentUser.js';
-import { CenteredDiv, FlexColumn, FlexRow } from '../../../styles/CreateProjectStyles.js';
+import { CenteredDiv } from '../../../styles/CreateProjectStyles.js';
 import { useState } from 'react';
 import ProjectList from '../../../components/cards/ProjectList.js';
 import { Project } from '../../../types/project';
 import { MoonLoader } from 'react-spinners';
 import ArticleList from '../../../components/cards/ArticleList.js';
 import { Article } from '../../../types/articles.js';
-import { useAuth } from '../../../auth.js';
 import UserSettings from '../../../components/UserSettings.js';
 import {
 	BorderStyledDiv,
@@ -56,7 +55,7 @@ function Profile() {
 	}
 
 	if (error) {
-		return <CenteredDiv>{error.message}</CenteredDiv>;
+		return <CenteredDiv>{error?.message}</CenteredDiv>;
 	}
 
 	return (

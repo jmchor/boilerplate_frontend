@@ -1,8 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { createFileRoute } from '@tanstack/react-router';
-import { graphql } from 'gql.tada';
 import LandingPage from '../../components/LandingPage';
 import { ARTICLE_TAG_QUERY, PROJECT_TAG_QUERY } from '../../gql/queries';
+import { Project } from '../../types/project';
+import { Article } from '../../types/articles';
+import { CenteredDiv } from '../../styles/CreateProjectStyles';
+import { MoonLoader } from 'react-spinners';
 
 export const Route = createFileRoute('/_layout-withAuth/search')({
 	component: SearchResults,
@@ -20,7 +23,6 @@ function SearchResults() {
 		variables: {
 			tag: query,
 		},
-
 		onError: (error) => {
 			console.log(error);
 		},
@@ -46,7 +48,21 @@ function SearchResults() {
 
 	const articles = data?.searchArticlesByTag || [];
 
-	console.log(projects, articles);
+	if (loading || projectLoading) {
+		return (
+			<CenteredDiv>
+				<MoonLoader color='var(--blue)' />
+			</CenteredDiv>
+		);
+	}
 
-	return <LandingPage projects={projects} articles={articles} />;
+	if (error || projectError) {
+		return (
+			<CenteredDiv>
+				<h1>Error: {error?.message}</h1>
+			</CenteredDiv>
+		);
+	}
+
+	return <LandingPage projects={projects as Project[]} articles={articles as Article[]} />;
 }

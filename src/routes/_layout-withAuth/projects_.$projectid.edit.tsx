@@ -124,7 +124,7 @@ function EditProject() {
 					<label htmlFor='image'>
 						{' '}
 						Hero Image
-						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={data?.findProject?.imageUrl} />
+						<ImageUploader id='image' setImageUrl={setImageUrl} existingImage={data?.findProject?.imageUrl as string} />
 					</label>
 				</>
 				<button type='submit' disabled={loading}>
