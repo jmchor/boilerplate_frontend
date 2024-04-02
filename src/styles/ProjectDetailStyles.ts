@@ -56,6 +56,10 @@ export const VerticalTechBox = styled(TechBox)`
 
 export const PackageList = styled.ul`
 	margin-left: 2rem !important;
+	color: var(--darkpurple);
+	text-align: left;
+	word-wrap: break-word;
+	hyphens: auto;
 `;
 
 export const DownloadButtonContainer = styled.div`

@@ -151,7 +151,9 @@ function Project() {
 									aria-controls='panel1-content'
 									id='panel1-header'
 								>
-									<p>Linked Articles</p>
+									<p>
+										<b style={{ color: 'var(--darkpurple)' }}>Linked Articles</b>
+									</p>
 								</CustomAccordionSummary>
 								<AccordionDetails>
 									<ul>
@@ -194,7 +196,7 @@ function Project() {
 										aria-controls='panelpackagefrontend-content'
 										id='panelpackagefrontend-header'
 									>
-										<p>Packages</p>
+										<b style={{ color: 'var(--darkpurple)' }}>Packages</b>
 									</CustomAccordionSummary>
 									<AccordionDetails>
 										<PackageList>{project?.backend?.packages?.map((p) => <li key={p}>{p}</li>)}</PackageList>
