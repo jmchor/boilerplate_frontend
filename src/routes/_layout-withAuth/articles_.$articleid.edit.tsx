@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../../components/CreateArticleFormComponent';
 import ImageUploader from '../../components/ImageUploads/ImageUploader';
 import { ALL_TAGS_QUERY } from '../../components/SearchBar';
+import { DeleteButton } from '../../styles/UserDeleteStyles.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid/edit')({
 	component: EditArticle,
@@ -245,9 +246,9 @@ function EditArticle() {
 					<button type='submit' disabled={loading}>
 						Confirm Changes
 					</button>
-					<button type='button' onClick={handleDelete}>
+					<DeleteButton type='button' onClick={handleDelete}>
 						Delete Article
-					</button>
+					</DeleteButton>
 				</FlexRow>
 			</CreateProjectForm>
 		</CreateFormWrapper>

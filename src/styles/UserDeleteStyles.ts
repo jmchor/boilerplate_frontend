@@ -23,7 +23,7 @@ export const DeleteUserForm = styled(CreateProjectForm)`
 export const DeleteButton = styled.button`
 	font-size: 20px !important;
 	color: white !important;
-	background-color: var(--darkpurple) !important;
+	background-color: var(--muddygreen) !important;
 `;
 
 export const DeleteContainer = styled.div`

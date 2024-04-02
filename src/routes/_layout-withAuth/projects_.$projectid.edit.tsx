@@ -8,6 +8,7 @@ import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import { EditProjectForm, EditProjectWrapper } from '../../styles/ProjectEditStyles';
 import ImageUploader from '../../components/ImageUploads/ImageUploader';
+import { DeleteButton } from '../../styles/UserDeleteStyles';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid/edit')({
 	component: EditProject,
@@ -145,9 +146,9 @@ function EditProject() {
 				<button type='submit' disabled={loading}>
 					Confirm Changes
 				</button>
-				<button type='button' onClick={handleDelete}>
+				<DeleteButton type='button' onClick={handleDelete}>
 					Delete Project
-				</button>
+				</DeleteButton>
 			</EditProjectForm>
 		</EditProjectWrapper>
 	);
