@@ -73,44 +73,6 @@ const cache = new InMemoryCache({
 				},
 			},
 		},
-		Query: {
-			fields: {
-				allTags: {
-					merge(existing = [], incoming) {
-						// Merge the existing tags with the incoming tags
-						return [...existing, ...incoming];
-					},
-				},
-				allArticles: {
-					merge(existing = [], incoming) {
-						// Merge the existing articles with the incoming articles
-						return [...existing, ...incoming];
-					},
-				},
-				allProjects: {
-					merge(existing = [], incoming) {
-						// Merge the existing projects with the incoming projects
-						return [...existing, ...incoming];
-					},
-				},
-				allTitles: {
-					merge(existing = [], incoming) {
-						// Merge the existing titles with the incoming titles
-						return [...existing, ...incoming];
-					},
-				},
-			},
-		},
-		Project: {
-			fields: {
-				articles: {
-					merge(existing = [], incoming) {
-						// Merge the existing articles with the incoming articles
-						return [...existing, ...incoming];
-					},
-				},
-			},
-		},
 	},
 });
 
