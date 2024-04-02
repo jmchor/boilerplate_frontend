@@ -1,6 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { graphql } from 'gql.tada';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import { MultiValue } from 'react-select';
@@ -14,10 +13,10 @@ import { useAuth } from '../auth.js';
 import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../styles/CreateProjectStyles.js';
 
 import usePreventNavigation from '../lib/usePreventNavigation.js';
-import { ArticleTagTypes } from '../types/articles.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
 import styled from 'styled-components';
-import { ALL_TAGS_QUERY } from './SearchBar.js';
+import { ALL_TAGS_QUERY } from '../gql/queries.js';
+import { CREATE_ARTICLE } from '../gql/mutations.js';
 
 export const FlexBox = styled.div`
 	display: flex;
@@ -44,40 +43,6 @@ export const CustomFlexRow = styled(FlexRow)`
 		width: fit-content;
 	}
 `;
-
-const CREATE_ARTICLE = graphql(`
-	mutation CREATE_ARTICLE(
-		$title: String!
-		$text: String!
-		$createdBy: ID!
-		$tags: [String]
-		$imageUrl: String
-		$subheadline: String
-		$externalLink: String
-	) {
-		createArticle(
-			title: $title
-			text: $text
-			createdBy: $createdBy
-			tags: $tags
-			imageUrl: $imageUrl
-			subheadline: $subheadline
-			externalLink: $externalLink
-		) {
-			_id
-			title
-			text
-			createdBy {
-				_id
-				username
-			}
-			subheadline
-			tags
-			imageUrl
-			externalLink
-		}
-	}
-`);
 
 export const ExtendedQuill = styled(ReactQuill)`
 	width: 100%;

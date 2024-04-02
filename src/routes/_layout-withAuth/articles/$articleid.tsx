@@ -1,36 +1,14 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { graphql } from 'gql.tada';
 import { CenteredDiv } from '../../../styles/CreateProjectStyles.js';
 import { MoonLoader } from 'react-spinners';
 import { useQuery } from '@apollo/client';
 import { FaLink } from 'react-icons/fa';
 import { ArticleText, ArticleWrapper, Banner } from '../../../styles/ArticleDetailStyles.js';
+import { FIND_ARTICLE } from '../../../gql/queries.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid')({
 	component: Article,
 });
-
-export const FIND_ARTICLE = graphql(`
-	query FIND_ARTICLE($id: ID) {
-		findArticle(_id: $id) {
-			title
-			text
-			subheadline
-			tags
-			imageUrl
-			externalLink
-			linkedProjects {
-				_id
-				title
-			}
-			createdBy {
-				_id
-				username
-			}
-			_id
-		}
-	}
-`);
 
 function Article() {
 	const articleId = useParams({ from: '/_layout-withAuth/articles/$articleid', select: (params) => params.articleid });

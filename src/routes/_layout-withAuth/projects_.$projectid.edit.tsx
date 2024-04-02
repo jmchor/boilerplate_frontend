@@ -1,34 +1,18 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router';
-import { CenteredDiv, FlexColumn, FlexRow } from '../../styles/CreateProjectStyles';
+import { CenteredDiv } from '../../styles/CreateProjectStyles';
 import { MoonLoader } from 'react-spinners';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../auth';
 import { useFindProject } from '../../services/findProject';
-import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import { EditProjectForm, EditProjectWrapper } from '../../styles/ProjectEditStyles';
 import ImageUploader from '../../components/ImageUploads/ImageUploader';
 import { DeleteButton } from '../../styles/UserDeleteStyles';
+import { DELETE_PROJECT, EDIT_PROJECT } from '../../gql/mutations';
 
 export const Route = createFileRoute('/_layout-withAuth/projects/$projectid/edit')({
 	component: EditProject,
 });
-
-const EDIT_PROJECT = graphql(`
-	mutation EDIT_PROJECT($id: ID!, $createdBy: ID!, $description: String, $title: String, $imageUrl: String) {
-		editProject(_id: $id, createdBy: $createdBy, description: $description, title: $title, imageUrl: $imageUrl) {
-			title
-			description
-			imageUrl
-		}
-	}
-`);
-
-const DELETE_PROJECT = graphql(`
-	mutation DELETE_PROJECT($id: ID!, $createdBy: ID!) {
-		deleteProject(_id: $id, createdBy: $createdBy)
-	}
-`);
 
 function EditProject() {
 	const projectId = useParams({ from: '/_layout-withAuth/projects/$projectid', select: (p) => p.projectid });

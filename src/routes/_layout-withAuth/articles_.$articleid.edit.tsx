@@ -4,60 +4,19 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import { MultiValue } from 'react-select';
-import { FIND_ARTICLE } from './articles/$articleid.js';
+import { FIND_ARTICLE } from '../../gql/queries';
 import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useAuth } from '../../auth';
 import 'react-quill/dist/quill.snow.css';
 import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../../components/CreateArticleFormComponent';
 import ImageUploader from '../../components/ImageUploads/ImageUploader';
-import { ALL_TAGS_QUERY } from '../../components/SearchBar';
+import { ALL_TAGS_QUERY } from '../../gql/queries';
 import { DeleteButton } from '../../styles/UserDeleteStyles.js';
+import { DELETE_ARTICLE, EDIT_ARTICLE } from '../../gql/mutations.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid/edit')({
 	component: EditArticle,
 });
-
-const EDIT_ARTICLE = graphql(`
-	mutation EDIT_ARTICLE(
-		$id: ID!
-		$createdBy: ID!
-		$title: String
-		$text: String
-		$subheadline: String
-		$tags: [String]
-		$imageUrl: String
-		$externalLink: String
-	) {
-		editArticle(
-			_id: $id
-			createdBy: $createdBy
-			title: $title
-			text: $text
-			subheadline: $subheadline
-			tags: $tags
-			imageUrl: $imageUrl
-			externalLink: $externalLink
-		) {
-			title
-			text
-			tags
-			subheadline
-			linkedProjects {
-				_id
-				title
-			}
-			imageUrl
-			externalLink
-			_id
-		}
-	}
-`);
-
-const DELETE_ARTICLE = graphql(`
-	mutation DELETE_ARTICLE($id: ID!, $createdBy: ID!) {
-		deleteArticle(_id: $id, createdBy: $createdBy)
-	}
-`);
 
 function EditArticle() {
 	const articleId = useParams({
@@ -133,9 +92,7 @@ function EditArticle() {
 		}
 	}, [
 		user?._id,
-		data?.findProject?.createdBy?._id,
-		data?.findProject?.description,
-		data?.findProject?.title,
+		data?.findArticle?.linkedProjects,
 		data?.findArticle?.tags,
 		data?.findArticle?.title,
 		data?.findArticle?.text,

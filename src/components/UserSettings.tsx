@@ -1,4 +1,3 @@
-import { graphql } from 'gql.tada';
 import { useEffect, useState } from 'react';
 import { CenteredDiv, CreateProjectForm } from '../styles/CreateProjectStyles.js';
 import { MoonLoader } from 'react-spinners';
@@ -6,23 +5,16 @@ import { useGetCurrentUser } from '../services/getCurrentUser.js';
 import ImageUploader from './ImageUploads/ImageUploader';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from '@tanstack/react-router';
-import { CURRENT_USER, useAuth } from '../auth';
+import { useAuth } from '../auth';
 import {
 	ButtonFlexColumn,
 	EditCustomFlexRow,
 	UserEditFlexBox,
 	UserEditFormWrapper,
 } from '../styles/UserSettingStyles.js';
+import { EDIT_USER } from '../gql/mutations.js';
+import { AUTH_CURRENT_USER } from '../gql/queries.js';
 
-const EDIT_USER = graphql(`
-	mutation EDIT_USER($id: ID!, $username: String, $email: String, $imageUrl: String) {
-		editUser(_id: $id, username: $username, email: $email, imageUrl: $imageUrl) {
-			username
-			email
-			imageUrl
-		}
-	}
-`);
 const UserSettings = () => {
 	const { data, error, loading } = useGetCurrentUser();
 
@@ -78,7 +70,7 @@ const UserSettings = () => {
 				email,
 				imageUrl,
 			},
-			refetchQueries: [{ query: CURRENT_USER }],
+			refetchQueries: [{ query: AUTH_CURRENT_USER }],
 		});
 
 		if (res) {

@@ -1,6 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { graphql } from 'gql.tada';
 import { useMutation } from '@apollo/client';
 import Switch from '@mui/material/Switch';
 import { MoonLoader } from 'react-spinners';
@@ -25,57 +24,7 @@ import {
 
 import usePreventNavigation from '../lib/usePreventNavigation.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
-
-const CREATE_PROJECT = graphql(`
-	mutation CREATE_PROJECT(
-		$title: String!
-		$createdBy: ID!
-		$frontend: FrontendConfigInput!
-		$backend: BackendConfigInput!
-		$description: String
-		$imageUrl: String
-	) {
-		createProject(
-			title: $title
-			createdBy: $createdBy
-			frontend: $frontend
-			backend: $backend
-			description: $description
-			imageUrl: $imageUrl
-		) {
-			title
-			description
-			imageUrl
-			createdBy {
-				_id
-				username
-			}
-			frontend {
-				framework
-				gqlClient
-			}
-			backend {
-				environment
-				moduleType
-				gqlServer
-				cms
-				packages
-				database
-			}
-			installScripts {
-				backend
-				frontend
-			}
-			kanban {
-				_id
-			}
-			articles {
-				_id
-			}
-			_id
-		}
-	}
-`);
+import { CREATE_PROJECT } from '../gql/mutations.js';
 
 const CreateProjectFormComponent = () => {
 	usePreventNavigation('Are you sure you want to leave this page?');
@@ -277,7 +226,7 @@ const CreateProjectFormComponent = () => {
 								/>
 							</label>
 						</FlexColumn>
-						<wrapColumn>
+						<FlexColumn>
 							{backPacks.map((item) => (
 								<div key={item}>
 									<label>{item === 'jsonwebtoken' ? 'jwt' : item}</label>
@@ -294,7 +243,7 @@ const CreateProjectFormComponent = () => {
 									/>
 								</div>
 							))}
-						</wrapColumn>
+						</FlexColumn>
 					</FlexRow>
 				</FlexRow>
 

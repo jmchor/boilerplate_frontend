@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { createFileRoute } from '@tanstack/react-router';
 import { graphql } from 'gql.tada';
 import LandingPage from '../../components/LandingPage';
+import { ARTICLE_TAG_QUERY, PROJECT_TAG_QUERY } from '../../gql/queries';
 
 export const Route = createFileRoute('/_layout-withAuth/search')({
 	component: SearchResults,
@@ -12,46 +13,6 @@ export const Route = createFileRoute('/_layout-withAuth/search')({
 	},
 });
 
-const ARTICLE_TAG_QUERY = graphql(`
-	query ARTICLE_TAG_QUERY($tag: String) {
-		searchArticlesByTag(tag: $tag) {
-			imageUrl
-			title
-			subheadline
-			_id
-			createdBy {
-				username
-			}
-			tags
-			createdAt
-		}
-	}
-`);
-
-const PROJECT_TAG_QUERY = graphql(`
-	query PROJECT_TAG_QUERY($tag: String) {
-		searchProjectsByTag(tag: $tag) {
-			_id
-			title
-			backend {
-				environment
-				moduleType
-				gqlServer
-				cms
-				packages
-				database
-			}
-			frontend {
-				framework
-				gqlClient
-				packages
-			}
-			createdBy {
-				username
-			}
-		}
-	}
-`);
 function SearchResults() {
 	const { query } = Route.useSearch();
 

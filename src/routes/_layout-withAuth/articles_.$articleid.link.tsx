@@ -7,23 +7,11 @@ import { useMutation } from '@apollo/client';
 import React from 'react';
 import LinkProjectList from '../../components/cards/LinkProjectList';
 import { LinkWrapper, ProjectLinkContainer } from '../../styles/ArticleLinkStyles.js';
+import { LINK_ARTICLE_TO_PROJECT } from '../../gql/mutations.js';
 
 export const Route = createFileRoute('/_layout-withAuth/articles/$articleid/link')({
 	component: LinkArticleToProject,
 });
-
-const LINK_ARTICLE_TO_PROJECT = graphql(`
-	mutation LinkArticleToProject($id: ID!, $projectId: ID!) {
-		linkArticleToProject(_id: $id, projectId: $projectId) {
-			_id
-			title
-			linkedProjects {
-				_id
-				title
-			}
-		}
-	}
-`);
 
 function LinkArticleToProject() {
 	const { data, loading, startPolling, stopPolling } = useGetCurrentUser();
@@ -54,8 +42,6 @@ function LinkArticleToProject() {
 			},
 		});
 	};
-
-	console.log(data?.currentUser?.projects[0]);
 
 	return (
 		<div>

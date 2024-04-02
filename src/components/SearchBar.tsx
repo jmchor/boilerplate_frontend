@@ -12,36 +12,7 @@ import {
 	GroupItems,
 	SearchBarStyles,
 } from '../styles/SearchbarStyles.js';
-
-const ALL_TITLES_QUERY = graphql(`
-	query ALL_TITLES_QUERY {
-		allTitles {
-			title
-			type
-		}
-	}
-`);
-
-export const ALL_TAGS_QUERY = graphql(`
-	query ALL_TAGS_QUERY {
-		allTags {
-			tag
-			type
-		}
-	}
-`);
-
-const SEARCH_PROJECT_QUERY = graphql(`
-	query SEARCH_PROJECT_QUERY($title: String) {
-		searchProject(title: $title)
-	}
-`);
-
-const SEARCH_ARTICLE_QUERY = graphql(`
-	query SEARCH_ARTICLE_QUERY($title: String) {
-		searchArticleByTitle(title: $title)
-	}
-`);
+import { ALL_TAGS_QUERY, ALL_TITLES_QUERY, SEARCH_ARTICLE_QUERY, SEARCH_PROJECT_QUERY } from '../gql/queries.js';
 
 const SearchBar = () => {
 	const [newOptions, setNewOptions] = useState<object[]>([]);

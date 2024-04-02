@@ -1,22 +1,14 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser.js';
-import { graphql } from 'gql.tada';
+import { useGetCurrentUser } from '../../services/getCurrentUser.js';
 import { CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
+import { UPDATE_PASSWORD } from '../../gql/mutations.js';
+import { CURRENT_USER } from '../../gql/queries.js';
 
 export const Route = createFileRoute('/_layout-withAuth/user/$username/editpassword')({
 	component: UpdatePassword,
 });
-
-const UPDATE_PASSWORD = graphql(`
-	mutation UPDATE_PASSWORD($id: ID!, $oldPassword: String!, $newPassword: String!) {
-		updatePassword(_id: $id, oldPassword: $oldPassword, newPassword: $newPassword) {
-			username
-			_id
-		}
-	}
-`);
 
 function UpdatePassword() {
 	const { data, error, loading } = useGetCurrentUser();

@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client';
-import { graphql } from 'gql.tada';
 import { useAuth } from '../auth';
 import { flushSync } from 'react-dom';
 import { useNavigate } from '@tanstack/react-router';
@@ -7,15 +6,7 @@ import Form from '../styles/Form.js';
 import { useState } from 'react';
 
 import { SigninFormWrapper } from '../styles/SigninForm.js';
-
-const LOGIN = graphql(`
-	mutation Login($credentials: LoginInput!) {
-		login(credentials: $credentials) {
-			value
-			isAuthenticated
-		}
-	}
-`);
+import { LOGIN } from '../gql/mutations.js';
 
 const SigninForm: React.FC = () => {
 	const [login, { loading, error }] = useMutation(LOGIN);

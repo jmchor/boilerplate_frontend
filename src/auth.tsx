@@ -1,36 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
-import { graphql } from 'gql.tada';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { User } from './types/user';
 import { flushSync } from 'react-dom';
-
-export const CURRENT_USER = graphql(`
-	query CurrentUser {
-		currentUser {
-			username
-			email
-			imageUrl
-			_id
-		}
-	}
-`);
-
-export const LOGOUT = graphql(`
-	mutation Logout {
-		logout {
-			loggedOut
-		}
-	}
-`);
-
-const CHECK_AUTHENTICATION = graphql(`
-	query CheckAuthentication {
-		checkAuthentication {
-			cookieIsPresent
-		}
-	}
-`);
+import { AUTH_CURRENT_USER, CHECK_AUTHENTICATION } from './gql/queries';
+import { LOGOUT } from './gql/mutations';
 
 export interface AuthContext {
 	isLoggedIn: boolean;
@@ -54,7 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [withNav, setWithNav] = useState<boolean>(true);
 
-	const { startPolling } = useQuery(CURRENT_USER, {
+	const { startPolling } = useQuery(AUTH_CURRENT_USER, {
 		onCompleted: (data) => {
 			flushSync(() => {
 				setUser(data?.currentUser);
@@ -73,7 +47,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 				flushSync(() => {
 					startPolling(1000);
 					setIsLoggedIn(true);
-					setCookieThere(true);
 				});
 			}
 		},
@@ -88,7 +61,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		onCompleted: () => {
 			setIsLoggedIn(false);
 			setIsLoggingOut(false);
-			setCookieThere(false);
 		},
 	});
 

@@ -1,21 +1,16 @@
 import { useMutation } from '@apollo/client';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { graphql } from 'gql.tada';
-import { CURRENT_USER, useGetCurrentUser } from '../../services/getCurrentUser.js';
+import { useGetCurrentUser } from '../../services/getCurrentUser.js';
 import { CenteredDiv } from '../../styles/CreateProjectStyles.js';
 import { useState } from 'react';
 import { useAuth } from '../../auth';
 import { DeleteButton, DeleteContainer, DeleteFormWrapper, DeleteUserForm } from '../../styles/UserDeleteStyles.js';
+import { DELETE_USER } from '../../gql/mutations.js';
+import { CURRENT_USER } from '../../gql/queries.js';
 
 export const Route = createFileRoute('/_layout-withAuth/user/$username/delete')({
 	component: DeleteUser,
 });
-
-const DELETE_USER = graphql(`
-	mutation DELETE_USER($id: ID!, $password: String!) {
-		deleteUser(_id: $id, password: $password)
-	}
-`);
 
 function DeleteUser() {
 	const navigate = useNavigate();
