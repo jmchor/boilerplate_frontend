@@ -23,6 +23,12 @@ const EDIT_PROJECT = graphql(`
 	}
 `);
 
+const DELETE_PROJECT = graphql(`
+	mutation DELETE_PROJECT($id: ID!, $createdBy: ID!) {
+		deleteProject(_id: $id, createdBy: $createdBy)
+	}
+`);
+
 function EditProject() {
 	const projectId = useParams({ from: '/_layout-withAuth/projects/$projectid', select: (p) => p.projectid });
 
@@ -43,6 +49,13 @@ function EditProject() {
 			title,
 			description,
 			imageUrl,
+		},
+	});
+
+	const [deleteProject] = useMutation(DELETE_PROJECT, {
+		variables: {
+			id: projectId,
+			createdBy: user?._id as string,
 		},
 	});
 
@@ -69,6 +82,15 @@ function EditProject() {
 
 		if (res) {
 			navigate({ to: `/projects/${projectId}` as string });
+		}
+	};
+
+	const handleDelete = async () => {
+		if (window.confirm('Are you sure you want to delete this project?')) {
+			const res = await deleteProject();
+			if (res) {
+				navigate({ to: `/user/${user?.username}` as string });
+			}
 		}
 	};
 
@@ -122,6 +144,9 @@ function EditProject() {
 				</>
 				<button type='submit' disabled={loading}>
 					Confirm Changes
+				</button>
+				<button type='button' onClick={handleDelete}>
+					Delete Project
 				</button>
 			</EditProjectForm>
 		</EditProjectWrapper>
