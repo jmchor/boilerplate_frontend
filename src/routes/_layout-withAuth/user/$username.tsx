@@ -58,6 +58,8 @@ function Profile() {
 		return <CenteredDiv>{error?.message}</CenteredDiv>;
 	}
 
+	console.log(currentUser?.projects);
+
 	return (
 		<ProfileWrapper>
 			<ExtendedFlexColumn>

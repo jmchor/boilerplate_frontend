@@ -22,6 +22,7 @@ export const CURRENT_USER = graphql(`
 					environment
 					gqlServer
 					database
+					cms
 				}
 			}
 			articles {
