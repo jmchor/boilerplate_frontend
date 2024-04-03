@@ -33,7 +33,7 @@ export const TagLine = styled.div`
 `;
 
 export const TitleImage = styled.img`
-	width: 100%;
+	max-width: 100%;
 	object-fit: cover;
 `;
 
@@ -53,6 +53,7 @@ export const Title = styled.div`
 	h2 {
 		margin: 0;
 		font-size: 18px;
+		padding: 0 10px;
 	}
 	h4 {
 		margin: 0;
