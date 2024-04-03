@@ -56,6 +56,14 @@ function About() {
 				<br />
 			</p>
 			<p>So go ahead, check it out, and enjoy!</p>
+
+			<h4>Attributions</h4>
+			<a
+				style={{ color: 'lightgrey', fontSize: '10px' }}
+				href='https://www.freepik.com/free-vector/digital-futuristic-binary-code-number-background_12686650.htm#fromView=search&page=2&position=4&uuid=a6ae9c85-4ea6-4bda-83c2-479d6be65327'
+			>
+				Project Detail Image by starline on Freepik
+			</a>
 		</AboutContainer>
 	);
 }
