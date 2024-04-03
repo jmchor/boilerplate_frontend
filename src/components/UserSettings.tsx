@@ -15,6 +15,7 @@ import {
 import { EDIT_USER } from '../gql/mutations.js';
 import { AUTH_CURRENT_USER } from '../gql/queries.js';
 import { User } from '../types/user.js';
+import { InversePurpleDeleteButton } from '../styles/UserDeleteStyles.js';
 
 const UserSettings = () => {
 	const { data, error, loading } = useGetCurrentUser();
@@ -102,9 +103,11 @@ const UserSettings = () => {
 							<button onClick={() => navigate({ to: `/user/${currentUser?.username}/editpassword` as string })}>
 								Update Password
 							</button>
-							<button onClick={() => navigate({ to: `/user/${currentUser?.username}/delete` as string })}>
+							<InversePurpleDeleteButton
+								onClick={() => navigate({ to: `/user/${currentUser?.username}/delete` as string })}
+							>
 								Delete Account
-							</button>
+							</InversePurpleDeleteButton>
 						</ButtonFlexColumn>
 					</UserEditFlexBox>
 				</EditCustomFlexRow>

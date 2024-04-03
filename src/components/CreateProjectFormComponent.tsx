@@ -168,7 +168,7 @@ const CreateProjectFormComponent = () => {
 								<option value=''>Select Environment</option>
 								<option value='nodets'>Node with TypeScript</option>
 								<option value='nodejs'>NodeJS</option>
-								<option value='nodeExpressTS'>Node & Exrepss with TypeScript</option>
+								<option value='nodeExpressTS'>Node & Express with TypeScript</option>
 								<option value='nodeExpressJS'>NodeJS & Express</option>
 							</select>
 						</label>
