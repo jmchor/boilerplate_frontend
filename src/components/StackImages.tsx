@@ -9,6 +9,7 @@ export interface ProjectForImages {
 		environment?: string;
 		gqlServer?: boolean;
 		database?: string;
+		cms?: string;
 	};
 }
 
@@ -53,14 +54,22 @@ const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Elem
 	}
 };
 
-const renderBackendImages = (environment?: string, database?: string): JSX.Element => {
+const renderBackendImages = (environment?: string, database?: string, cms?: string): JSX.Element => {
 	const databaseImage = database === 'mongodb' ? 'mongo.svg' : 'pg.svg';
+	let cmsImageElement = null;
+
+	if (cms === 'keystoneJS') {
+		cmsImageElement = renderToolImage('keystonejs.svg');
+	} else if (cms) {
+		cmsImageElement = renderToolImage('strapi.svg');
+	}
 	switch (environment) {
 		case 'nodets':
 			return (
 				<>
 					{renderToolImage('node.svg')}
 					{renderToolImage(databaseImage)}
+					{cmsImageElement && cmsImageElement}
 				</>
 			);
 		case 'nodejs':
@@ -68,6 +77,7 @@ const renderBackendImages = (environment?: string, database?: string): JSX.Eleme
 				<>
 					{renderToolImage('node.svg')}
 					{renderToolImage(databaseImage)}
+					{cmsImageElement && cmsImageElement}
 				</>
 			);
 		case 'nodeExpressTS':
@@ -76,6 +86,7 @@ const renderBackendImages = (environment?: string, database?: string): JSX.Eleme
 					{renderToolImage('node.svg')}
 					{renderToolImage('express.svg')}
 					{renderToolImage(databaseImage)}
+					{cmsImageElement && cmsImageElement}
 				</>
 			);
 		case 'nodeExpressJS':
@@ -84,6 +95,7 @@ const renderBackendImages = (environment?: string, database?: string): JSX.Eleme
 					{renderToolImage('node.svg')}
 					{renderToolImage('express.svg')}
 					{renderToolImage(databaseImage)}
+					{cmsImageElement && cmsImageElement}
 				</>
 			);
 		default:
@@ -98,7 +110,7 @@ const StackImages = ({ project }: { project: ProjectForImages }) => {
 	return (
 		<>
 			{frontend && frontend.framework && renderFrontendImages(frontend.framework, frontend.gqlClient)}
-			{backend && backend.environment && renderBackendImages(backend.environment, backend.database)}
+			{backend && backend.environment && renderBackendImages(backend.environment, backend.database, backend.cms)}
 		</>
 	);
 };
