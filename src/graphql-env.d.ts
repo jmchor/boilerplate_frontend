@@ -176,6 +176,18 @@ export type introspection = {
           },
           {
             "name": "typesExpress"
+          },
+          {
+            "name": "styled_components"
+          },
+          {
+            "name": "mui_material"
+          },
+          {
+            "name": "emotion_react"
+          },
+          {
+            "name": "emotion_styled"
           }
         ]
       },
@@ -2149,7 +2161,7 @@ export type introspection = {
 import * as gqlTada from 'gql.tada';
 
 declare module 'gql.tada' {
-  interface setupSchema {
-    introspection: introspection
-  }
+	interface setupSchema {
+		introspection: introspection;
+	}
 }

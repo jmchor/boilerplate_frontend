@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import Switch from '@mui/material/Switch';
 import { MoonLoader } from 'react-spinners';
+import { MultiValue } from 'react-select';
 
 import {
 	BackendEnvironment,
@@ -10,6 +11,7 @@ import {
 	Cms,
 	Database,
 	FrontendFramework,
+	FrontendPackages,
 	Modules,
 } from '../types/createProject.js';
 import { useAuth } from '../auth.js';
@@ -25,6 +27,7 @@ import {
 import usePreventNavigation from '../lib/usePreventNavigation.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
 import { CREATE_PROJECT } from '../gql/mutations.js';
+import { CustomSelect } from '../styles/CreateArticleStyles.js';
 
 const CreateProjectFormComponent = () => {
 	usePreventNavigation('Are you sure you want to leave this page?');
@@ -43,8 +46,38 @@ const CreateProjectFormComponent = () => {
 	const [backendCms, setBackendCms] = useState<Cms>(undefined);
 	const [backendPackages, setBackendPackages] = useState<BackendPackages[]>([]);
 	const [backendDatabase, setBackendDatabase] = useState<Database>(undefined);
+	const [selectedOptions, setSelectedOptions] = useState<MultiValue<{ value: string; label: string }>>([]);
+	const [frontendPacks, setFrontendPacks] = useState<FrontendPackages[]>([]);
+	const [selectedFrontendOptions, setSelectedFrontendOptions] = useState<MultiValue<{ value: string; label: string }>>(
+		[]
+	);
 
-	const backPacks = ['jsonwebtoken', 'cors', 'bcryptjs', 'dotenv', 'nodemon'];
+	// const backPacks = ['jsonwebtoken', 'cors', 'bcryptjs', 'dotenv', 'nodemon'];
+
+	const frontEndOptions = [
+		{ value: 'styled_components', label: 'Styled Components' },
+		{ value: 'mui_material', label: 'MUI Material' },
+		{ value: 'emotion_react', label: 'Emotion for React' },
+		{ value: 'emotion_styled', label: 'Emotion Styled' },
+	];
+
+	const backPackOptions = [
+		{ value: 'jsonwebtoken', label: 'JSON Web Token' },
+		{ value: 'cors', label: 'CORS' },
+		{ value: 'bcryptjs', label: 'BCrypt' },
+		{ value: 'dotenv', label: 'Dotenv' },
+		{ value: 'nodemon', label: 'Nodemon' },
+	];
+
+	const handleBackendChange = (selectedOptions: MultiValue<{ value: string; label: string }>) => {
+		setSelectedOptions(selectedOptions);
+		setBackendPackages(selectedOptions.map((option) => option.value as BackendPackages));
+	};
+
+	const handleFrontendChange = (selectedFrontendOptions: MultiValue<{ value: string; label: string }>) => {
+		setSelectedFrontendOptions(selectedFrontendOptions);
+		setFrontendPacks(selectedFrontendOptions.map((option) => option.value as FrontendPackages));
+	};
 
 	// const [frontendPackages, setFrontendPackages] = useState<FrontendPackages[]>([]);
 
@@ -55,6 +88,7 @@ const CreateProjectFormComponent = () => {
 			frontend: {
 				framework: frontendFramework,
 				gqlClient: frontendGqlClient,
+				packages: frontendPacks,
 			},
 			backend: {
 				environment: backendEnvironment,
@@ -75,7 +109,6 @@ const CreateProjectFormComponent = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
 		const { data } = await createProject({
 			variables: {
 				title,
@@ -85,6 +118,7 @@ const CreateProjectFormComponent = () => {
 				frontend: {
 					framework: frontendFramework,
 					gqlClient: frontendGqlClient,
+					packages: frontendPacks,
 				},
 				backend: {
 					environment: backendEnvironment,
@@ -214,6 +248,24 @@ const CreateProjectFormComponent = () => {
 					</FlexColumn>
 					<FlexRow className='form-flex'>
 						<FlexColumn>
+							<label htmlFor='frontend'>
+								Frontend Packages
+								<CustomSelect
+									isMulti
+									options={frontEndOptions}
+									defaultValue={selectedFrontendOptions}
+									onChange={handleFrontendChange}
+								/>
+							</label>
+							<label htmlFor='backend'>
+								Backend Packages
+								<CustomSelect
+									isMulti
+									options={backPackOptions}
+									defaultValue={selectedOptions}
+									onChange={handleBackendChange}
+								/>
+							</label>
 							<label htmlFor='frontendGqlClient'>
 								GraphQL
 								<Switch
@@ -226,7 +278,7 @@ const CreateProjectFormComponent = () => {
 								/>
 							</label>
 						</FlexColumn>
-						<FlexColumn>
+						{/* <FlexColumn>
 							{backPacks.map((item) => (
 								<div key={item}>
 									<label>{item === 'jsonwebtoken' ? 'jwt' : item}</label>
@@ -243,7 +295,7 @@ const CreateProjectFormComponent = () => {
 									/>
 								</div>
 							))}
-						</FlexColumn>
+						</FlexColumn> */}
 					</FlexRow>
 				</FlexRow>
 

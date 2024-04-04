@@ -11,3 +11,5 @@ export type Database = 'mongodb' | 'postgres' | null | undefined;
 // export type FrontendPackages = 'jsonwebtoken' | null | undefined;
 
 export type BackendPackages = 'jsonwebtoken' | 'cors' | 'bcryptjs' | 'dotenv' | 'nodemon';
+
+export type FrontendPackages = 'mui_material' | 'styled_components' | 'emotion_react' | 'emotion_styled';

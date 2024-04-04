@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { MoonLoader } from 'react-spinners';
 import { MultiValue } from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import { useAuth } from '../auth.js';
@@ -14,44 +12,10 @@ import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../s
 
 import usePreventNavigation from '../lib/usePreventNavigation.js';
 import ImageUploader from './ImageUploads/ImageUploader.js';
-import styled from 'styled-components';
 import { ALL_TAGS_QUERY } from '../gql/queries.js';
 import { CREATE_ARTICLE } from '../gql/mutations.js';
+import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../styles/CreateArticleStyles.js';
 
-export const FlexBox = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	width: 80%;
-	height: 100%;
-	& > label {
-		margin: 0;
-		height: fit-content;
-	}
-`;
-
-export const CustomSelect = styled(CreatableSelect)`
-	padding-top: 0.5rem;
-	width: 100%;
-`;
-
-export const CustomFlexRow = styled(FlexRow)`
-	margin-bottom: 3rem;
-	justify-content: space-between;
-	gap: 4rem;
-	& > label {
-		margin: 0;
-		width: fit-content;
-	}
-`;
-
-export const ExtendedQuill = styled(ReactQuill)`
-	width: 100%;
-
-	& .ql-editor {
-		height: 25rem;
-		font-weight: normal;
-	}
-`;
 const CreateArticleFormComponent = () => {
 	usePreventNavigation('Are you sure you want to leave this page?');
 

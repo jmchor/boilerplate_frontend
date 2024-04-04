@@ -69,10 +69,8 @@ export const CreateProjectForm = styled(Form)`
 
 export const FlexRow = styled.div`
 	display: flex;
-	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
-	flex: 1;
 	gap: 4rem;
 	margin-bottom: 2rem;
 	/* border: 1px solid black; */
@@ -81,9 +79,10 @@ export const FlexRow = styled.div`
 export const FlexColumn = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
-	width: 50%;
+	min-width: 15rem;
+	width: 100%;
 	/* margin: 0 1rem 0 0;
 	border: 2px solid red; */
 `;
