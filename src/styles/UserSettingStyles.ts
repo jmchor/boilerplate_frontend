@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { CustomFlexRow, FlexBox } from '../components/CreateArticleFormComponent';
 import { FlexColumn } from './CreateProjectStyles';
+import { CustomFlexRow, FlexBox } from './CreateArticleStyles';
 
 export const UserEditFormWrapper = styled.div`
 	display: flex;

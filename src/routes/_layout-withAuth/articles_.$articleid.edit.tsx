@@ -7,7 +7,7 @@ import { FIND_ARTICLE } from '../../gql/queries';
 import { CenteredDiv, CreateFormWrapper, CreateProjectForm, FlexRow } from '../../styles/CreateProjectStyles.js';
 import { useAuth } from '../../auth';
 import 'react-quill/dist/quill.snow.css';
-import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../../components/CreateArticleFormComponent';
+import { CustomFlexRow, CustomSelect, ExtendedQuill, FlexBox } from '../../styles/CreateArticleStyles.js';
 import ImageUploader from '../../components/ImageUploads/ImageUploader';
 import { ALL_TAGS_QUERY } from '../../gql/queries';
 import { DeleteButton } from '../../styles/UserDeleteStyles.js';

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import Switch from '@mui/material/Switch';
 import { MoonLoader } from 'react-spinners';
+import { MultiValue } from 'react-select';
 
 import {
 	BackendEnvironment,
