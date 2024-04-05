@@ -2,6 +2,7 @@ import { Link, useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../auth';
 
 import {
+	DefaultImage,
 	EmptyImage,
 	NavigationBar,
 	NavigationButton,
@@ -24,7 +25,7 @@ function Navbar() {
 						{auth.user?.imageUrl && auth.isLoggedIn ? (
 							<ProfileImage src={auth.user?.imageUrl} alt='' />
 						) : (
-							<EmptyImage />
+							<DefaultImage src={'/react.svg'} />
 						)}
 					</Link>
 					{SidebarData.map((item: SidebarItem) => {
