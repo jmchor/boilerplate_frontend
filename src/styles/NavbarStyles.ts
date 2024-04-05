@@ -93,6 +93,11 @@ export const ProfileImage = styled.img`
 	object-fit: cover;
 `;
 
+export const DefaultImage = styled(ProfileImage)`
+	background-color: var(--purpleblack);
+	border: none;
+`;
+
 export const EmptyImage = styled.div`
 	width: 80px;
 	height: 80px;

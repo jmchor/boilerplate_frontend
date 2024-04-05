@@ -23,7 +23,7 @@ export const CenteredWrapper = styled.div`
 `;
 
 export const SmallCenteredWrapper = styled.div`
-	margin-top: 10rem;
+	margin-top: 5rem;
 `;
 
 export interface ImageProps {
