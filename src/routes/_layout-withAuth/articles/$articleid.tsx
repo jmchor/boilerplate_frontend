@@ -63,7 +63,7 @@ function Article() {
 				</p>
 			)}
 			<hr width='80%' />
-			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag}`)}</p>}
+			{data?.findArticle?.tags && <p>{data?.findArticle?.tags.map((tag: string) => `#${tag} `)}</p>}
 		</ArticleWrapper>
 	);
 }

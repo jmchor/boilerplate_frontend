@@ -69,6 +69,7 @@ export const CreateProjectForm = styled(Form)`
 
 export const FlexRow = styled.div`
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	width: 100%;
 	gap: 4rem;
