@@ -3,7 +3,7 @@ import { ALL_PROJECTS } from '../gql/queries';
 
 const useGetProjects = (limit: number) => {
 	const { data, error, loading } = useQuery(ALL_PROJECTS, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: {
 			limit: limit,
 		},

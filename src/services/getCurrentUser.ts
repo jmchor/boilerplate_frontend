@@ -3,7 +3,7 @@ import { CURRENT_USER } from '../gql/queries';
 
 export const useGetCurrentUser = () => {
 	const { data, error, loading, startPolling, stopPolling } = useQuery(CURRENT_USER, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 	});
 	return { data, error, loading, startPolling, stopPolling };
 };
