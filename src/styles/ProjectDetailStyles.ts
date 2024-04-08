@@ -16,6 +16,9 @@ export const TechBox = styled.div`
 			margin: 0;
 			padding: 0;
 			color: var(--darkpurple);
+			&:last-child {
+				padding-bottom: 3rem;
+			}
 		}
 	}
 `;
