@@ -29,6 +29,7 @@ const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Elem
 					{gqlImage}
 				</>
 			);
+			break;
 		case 'nextjs':
 			return (
 				<>
@@ -36,6 +37,16 @@ const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Elem
 					{gqlImage}
 				</>
 			);
+			break;
+		case 'nextts':
+			return (
+				<>
+					{renderToolImage('nextjs.svg')}
+					{renderToolImage('ts.svg')}
+					{gqlImage}
+				</>
+			);
+			break;
 
 		case 'vanillajs':
 			return (
@@ -44,6 +55,7 @@ const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Elem
 					{gqlImage}
 				</>
 			);
+			break;
 		default:
 			return (
 				<>
@@ -51,6 +63,7 @@ const renderFrontendImages = (framework?: string, gqlClient?: boolean): JSX.Elem
 					{gqlImage}
 				</>
 			);
+			break;
 	}
 };
 

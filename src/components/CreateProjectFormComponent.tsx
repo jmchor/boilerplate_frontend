@@ -189,6 +189,7 @@ const CreateProjectFormComponent = () => {
 								<option value='reactjs'>React</option>
 								<option value='vanillajs'>JavaScript</option>
 								<option value='nextjs'>NextJS</option>
+								<option value='nextts'>NextJS with TypeScript</option>
 							</select>
 						</label>
 						<label htmlFor='backendEnvironment'>
