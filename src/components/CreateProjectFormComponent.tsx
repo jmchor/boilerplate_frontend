@@ -59,6 +59,7 @@ const CreateProjectFormComponent = () => {
 		{ value: 'mui_material', label: 'MUI Material' },
 		{ value: 'emotion_react', label: 'Emotion for React' },
 		{ value: 'emotion_styled', label: 'Emotion Styled' },
+		{ value: 'stylex', label: 'StyleX' },
 	];
 
 	const backPackOptions = [
